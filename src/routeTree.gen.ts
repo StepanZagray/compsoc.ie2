@@ -10,33 +10,96 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as otherConstitutionRouteImport } from './routes/(other)/constitution'
+import { Route as menuEventsRouteImport } from './routes/(menu)/events'
+import { Route as menuContactRouteImport } from './routes/(menu)/contact'
+import { Route as menuCommitteeRouteImport } from './routes/(menu)/committee'
+import { Route as menuAccountRouteImport } from './routes/(menu)/account'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const otherConstitutionRoute = otherConstitutionRouteImport.update({
+  id: '/(other)/constitution',
+  path: '/constitution',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const menuEventsRoute = menuEventsRouteImport.update({
+  id: '/(menu)/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const menuContactRoute = menuContactRouteImport.update({
+  id: '/(menu)/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const menuCommitteeRoute = menuCommitteeRouteImport.update({
+  id: '/(menu)/committee',
+  path: '/committee',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const menuAccountRoute = menuAccountRouteImport.update({
+  id: '/(menu)/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof menuAccountRoute
+  '/committee': typeof menuCommitteeRoute
+  '/contact': typeof menuContactRoute
+  '/events': typeof menuEventsRoute
+  '/constitution': typeof otherConstitutionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof menuAccountRoute
+  '/committee': typeof menuCommitteeRoute
+  '/contact': typeof menuContactRoute
+  '/events': typeof menuEventsRoute
+  '/constitution': typeof otherConstitutionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/(menu)/account': typeof menuAccountRoute
+  '/(menu)/committee': typeof menuCommitteeRoute
+  '/(menu)/contact': typeof menuContactRoute
+  '/(menu)/events': typeof menuEventsRoute
+  '/(other)/constitution': typeof otherConstitutionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/account'
+    | '/committee'
+    | '/contact'
+    | '/events'
+    | '/constitution'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/account' | '/committee' | '/contact' | '/events' | '/constitution'
+  id:
+    | '__root__'
+    | '/'
+    | '/(menu)/account'
+    | '/(menu)/committee'
+    | '/(menu)/contact'
+    | '/(menu)/events'
+    | '/(other)/constitution'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  menuAccountRoute: typeof menuAccountRoute
+  menuCommitteeRoute: typeof menuCommitteeRoute
+  menuContactRoute: typeof menuContactRoute
+  menuEventsRoute: typeof menuEventsRoute
+  otherConstitutionRoute: typeof otherConstitutionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +111,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(other)/constitution': {
+      id: '/(other)/constitution'
+      path: '/constitution'
+      fullPath: '/constitution'
+      preLoaderRoute: typeof otherConstitutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(menu)/events': {
+      id: '/(menu)/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof menuEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(menu)/contact': {
+      id: '/(menu)/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof menuContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(menu)/committee': {
+      id: '/(menu)/committee'
+      path: '/committee'
+      fullPath: '/committee'
+      preLoaderRoute: typeof menuCommitteeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(menu)/account': {
+      id: '/(menu)/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof menuAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  menuAccountRoute: menuAccountRoute,
+  menuCommitteeRoute: menuCommitteeRoute,
+  menuContactRoute: menuContactRoute,
+  menuEventsRoute: menuEventsRoute,
+  otherConstitutionRoute: otherConstitutionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

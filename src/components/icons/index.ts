@@ -1,0 +1,6 @@
+export { CompSocLogo } from "./CompSocLogo";
+export { GithubIcon } from "./GithubIcon";
+export { HamburgerMenuIcon } from "./HamburgerIcon";
+export { InstagramIcon } from "./InstagramIcon";
+export { LinkedinIcon } from "./LinkedinIcon";
+export { XIcon } from "./XIcon";
