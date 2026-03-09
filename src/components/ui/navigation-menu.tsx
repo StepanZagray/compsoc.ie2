@@ -251,13 +251,13 @@ function NavigationMenuComponent({
 				</NavigationMenu>
 			</div>
 			{/* Mobile hamburger — visible below md via CSS only */}
-			<div className="z-9999 flex h-full w-14 flex-row md:hidden">
+			<div className="z-9999 aspect-square h-16 shrink-0 md:hidden">
 				<Button
-					variant="ghost"
+					variant="transperent"
 					onClick={() =>
 						setisFullscreenMenuOpen(!isFullscreenMenuOpen)
 					}
-					className="relative flex h-full w-full items-center justify-center p-0! hover:bg-transparent hover:text-foreground focus:bg-transparent focus-visible:border-transparent focus-visible:outline-none focus-visible:ring-0"
+					className="relative flex h-full w-full shrink-0 items-center justify-center"
 				>
 					<HamburgerMenuIcon
 						isOpen={isFullscreenMenuOpen}
