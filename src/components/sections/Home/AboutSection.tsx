@@ -36,7 +36,7 @@ const AboutSection = ({
 	return (
 		<section
 			ref={sectionRef}
-			className="relative z-10 mb-2 w-full px-2 md:mb-4 md:px-4"
+			className="relative z-10 mb-4 w-full px-4"
 			onTouchEnd={() => setTapOverride("about")}
 		>
 			<motion.div

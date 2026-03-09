@@ -22,7 +22,7 @@ export function Footer() {
 		// biome-ignore lint/a11y/noStaticElementInteractions: hover only for active-section state, not a control
 		<footer
 			ref={footerRef}
-			className="w-full px-2 pb-2 md:px-4 md:pb-4"
+			className="w-full px-4 pb-4"
 			onMouseEnter={() => setFooterHovered(true)}
 			onMouseLeave={() => setFooterHovered(false)}
 			onTouchEnd={() => setTapOverride("footer")}

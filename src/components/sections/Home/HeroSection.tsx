@@ -48,7 +48,7 @@ const HeroSection = ({
 		>
 			{/* Background photo clipped in a rounded window */}
 			<div className="-translate-x-1/2 -translate-y-1/2 absolute top-[calc(50%)] left-1/2 z-0">
-				<div className="relative h-[calc(100vh-4rem-1rem)] w-[calc(100vw-1rem)] overflow-hidden rounded-md md:h-[calc(100vh-4rem-2rem)] md:w-[calc(100vw-2rem)]">
+				<div className="relative h-[calc(100vh-4rem-2rem)] w-[calc(100vw-2rem)] overflow-hidden rounded-md">
 					<img
 						src={heroImg}
 						alt=""
@@ -110,7 +110,7 @@ const HeroSection = ({
 					<span className="text-accent">~ ❯</span> compsoc
 				</p>
 				<motion.div
-					className="relative z-10 h-[calc(100vh-4rem-1rem)] w-[calc(100vw-1rem)] overflow-hidden rounded-md border-2 bg-background/80 px-3.5 py-3 shadow-2xl md:h-[calc(100vh-4rem-2rem)] md:w-[calc(100vw-2rem)] md:px-5 md:py-4"
+					className="relative z-10 h-[calc(100vh-4rem-2rem)] w-[calc(100vw-2rem)] overflow-hidden rounded-md border-2 bg-background/80 px-3.5 py-3 shadow-2xl md:px-5 md:py-4"
 					animate={active ? activeVariant : inactiveVariant}
 					transition={transition}
 				></motion.div>
