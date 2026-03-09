@@ -278,7 +278,7 @@ function NavigationMenuComponent({
 												: undefined
 										}
 										render={<Link to={item.link} />}
-										className="h-full w-30 text-sm"
+										className="h-full w-content text-4xl"
 									>
 										{item.text}
 									</NavigationMenuLink>
