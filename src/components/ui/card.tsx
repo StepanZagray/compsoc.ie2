@@ -1,13 +1,13 @@
-import type * as React from "react";
+import type * as React from "react"
 
-import { cn } from "#/lib/utils";
+import { cn } from "#/lib/utils"
 
 function Card({
 	className,
 	size = "default",
 	...props
 }: React.ComponentProps<"div"> & {
-	size?: "default" | "sm";
+	size?: "default" | "sm"
 }) {
 	return (
 		<div
@@ -19,7 +19,7 @@ function Card({
 			)}
 			{...props}
 		/>
-	);
+	)
 }
 
 function CardHeader({
@@ -35,7 +35,7 @@ function CardHeader({
 			)}
 			{...props}
 		/>
-	);
+	)
 }
 
 function CardTitle({
@@ -51,7 +51,7 @@ function CardTitle({
 			)}
 			{...props}
 		/>
-	);
+	)
 }
 
 function CardDescription({
@@ -67,7 +67,7 @@ function CardDescription({
 			)}
 			{...props}
 		/>
-	);
+	)
 }
 
 function CardAction({
@@ -83,7 +83,7 @@ function CardAction({
 			)}
 			{...props}
 		/>
-	);
+	)
 }
 
 function CardContent({
@@ -99,7 +99,7 @@ function CardContent({
 			)}
 			{...props}
 		/>
-	);
+	)
 }
 
 function CardFooter({
@@ -115,7 +115,7 @@ function CardFooter({
 			)}
 			{...props}
 		/>
-	);
+	)
 }
 
 export {
@@ -126,4 +126,4 @@ export {
 	CardAction,
 	CardDescription,
 	CardContent,
-};
+}

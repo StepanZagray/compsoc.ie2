@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
 export const useTypewriter = (
 	words: string[],
@@ -6,13 +6,13 @@ export const useTypewriter = (
 	delay = 1000,
 	active = true,
 ) => {
-	const [text, setText] = useState("");
-	const [index, setIndex] = useState(0);
-	const [isDeleting, setIsDeleting] = useState(false);
-	const [charIndex, setCharIndex] = useState(0);
+	const [text, setText] = useState("")
+	const [index, setIndex] = useState(0)
+	const [isDeleting, setIsDeleting] = useState(false)
+	const [charIndex, setCharIndex] = useState(0)
 
 	useEffect(() => {
-		if (!active) return;
+		if (!active) return
 		const timeout = setTimeout(
 			() => {
 				if (!isDeleting) {
@@ -20,26 +20,26 @@ export const useTypewriter = (
 					if (charIndex < words[index].length) {
 						setText(
 							(prev) => prev + words[index][charIndex],
-						);
-						setCharIndex(charIndex + 1);
+						)
+						setCharIndex(charIndex + 1)
 					} else {
-						setTimeout(() => setIsDeleting(true), delay);
+						setTimeout(() => setIsDeleting(true), delay)
 					}
 				} else {
 					// Deleting effect
 					if (charIndex > 0) {
-						setText(words[index].slice(0, charIndex - 1));
-						setCharIndex(charIndex - 1);
+						setText(words[index].slice(0, charIndex - 1))
+						setCharIndex(charIndex - 1)
 					} else {
-						setIsDeleting(false);
-						setIndex((prev) => (prev + 1) % words.length);
+						setIsDeleting(false)
+						setIndex((prev) => (prev + 1) % words.length)
 					}
 				}
 			},
 			isDeleting ? speed / 2 : speed,
-		);
+		)
 
-		return () => clearTimeout(timeout);
+		return () => clearTimeout(timeout)
 	}, [
 		active,
 		isDeleting,
@@ -48,7 +48,7 @@ export const useTypewriter = (
 		words,
 		speed,
 		delay,
-	]);
+	])
 
-	return text;
-};
+	return text
+}

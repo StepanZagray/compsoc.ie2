@@ -92,10 +92,10 @@ body {
 .dark {
 	--background: oklch(0.13 0.028 261.692);
 	/* gray 950 */
-	--foreground: oklch(92.8% 0.006 264.531);
-	/* gray 200 */
-	--foreground-light: oklch(98.5% 0.002 247.839);
-	/* gray 50 */
+	--foreground: oklch(96.7% 0.003 264.542);
+	/* gray 100 */
+	--foreground-light: oklch(1 0 247.839);
+	/* white */
 	--card: oklch(0.13 0.028 261.692);
 	/* gray 950 */
 	--card-foreground: oklch(0.985 0.002 247.839);
@@ -224,24 +224,22 @@ body {
 }
 
 html {
-	overflow: hidden;
+	overflow: auto; /* scroll on document root = browser viewport (useScroll default) */
 }
 
 body {
-	overflow: auto;
+	overflow: visible;
 	position: relative;
+	min-height: 100vh;
 }
 
 @media screen and (width >=768px) {
-	body {
+	html {
 		scrollbar-width: none;
-		/* Firefox */
 		-ms-overflow-style: none;
-		/* IE / Edge Legacy */
+	}
+	html::-webkit-scrollbar {
+		display: none;
 	}
 
-	body::-webkit-scrollbar {
-		display: none;
-		/* Chrome, Safari, new Edge */
-	}
-}
+} 

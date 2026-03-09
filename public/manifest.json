@@ -2,12 +2,12 @@
   "name": "compsoc.ie",
   "icons": [
     {
-      "src": "assets/img/compsoc_logo.png",
+      "src": "assets/img/compsoc/compsoc_logo.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "assets/img/compsoc_logo.png",
+      "src": "assets/img/compsoc/compsoc_logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }

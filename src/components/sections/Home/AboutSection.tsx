@@ -1,20 +1,18 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router"
+import uog2 from "#/assets/img/university/UoG2.jpg?format=webp&w=1600"
+import uog3 from "#/assets/img/university/UoG3.jpg?format=webp&w=1600"
+import uog4 from "#/assets/img/university/UoG4.jpg?format=webp&w=1600"
 
 const AboutSection = () => {
 	return (
-		<section className="relative flex w-full flex-col items-center px-4 py-8 md:px-6 md:py-12">
-			<div className="z-10 flex w-full max-w-4xl flex-col gap-8 md:gap-12">
-				<h1 className="mb-2 text-center font-extrabold text-3xl text-secondary-foreground tracking-wide sm:text-4xl md:mb-4 md:text-5xl lg:text-6xl">
-					About us
-					<span className="mx-auto mt-2 block h-1 w-16 rounded-full bg-secondary sm:w-20 md:mt-3 md:w-24" />
-				</h1>
-				<div className="flex flex-col gap-8 md:gap-12">
-					<div className="flex flex-col gap-2 md:gap-3">
-						<h2 className="relative mb-1 text-left font-bold text-secondary-foreground text-xl sm:text-2xl">
+		<section className="relative z-10 w-full px-4 pb-32 md:px-4">
+			<div className="mx-auto overflow-hidden rounded-md border-2 border-border">
+				<div className="grid grid-cols-1 md:grid-cols-3">
+					<div className="flex flex-col justify-center border-border border-b-2 bg-background p-6 md:border-r-2 md:p-8">
+						<h2 className="mb-3 font-bold text-lg sm:text-xl">
 							Who we are
-							<span className="mx-0 mt-2 block h-0.5 w-12 rounded-full bg-secondary sm:w-13" />
 						</h2>
-						<p className="font-normal text-base text-muted-foreground leading-7 tracking-wide sm:leading-relaxed">
+						<p className="text-muted-foreground text-sm leading-7">
 							CompSoc is University of Galway's Computer and
 							Networking Society. We host events for
 							everything computing related from how to setup
@@ -28,53 +26,88 @@ const AboutSection = () => {
 							that the University was known as UCG.
 						</p>
 					</div>
-					<div className="flex flex-col gap-2 md:gap-3">
-						<h2 className="relative mb-1 text-left font-bold text-secondary-foreground text-xl sm:text-2xl">
+
+					<div className="relative border-b-2 border-border bg-background md:col-span-2">
+						<div className="aspect-4/3 md:absolute md:inset-0 md:aspect-auto">
+							<img
+								src={uog2}
+								alt="University of Galway campus"
+								className="h-full w-full object-cover"
+							/>
+						</div>
+						<div
+							className="pointer-events-none absolute inset-0 bg-black/10"
+							aria-hidden
+						/>
+					</div>
+
+					<div className="relative hidden border-b-2 border-border bg-background md:flex md:border-r-2">
+						<div className="aspect-4/3 md:absolute md:inset-0 md:aspect-auto">
+							<img
+								src={uog3}
+								alt="University of Galway"
+								className="h-full w-full object-cover"
+							/>
+						</div>
+					</div>
+
+					<div className="flex flex-col justify-center border-b-2 border-border bg-background p-6 md:border-r-2 md:p-8">
+						<h2 className="mb-3 font-bold text-lg sm:text-xl">
 							Our mission
-							<span className="mx-0 mt-2 block h-0.5 w-10 rounded-full bg-secondary sm:w-11" />
 						</h2>
-						<p className="font-normal text-base text-muted-foreground leading-7 tracking-wide sm:leading-relaxed">
+						<p className="text-muted-foreground text-sm leading-7">
 							CompSoc's main goal is to try and foster a
 							love and passion for all things technology
 							related in University of Galway. We host a
 							wide variety of events to work towards this
 							goal, including workshops about Linux,
-							hardware and programming. As outlined under
-							our Constitution, our aims is to "promote and
-							increase awareness of electronic communication
-							and related computer systems, a forum to
-							discuss and gain experience in computer
-							networking and systems and to help educate
-							people in the usage of Internet utilities and
-							resources".
+							hardware and programming. Our aims is to
+							"promote and increase awareness of electronic
+							communication and related computer systems, a
+							forum to discuss and gain experience in
+							computer networking and systems and to help
+							educate people in the usage of Internet
+							utilities and resources".
 						</p>
 					</div>
-					<div className="flex flex-col gap-2 md:gap-3">
-						<h2 className="relative mb-1 text-left font-bold text-secondary-foreground text-xl sm:text-2xl">
+
+					<div className="relative border-b-2 border-border bg-background">
+						<div className="aspect-4/3 md:absolute md:inset-0 md:aspect-auto">
+							<img
+								src={uog4}
+								alt="University of Galway"
+								className="h-full w-full object-cover"
+							/>
+						</div>
+						<div
+							className="pointer-events-none absolute inset-0 bg-black/10"
+							aria-hidden
+						/>
+					</div>
+
+					<div className="bg-background p-6 md:col-span-3 md:p-8">
+						<h2 className="mb-2 font-bold text-lg sm:text-xl">
 							Our constitution
-							<span className="mx-0 mt-2 block h-0.5 w-10 rounded-full bg-secondary sm:w-11" />
 						</h2>
-						<p className="font-normal text-base text-muted-foreground leading-7 tracking-wide sm:leading-relaxed">
+						<p className="text-muted-foreground text-sm leading-7">
 							You can find our constitution{" "}
-							<b>
-								<Link
-									className="text-accent underline"
-									to="/constitution"
-								>
-									here
-								</Link>
-							</b>
+							<Link
+								className="font-semibold text-accent underline underline-offset-2 transition-colors hover:text-accent/80"
+								to="/constitution"
+							>
+								here
+							</Link>
 							, as ratified by the USCG (
-							<i>
+							<span className="italic">
 								"University Societies Coordination Group"
-							</i>
+							</span>
 							) on 27th May, 2022.
 						</p>
 					</div>
 				</div>
 			</div>
 		</section>
-	);
-};
+	)
+}
 
-export default AboutSection;
+export default AboutSection

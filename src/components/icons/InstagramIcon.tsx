@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from "react"
 
 interface InstagramIconProps
 	extends React.SVGProps<SVGSVGElement> {
-	size?: number | string;
-	className?: string;
+	size?: number | string
+	className?: string
 }
 
 export const InstagramIcon = React.forwardRef<
@@ -27,6 +27,6 @@ export const InstagramIcon = React.forwardRef<
 			fill="currentColor"
 		/>
 	</svg>
-));
+))
 
-InstagramIcon.displayName = "InstagramIcon";
+InstagramIcon.displayName = "InstagramIcon"

@@ -1,14 +1,14 @@
-import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu";
-import { Link } from "@tanstack/react-router";
-import { cva } from "class-variance-authority";
-import { ChevronDownIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu"
+import { Link } from "@tanstack/react-router"
+import { cva } from "class-variance-authority"
+import { ChevronDownIcon } from "lucide-react"
+import { useEffect, useState } from "react"
 import {
 	CompSocLogo,
 	HamburgerMenuIcon,
-} from "#/components/icons";
-import { cn } from "#/lib/utils";
-import { Button } from "./button";
+} from "#/components/icons"
+import { cn } from "#/lib/utils"
+import { Button } from "./button"
 
 function NavigationMenu({
 	align = "start",
@@ -29,7 +29,7 @@ function NavigationMenu({
 			{children}
 			<NavigationMenuPositioner align={align} />
 		</NavigationMenuPrimitive.Root>
-	);
+	)
 }
 
 function NavigationMenuList({
@@ -47,7 +47,7 @@ function NavigationMenuList({
 			)}
 			{...props}
 		/>
-	);
+	)
 }
 
 function NavigationMenuItem({
@@ -62,12 +62,12 @@ function NavigationMenuItem({
 			className={cn("relative", className)}
 			{...props}
 		/>
-	);
+	)
 }
 
 const navigationMenuTriggerStyle = cva(
 	"group/navigation-menu-trigger inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-all outline-none hover:bg-muted focus:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-popup-open:bg-muted/50 data-popup-open:hover:bg-muted data-open:bg-muted/50 data-open:hover:bg-muted data-open:focus:bg-muted",
-);
+)
 
 function NavigationMenuTrigger({
 	className,
@@ -90,7 +90,7 @@ function NavigationMenuTrigger({
 				aria-hidden="true"
 			/>
 		</NavigationMenuPrimitive.Trigger>
-	);
+	)
 }
 
 function NavigationMenuContent({
@@ -106,7 +106,7 @@ function NavigationMenuContent({
 			)}
 			{...props}
 		/>
-	);
+	)
 }
 
 function NavigationMenuPositioner({
@@ -135,7 +135,7 @@ function NavigationMenuPositioner({
 				</NavigationMenuPrimitive.Popup>
 			</NavigationMenuPrimitive.Positioner>
 		</NavigationMenuPrimitive.Portal>
-	);
+	)
 }
 
 function NavigationMenuLink({
@@ -152,7 +152,7 @@ function NavigationMenuLink({
 			)}
 			{...props}
 		/>
-	);
+	)
 }
 
 function NavigationMenuIndicator({
@@ -172,7 +172,7 @@ function NavigationMenuIndicator({
 		>
 			<div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
 		</NavigationMenuPrimitive.Icon>
-	);
+	)
 }
 
 const mainMenuItems = [
@@ -181,25 +181,25 @@ const mainMenuItems = [
 	{ text: "Account", link: "/account" },
 	{ text: "Committee", link: "/committee" },
 	{ text: "Contact us", link: "/contact" },
-];
+]
 
 function NavigationMenuComponent({
 	isDesktop,
 	currentPage,
 }: {
-	isDesktop: boolean;
-	currentPage: string;
+	isDesktop: boolean
+	currentPage: string
 }) {
 	const pathname =
-		currentPage === "" ? "/" : `/${currentPage}`;
+		currentPage === "" ? "/" : `/${currentPage}`
 
 	const [isFullscreenMenuOpen, setisFullscreenMenuOpen] =
-		useState(false);
+		useState(false)
 
 	// Close mobile overlay when resizing to desktop
 	useEffect(() => {
-		if (isDesktop) setisFullscreenMenuOpen(false);
-	}, [isDesktop]);
+		if (isDesktop) setisFullscreenMenuOpen(false)
+	}, [isDesktop])
 
 	return (
 		<div className="fixed top-0 left-0 z-50 flex h-14 w-screen items-center justify-between border-border border-b bg-background">
@@ -274,7 +274,7 @@ function NavigationMenuComponent({
 				</div>
 			)}
 		</div>
-	);
+	)
 }
 
 export {
@@ -288,4 +288,4 @@ export {
 	NavigationMenuTrigger,
 	navigationMenuTriggerStyle,
 	NavigationMenuPositioner,
-};
+}

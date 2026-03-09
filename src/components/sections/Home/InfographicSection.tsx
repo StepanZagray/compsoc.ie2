@@ -3,13 +3,13 @@ import {
 	Database,
 	UserRoundCog,
 	UsersRound,
-} from "lucide-react";
+} from "lucide-react"
 import {
 	Card,
 	CardContent,
 	CardHeader,
-} from "#/components/ui/card";
-import { NumberOfCommitteeMembers } from "#/services/committee";
+} from "#/components/ui/card"
+import { NumberOfCommitteeMembers } from "#/services/committee"
 
 const InfographicSection = () => {
 	return (
@@ -105,7 +105,7 @@ const InfographicSection = () => {
 				</Card>
 			</div>
 		</section>
-	);
-};
+	)
+}
 
-export default InfographicSection;
+export default InfographicSection

@@ -1,9 +1,9 @@
-import { cn } from "#/lib/utils";
+import { cn } from "#/lib/utils"
 
 export function CompSocLogo({
 	className,
 }: {
-	className?: string;
+	className?: string
 }) {
 	return (
 		<div
@@ -13,7 +13,7 @@ export function CompSocLogo({
 			)}
 		>
 			<img
-				src="/assets/img/compsoc_logo.png"
+				src="/assets/img/compsoc/compsoc_logo.png"
 				alt=""
 				className="relative h-10 object-contain"
 			/>
@@ -26,5 +26,5 @@ export function CompSocLogo({
 				</p>
 			</div>
 		</div>
-	);
+	)
 }

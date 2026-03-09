@@ -1,21 +1,21 @@
-import { TanStackDevtools } from "@tanstack/react-devtools";
-import type { QueryClient } from "@tanstack/react-query";
+import { TanStackDevtools } from "@tanstack/react-devtools"
+import type { QueryClient } from "@tanstack/react-query"
 import {
 	createRootRouteWithContext,
 	HeadContent,
 	Scripts,
 	useLocation,
-} from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { useEffect, useState } from "react";
-import { NavigationMenuComponent } from "#/components/ui/navigation-menu";
+} from "@tanstack/react-router"
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
+import { useEffect, useState } from "react"
+import { NavigationMenuComponent } from "#/components/ui/navigation-menu"
 
-import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
-import TanStackQueryProvider from "../integrations/tanstack-query/root-provider";
-import appCss from "../styles.css?url";
+import TanStackQueryDevtools from "../integrations/tanstack-query/devtools"
+import TanStackQueryProvider from "../integrations/tanstack-query/root-provider"
+import appCss from "../styles.css?url"
 
 interface MyRouterContext {
-	queryClient: QueryClient;
+	queryClient: QueryClient
 }
 
 export const Route =
@@ -64,7 +64,7 @@ export const Route =
 				{
 					property: "og:image",
 					content:
-						"/assets/img/compsoc-meta-social-banner.png",
+						"/assets/img/compsoc/compsoc-meta-social-banner.png",
 				},
 				{
 					property: "twitter:card",
@@ -87,7 +87,7 @@ export const Route =
 				{
 					property: "twitter:image",
 					content:
-						"/assets/img/compsoc-meta-social-banner.png",
+						"/assets/img/compsoc/compsoc-meta-social-banner.png",
 				},
 			],
 			links: [
@@ -97,11 +97,11 @@ export const Route =
 				},
 				{
 					rel: "icon",
-					href: "/assets/img/compsoc_logo.png",
+					href: "/assets/img/compsoc/favicon.png",
 				},
 				{
 					rel: "apple-touch-icon",
-					href: "/assets/img/compsoc_logo.png",
+					href: "/assets/img/compsoc/apple-touch-icon.png",
 				},
 				{
 					rel: "stylesheet",
@@ -114,30 +114,30 @@ export const Route =
 			],
 		}),
 		shellComponent: RootDocument,
-	});
+	})
 
 function RootDocument({
 	children,
 }: {
-	children: React.ReactNode;
+	children: React.ReactNode
 }) {
-	const currentPage = useLocation().pathname.slice(1);
-	const DESKTOP_BREAKPOINT = 768;
+	const currentPage = useLocation().pathname.slice(1)
+	const DESKTOP_BREAKPOINT = 768
 	const [isDesktop, setIsDesktop] = useState(() => {
 		if (typeof window !== "undefined") {
-			return window.innerWidth >= DESKTOP_BREAKPOINT;
+			return window.innerWidth >= DESKTOP_BREAKPOINT
 		}
-		return true;
-	});
+		return true
+	})
 
 	useEffect(() => {
 		const onResize = () => {
-			setIsDesktop(window.innerWidth >= DESKTOP_BREAKPOINT);
-		};
-		window.addEventListener("resize", onResize);
+			setIsDesktop(window.innerWidth >= DESKTOP_BREAKPOINT)
+		}
+		window.addEventListener("resize", onResize)
 		return () =>
-			window.removeEventListener("resize", onResize);
-	}, []);
+			window.removeEventListener("resize", onResize)
+	}, [])
 
 	return (
 		<html lang="en" className="dark">
@@ -167,5 +167,5 @@ function RootDocument({
 				<Scripts />
 			</body>
 		</html>
-	);
+	)
 }

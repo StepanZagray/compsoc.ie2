@@ -1,10 +1,10 @@
 // Custom hamburger menu icon with three SVG lines
-import { motion } from "motion/react";
+import { motion } from "motion/react"
 
 export function HamburgerMenuIcon({
 	isOpen,
 }: {
-	isOpen: boolean;
+	isOpen: boolean
 }) {
 	return (
 		<svg
@@ -61,5 +61,5 @@ export function HamburgerMenuIcon({
 				style={{ transformOrigin: "16px 24px" }}
 			/>
 		</svg>
-	);
+	)
 }
