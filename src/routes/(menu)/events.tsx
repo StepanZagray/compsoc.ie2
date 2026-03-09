@@ -96,7 +96,7 @@ function RouteComponent() {
 							</p>
 						</MenuPanel>
 					) : (
-						events.map((event) => (
+						events.map((event: EventType) => (
 							<EventCard
 								key={`${event.EventID}-${event.EventDetailsID}`}
 								event={event}
