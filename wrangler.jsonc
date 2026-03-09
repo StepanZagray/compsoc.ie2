@@ -1,8 +1,6 @@
 {
-  // Unused for current SSG deploy (Cloudflare Pages static). Kept for reference.
+  // Cloudflare Pages (static). Build output: dist/client
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tanstack-start-app",
-  "compatibility_date": "2025-09-02",
-  "compatibility_flags": ["nodejs_compat"],
-  "main": "@tanstack/react-start/server-entry"
+  "name": "compsoc-ie",
+  "pages_build_output_dir": "./dist/client"
 }

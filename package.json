@@ -13,7 +13,7 @@
     "format": "biome format --write && biome check --write --unsafe",
     "lint": "biome lint",
     "check": "biome check",
-    "deploy": "bun run build"
+    "deploy": "bun run build && wrangler pages deploy dist/client"
   },
   "dependencies": {
     "@base-ui/react": "^1.2.0",
@@ -52,6 +52,7 @@
     "vite": "^7.1.7",
     "vite-imagetools": "^10.0.0",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.0.5"
+    "vitest": "^3.0.5",
+    "wrangler": "^3.91.0"
   }
 }
