@@ -47,7 +47,7 @@ function RouteComponent() {
 
 	return (
 		<MenuPageLayout>
-			<div className="w-full max-w-4xl px-4">
+			<div className="w-full max-w-4xl">
 				<MenuPageTitle
 					title="Events"
 					subtitle="Discover upcoming events and explore our past activities."

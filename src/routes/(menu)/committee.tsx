@@ -24,7 +24,7 @@ export const Route = createFileRoute("/(menu)/committee")({
 function CommitteePage() {
 	return (
 		<MenuPageLayout>
-			<div className="w-full max-w-5xl px-4">
+			<div className="w-full max-w-5xl">
 				<MenuPageTitle
 					title="Committee"
 					subtitle="Meet the CompSoc committee members from recent years."
@@ -38,7 +38,10 @@ function CommitteePage() {
 							<h2 className="font-bold text-foreground text-xl md:text-2xl">
 								Committee {year.year}
 							</h2>
-							<div className="columns-1 sm:columns-2 md:columns-3" style={{ columnGap: "1.5rem" }}>
+							<div
+								className="columns-1 sm:columns-2 md:columns-3"
+								style={{ columnGap: "1.5rem" }}
+							>
 								{year.committee?.map((person, idx) => (
 									<CommitteeCard
 										key={`${person.name}-${idx}`}
