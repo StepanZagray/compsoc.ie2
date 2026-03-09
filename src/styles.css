@@ -16,6 +16,13 @@ body {
 }
 
 /* Colors were taken from https://tailwindcss.com/docs/colors */
+/*
+ * When changing any of the border/active colors below, also update the matching
+ * values in src/constants/section-variants.ts. Those constants are used by
+ * animated components (Hero, About, Footer, nav) so that motion can interpolate
+ * between the same numeric values—keeping them in sync avoids flicker during
+ * transition.
+ */
 
 :root {
 	--background: oklch(0.985 0.002 247.839);
@@ -54,6 +61,7 @@ body {
 	/* gray 50 */
 	--border: oklch(0.928 0.006 264.531);
 	/* gray 200 */
+	/* Mirrored in section-variants.ts (active border). Change there too to avoid animation flicker. */
 	--border-sky: oklch(82.8% 0.111 230.318);
 	/* sky 300 */
 	--input: oklch(0.928 0.006 264.531);
@@ -124,8 +132,10 @@ body {
 	/* rose 700 */
 	--destructive-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
+	/* Mirrored in section-variants.ts (inactive border). Change there too to avoid animation flicker. */
 	--border: oklch(0.278 0.033 256.848);
 	/* gray 800 */
+	/* Mirrored in section-variants.ts (active border). Change there too to avoid animation flicker. */
 	--border-sky: oklch(82.8% 0.111 230.318);
 	/* sky 300 */
 	--input: oklch(0.278 0.033 256.848);

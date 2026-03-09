@@ -19,10 +19,14 @@ const HeroSection = ({
 	transition,
 }: SectionMotionProps) => {
 	const sectionRef = useRef<HTMLElement>(null)
-	const { activeSectionId, registerSection } = useActiveSection()
+	const { activeSectionId, registerSection } =
+		useActiveSection()
 	const active = activeSectionId === "hero"
 
-	useEffect(() => registerSection("hero", sectionRef), [registerSection])
+	useEffect(
+		() => registerSection("hero", sectionRef),
+		[registerSection],
+	)
 
 	const strarray = [
 		"Computer",
@@ -39,8 +43,8 @@ const HeroSection = ({
 			className="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-2"
 		>
 			{/* Background photo clipped in a rounded window */}
-			<div className="-translate-x-1/2 -translate-y-1/2 absolute top-[calc(50%+1.75rem)] left-1/2 z-0">
-				<div className="relative h-[calc(100vh-3.5rem-2rem)] w-[calc(100vw-2rem)] overflow-hidden rounded-md">
+			<div className="-translate-x-1/2 -translate-y-1/2 absolute top-[calc(50%+2rem)] left-1/2 z-0">
+				<div className="relative h-[calc(100vh-4rem-2rem)] w-[calc(100vw-2rem)] overflow-hidden rounded-md">
 					<img
 						src={heroImg}
 						alt=""
@@ -49,7 +53,8 @@ const HeroSection = ({
 					/>
 				</div>
 			</div>
-			<p className="absolute top-22 left-10 z-20 text-base">
+			{/* terminal prompt */}
+			<p className="absolute top-26 left-10 z-20 text-base">
 				<span className="text-accent">~ ❯</span> compsoc
 			</p>
 			{/* Hero content */}
@@ -94,13 +99,13 @@ const HeroSection = ({
 				</p>
 			</div>
 			{/* Terminal window */}
-			<div className="-translate-y-1/2 -translate-x-1/2 absolute top-[calc(50%+1.75rem)] left-1/2 z-10">
+			<div className="-translate-y-1/2 -translate-x-1/2 absolute top-[calc(50%+2rem)] left-1/2 z-10">
 				<div
 					className="absolute inset-0 z-0 rounded-md backdrop-blur-sm"
 					aria-hidden
 				/>
 				<motion.div
-					className="relative z-10 h-[calc(100vh-3.5rem-2rem)] w-[calc(100vw-2rem)] overflow-hidden rounded-md border-2 bg-background/80 px-3.5 py-3 shadow-2xl md:px-5 md:py-4"
+					className="relative z-10 h-[calc(100vh-4rem-2rem)] w-[calc(100vw-2rem)] overflow-hidden rounded-md border-2 bg-background/80 px-3.5 py-3 shadow-2xl md:px-5 md:py-4"
 					animate={active ? activeVariant : inactiveVariant}
 					transition={transition}
 				></motion.div>

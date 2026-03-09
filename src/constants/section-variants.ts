@@ -1,4 +1,8 @@
-/** Active/inactive variants for section motion (border, opacity). Shared by Hero, About, Footer. */
+/**
+ * Active/inactive variants for section motion (border, opacity). Shared by Hero, About, Footer.
+ * Border colors must match src/styles.css (--border-sky and .dark --border) so animations
+ * interpolate without flicker. When changing these, update the CSS variables too.
+ */
 export const sectionVariants = {
 	active: {
 		borderColor: "oklch(0.828 0.111 230.318)",

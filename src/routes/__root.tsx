@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { useEffect, useState } from "react"
+import { NotFound } from "#/components/NotFound"
 import { ActiveSectionProvider } from "#/contexts/active-section"
 import { Footer } from "#/components/ui/footer"
 import { NavigationMenuComponent } from "#/components/ui/navigation-menu"
@@ -22,6 +23,7 @@ interface MyRouterContext {
 
 export const Route =
 	createRootRouteWithContext<MyRouterContext>()({
+		notFoundComponent: NotFound,
 		head: () => ({
 			meta: [
 				{

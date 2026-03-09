@@ -209,7 +209,7 @@ function NavigationMenuComponent({
 	return (
 		// biome-ignore lint/a11y/noStaticElementInteractions: hover only for active-section state
 		<div
-			className="fixed top-0 left-0 z-50 flex h-14 w-screen items-center justify-between border-border border-b-2 bg-background transition-[border-color] duration-300"
+			className="fixed top-0 left-0 z-50 flex h-16 w-screen items-center justify-between border-border border-b-2 bg-background transition-[border-color] duration-300"
 			onMouseEnter={() => setMenuHovered(true)}
 			onMouseLeave={() => setMenuHovered(false)}
 			style={{
@@ -218,7 +218,7 @@ function NavigationMenuComponent({
 					: undefined,
 			}}
 		>
-			<CompSocLogo className="pl-2" />
+			<CompSocLogo className="ml-3" />
 
 			{/* Desktop Navigation Menu — visible from md up via CSS only (no flicker on load) */}
 			<div className="hidden md:flex">
