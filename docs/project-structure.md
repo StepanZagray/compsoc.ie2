@@ -1,6 +1,6 @@
 # Project Structure
 
-CompSoc.ie is a TanStack Start app (React, Vite, TanStack Router, TanStack Query) deployed to Cloudflare Pages with the Cloudflare Vite plugin.
+CompSoc.ie is a TanStack Start app (React, Vite, TanStack Router, TanStack Query) built as a **static site (SSG)** and deployed to Cloudflare Pages. The build uses the Netlify Vite plugin for TanStack Start to output static files to `dist/client`; no Workers or Wrangler.
 
 ## Directory layout
 
@@ -37,8 +37,7 @@ compsoc.ie2/
 ├── components.json          # shadcn/ui config
 ├── package.json
 ├── tsconfig.json
-├── vite.config.ts
-└── wrangler.jsonc           # Cloudflare Workers/Pages config
+└── vite.config.ts
 ```
 
 ## Conventions
@@ -61,8 +60,7 @@ compsoc.ie2/
 | `src/constants/section-variants.ts` | Motion variants and active border color for sections/nav. |
 | `src/styles.css` | Tailwind, theme variables, base styles. |
 | `src/lib/utils.ts` | Exports `cn()` (clsx + tailwind-merge) for conditional/merged class names. |
-| `wrangler.jsonc` | Cloudflare app name, compatibility, entry. |
-| `vite.config.ts` | TanStack Start, Cloudflare plugin, Tailwind, React, etc. |
+| `vite.config.ts` | TanStack Start, Netlify plugin (static build), prerender, Tailwind, React. |
 
 ## Generated / ignored
 

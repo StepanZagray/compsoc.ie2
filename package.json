@@ -13,11 +13,10 @@
     "format": "biome format --write && biome check --write --unsafe",
     "lint": "biome lint",
     "check": "biome check",
-    "deploy": "bun run build && wrangler deploy"
+    "deploy": "bun run build"
   },
   "dependencies": {
     "@base-ui/react": "^1.2.0",
-    "@cloudflare/vite-plugin": "^1.13.8",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-devtools": "^0.7.0",
     "@tanstack/react-query": "^5.66.5",
@@ -39,6 +38,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
+    "@netlify/vite-plugin-tanstack-start": "^1.2.18",
     "@tanstack/devtools-vite": "^0.3.11",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
@@ -52,7 +52,6 @@
     "vite": "^7.1.7",
     "vite-imagetools": "^10.0.0",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.0.5",
-    "wrangler": "^4.40.3"
+    "vitest": "^3.0.5"
   }
 }

@@ -1,6 +1,6 @@
 # CompSoc.ie
 
-University of Galway CompSoc website. TanStack Start (React, Vite) on Cloudflare Pages.
+University of Galway CompSoc website. TanStack Start (React, Vite), **static build (SSG)** for Cloudflare Pages.
 
 ## Commands
 
@@ -11,10 +11,10 @@ bun install
 # Dev
 bun run dev
 
-# Build
+# Build (output: dist/client)
 bun run build
 
-# Deploy (build + wrangler deploy)
+# Deploy (build only; Pages uploads dist/client)
 bun run deploy
 
 # Lint & format
@@ -35,14 +35,14 @@ Detailed documentation lives in **[/docs](docs/)** (not part of the build):
 - [Active Section Provider](docs/active-section-provider.md) — how scroll/hover/tap active state works
 - [Project structure](docs/project-structure.md) — layout, conventions, key files
 - [Design tokens](docs/design-tokens.md) — section variants, CSS sync, animation
-- [Deployment](docs/deployment.md) — Cloudflare Pages, Wrangler
+- [Deployment](docs/deployment.md) — Cloudflare Pages (SSG, build output `dist/client`)
 
 ## Stack
 
-- **React 19** + **Vite 7** + **TanStack Start** (SSR)
+- **React 19** + **Vite 7** + **TanStack Start** (static build via Netlify plugin)
 - **TanStack Router** (file-based routes), **TanStack Query**
 - **Tailwind CSS v4**, **Motion**, **Base UI** + CVA
-- **Cloudflare** (Vite plugin, Wrangler deploy)
+- **Cloudflare Pages** (static; no Workers/Wrangler)
 
 ## Adding UI components
 

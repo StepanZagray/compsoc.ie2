@@ -9,7 +9,7 @@ Documentation for the CompSoc.ie project. This folder is for humans and agents; 
 | [active-section-provider.md](active-section-provider.md) | How the active section context works (scroll, hover, tap, priority). |
 | [project-structure.md](project-structure.md) | Directory layout, conventions, key files. |
 | [design-tokens.md](design-tokens.md) | Section motion constants, CSS variables, keeping colors in sync. |
-| [deployment.md](deployment.md) | Cloudflare Pages, Wrangler, build/deploy commands. |
+| [deployment.md](deployment.md) | Cloudflare Pages SSG: build command, output `dist/client`. |
 
 ## For agents
 
