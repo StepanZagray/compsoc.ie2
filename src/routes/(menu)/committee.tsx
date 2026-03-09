@@ -24,40 +24,38 @@ export const Route = createFileRoute("/(menu)/committee")({
 function CommitteePage() {
 	return (
 		<MenuPageLayout>
-			<div className="w-full max-w-5xl">
-				<MenuPageTitle
-					title="Committee"
-					subtitle="Meet the CompSoc committee members from recent years."
-				/>
-				<div className="flex flex-col gap-12">
-					{CommitteeYears.map((year) => (
+			<MenuPageTitle
+				title="Committee"
+				subtitle="Meet the CompSoc committee members from recent years."
+			/>
+			<div className="flex flex-col gap-12">
+				{CommitteeYears.map((year) => (
+					<div
+						key={year.year}
+						className="flex flex-col gap-6"
+					>
+						<h2 className="font-bold text-foreground text-xl md:text-2xl">
+							Committee {year.year}
+						</h2>
 						<div
-							key={year.year}
-							className="flex flex-col gap-6"
+							className="columns-1 sm:columns-2 md:columns-3"
+							style={{ columnGap: "1.5rem" }}
 						>
-							<h2 className="font-bold text-foreground text-xl md:text-2xl">
-								Committee {year.year}
-							</h2>
-							<div
-								className="columns-1 sm:columns-2 md:columns-3"
-								style={{ columnGap: "1.5rem" }}
-							>
-								{year.committee?.map((person, idx) => (
-									<CommitteeCard
-										key={`${person.name}-${idx}`}
-										person={person}
-										defaultBio={
-											year.default_bio || DefaultBio
-										}
-										defaultPhoto={
-											year.default_photo || DefaultPhoto
-										}
-									/>
-								))}
-							</div>
+							{year.committee?.map((person, idx) => (
+								<CommitteeCard
+									key={`${person.name}-${idx}`}
+									person={person}
+									defaultBio={
+										year.default_bio || DefaultBio
+									}
+									defaultPhoto={
+										year.default_photo || DefaultPhoto
+									}
+								/>
+							))}
 						</div>
-					))}
-				</div>
+					</div>
+				))}
 			</div>
 		</MenuPageLayout>
 	)
@@ -94,12 +92,12 @@ function CommitteeCard({
 		: defaultPhoto
 	const bio = person.bio?.trim() ? person.bio : defaultBio
 	return (
-		<MenuPanel className="group mb-6 flex break-inside-avoid flex-col items-center text-center transition-all duration-200 hover:border-border-sky hover:shadow-foreground/5 hover:shadow-md">
+		<MenuPanel className="group mb-6 flex break-inside-avoid flex-col items-center text-center transition-all duration-200 hover:border-border-accent hover:shadow-foreground/5 hover:shadow-md">
 			<div className="flex flex-col items-center p-6">
 				<img
 					src={photo}
 					alt={person.name}
-					className="mb-3 size-24 rounded-full border-2 border-border object-cover transition-colors duration-200 group-hover:border-border-sky md:size-28"
+					className="mb-3 size-24 rounded-full border-2 border-border object-cover transition-colors duration-200 group-hover:border-border-accent md:size-28"
 					loading="lazy"
 				/>
 				<h3 className="font-bold text-foreground">

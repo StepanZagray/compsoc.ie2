@@ -155,11 +155,10 @@ function RootDocument({
 							currentPage={currentPage}
 							isDesktop={isDesktop}
 						/>
-						<div className="min-h-screen w-screen pt-16">
+						<div className="flex min-h-screen w-screen flex-col items-center justify-between pt-16">
 							{children}
+							<Footer />
 						</div>
-
-						<Footer />
 					</ActiveSectionProvider>
 					<TanStackDevtools
 						config={{

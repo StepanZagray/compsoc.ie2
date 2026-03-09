@@ -47,63 +47,61 @@ function RouteComponent() {
 
 	return (
 		<MenuPageLayout>
-			<div className="w-full max-w-4xl">
-				<MenuPageTitle
-					title="Events"
-					subtitle="Discover upcoming events and explore our past activities."
-				/>
+			<MenuPageTitle
+				title="Events"
+				subtitle="Discover upcoming events and explore our past activities."
+			/>
 
-				{/* Tabs */}
-				<div className="mb-6 flex gap-1 rounded-md border-2 border-border bg-background/80 p-1">
-					<button
-						type="button"
-						onClick={() => setActiveTab("upcoming")}
-						className={`flex-1 cursor-pointer rounded px-4 py-2 font-medium text-sm transition-colors ${
-							activeTab === "upcoming"
-								? "bg-foreground text-background"
-								: "text-muted-foreground hover:text-foreground"
-						}`}
-					>
-						Upcoming
-					</button>
-					<button
-						type="button"
-						onClick={() => setActiveTab("past")}
-						className={`flex-1 cursor-pointer rounded px-4 py-2 font-medium text-sm transition-colors ${
-							activeTab === "past"
-								? "bg-foreground text-background"
-								: "text-muted-foreground hover:text-foreground"
-						}`}
-					>
-						Past
-					</button>
-				</div>
+			{/* Tabs */}
+			<div className="mb-6 flex gap-1 rounded-md border-2 border-border bg-background/80 p-1">
+				<button
+					type="button"
+					onClick={() => setActiveTab("upcoming")}
+					className={`flex-1 cursor-pointer rounded px-4 py-2 font-medium text-sm transition-colors ${
+						activeTab === "upcoming"
+							? "bg-foreground text-background"
+							: "text-muted-foreground hover:text-foreground"
+					}`}
+				>
+					Upcoming
+				</button>
+				<button
+					type="button"
+					onClick={() => setActiveTab("past")}
+					className={`flex-1 cursor-pointer rounded px-4 py-2 font-medium text-sm transition-colors ${
+						activeTab === "past"
+							? "bg-foreground text-background"
+							: "text-muted-foreground hover:text-foreground"
+					}`}
+				>
+					Past
+				</button>
+			</div>
 
-				{/* Events list */}
-				<div className="space-y-4">
-					{loading ? (
-						<MenuPanel className="p-8">
-							<p className="text-center text-muted-foreground text-sm">
-								Loading events…
-							</p>
-						</MenuPanel>
-					) : events.length === 0 ? (
-						<MenuPanel className="p-8">
-							<p className="text-center text-muted-foreground text-sm">
-								{activeTab === "upcoming"
-									? "No upcoming events at the moment. Check back soon."
-									: "No past events to display."}
-							</p>
-						</MenuPanel>
-					) : (
-						events.map((event: EventType) => (
-							<EventCard
-								key={`${event.EventID}-${event.EventDetailsID}`}
-								event={event}
-							/>
-						))
-					)}
-				</div>
+			{/* Events list */}
+			<div className="space-y-4">
+				{loading ? (
+					<MenuPanel className="p-8">
+						<p className="text-center text-muted-foreground text-sm">
+							Loading events…
+						</p>
+					</MenuPanel>
+				) : events.length === 0 ? (
+					<MenuPanel className="p-8">
+						<p className="text-center text-muted-foreground text-sm">
+							{activeTab === "upcoming"
+								? "No upcoming events at the moment. Check back soon."
+								: "No past events to display."}
+						</p>
+					</MenuPanel>
+				) : (
+					events.map((event: EventType) => (
+						<EventCard
+							key={`${event.EventID}-${event.EventDetailsID}`}
+							event={event}
+						/>
+					))
+				)}
 			</div>
 		</MenuPageLayout>
 	)

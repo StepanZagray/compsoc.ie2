@@ -152,8 +152,8 @@ export function ActiveSectionProvider({
 			setActiveSectionId("footer")
 			return
 		}
-		// Scroll-based: hero, about, and footer (footer active when ≥90% visible)
-		const scrollSectionIds = ["hero", "about", "footer"] as const
+		// Scroll-based: hero and about only; footer is active only on hover
+		const scrollSectionIds = ["hero", "about"] as const
 		const entries = Array.from(registeredIds)
 			.filter(
 				(id): id is (typeof scrollSectionIds)[number] =>
@@ -166,10 +166,6 @@ export function ActiveSectionProvider({
 				// Hero must be ≥75% visible to stay active
 				if (id === "hero") {
 					return [id, raw < 0.75 ? 0 : raw] as [SectionId, number]
-				}
-				// Footer counts only when ≥90% visible
-				if (id === "footer") {
-					return [id, raw >= 0.9 ? raw : 0] as [SectionId, number]
 				}
 				return [id, raw] as [SectionId, number]
 			})

@@ -39,55 +39,55 @@ body {
 	/* white */
 	--popover-foreground: oklch(0.278 0.033 256.848);
 	/* gray 800 */
-	--primary: oklch(68.5% 0.169 237.323);
+	--primary: oklch(0.685 0.169 237.323);
 	/* sky 500 */
 	--primary-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
-	--secondary: oklch(68.5% 0.169 237.323);
+	--secondary: oklch(0.685 0.169 237.323);
 	/* sky 500 */
-	--secondary-foreground: oklch(37.2% 0.044 257.287);
+	--secondary-foreground: oklch(0.372 0.044 257.287);
 	/* slate 700 */
 	--muted: oklch(0.967 0.003 264.542);
 	/* gray 100 */
 	--muted-foreground: oklch(0.551 0.027 264.364);
 	/* gray 500 */
-	--accent: oklch(68.5% 0.169 237.323);
+	--accent: oklch(0.685 0.169 237.323);
 	/* sky 500 */
 	--accent-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
-	--destructive: oklch(57.7% 0.245 27.325);
+	--destructive: oklch(0.577 0.245 27.325);
 	/* rose 500 */
 	--destructive-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
 	--border: oklch(0.928 0.006 264.531);
 	/* gray 200 */
 	/* Mirrored in section-variants.ts (active border). Change there too to avoid animation flicker. */
-	--border-sky: oklch(82.8% 0.111 230.318);
+	--border-accent: oklch(0.828 0.111 230.318);
 	/* sky 300 */
 	--input: oklch(0.928 0.006 264.531);
 	/* gray 200 */
 	--ring: oklch(0.707 0.022 261.325);
 	/* gray 400 */
-	--chart-1: oklch(82.8% 0.189 84.429);
+	--chart-1: oklch(0.828 0.189 84.429);
 	/* lime 300 */
-	--chart-2: oklch(60% 0.118 184.704);
+	--chart-2: oklch(0.6 0.118 184.704);
 	/* teal 400 */
-	--chart-3: oklch(39.8% 0.07 227.392);
+	--chart-3: oklch(0.398 0.07 227.392);
 	/* blue 700 */
-	--chart-4: oklch(64.6% 0.222 41.116);
+	--chart-4: oklch(0.646 0.222 41.116);
 	/* amber 400 */
-	--chart-5: oklch(76.9% 0.188 70.08);
+	--chart-5: oklch(0.769 0.188 70.08);
 	/* yellow 400 */
 	--radius: 0.625rem;
 	--menu: oklch(0.13 0.028 261.692);
 	/* gray 950 */
 	--menu-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
-	--menu-primary: oklch(68.5% 0.169 237.323);
+	--menu-primary: oklch(0.685 0.169 237.323);
 	/* sky 500 */
 	--menu-primary-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
-	--menu-accent: oklch(68.5% 0.169 237.323);
+	--menu-accent: oklch(0.685 0.169 237.323);
 	/* sky 500 */
 	--menu-accent-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
@@ -100,7 +100,7 @@ body {
 .dark {
 	--background: oklch(0.13 0.028 261.692);
 	/* gray 950 */
-	--foreground: oklch(96.7% 0.003 264.542);
+	--foreground: oklch(0.967 0.003 264.542);
 	/* gray 100 */
 	--foreground-light: oklch(1 0 247.839);
 	/* white */
@@ -116,19 +116,19 @@ body {
 	/* gray 50 */
 	--primary-foreground: oklch(0.21 0.034 264.665);
 	/* gray 900 */
-	--secondary: oklch(37.2% 0.169 237.323);
+	--secondary: oklch(0.372 0.169 237.323);
 	/* sky 700 */
-	--secondary-foreground: oklch(97.1% 0.045 237.323);
+	--secondary-foreground: oklch(0.971 0.045 237.323);
 	/* sky 100 */
 	--muted: oklch(0.278 0.033 256.848);
 	/* gray 800 */
 	--muted-foreground: oklch(0.707 0.022 261.325);
 	/* gray 400 */
-	--accent: oklch(74.6% 0.16 232.661);
+	--accent: oklch(0.746 0.16 232.661);
 	/* sky 400 */
 	--accent-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
-	--destructive: oklch(39.6% 0.141 25.723);
+	--destructive: oklch(0.396 0.141 25.723);
 	/* rose 700 */
 	--destructive-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
@@ -136,27 +136,27 @@ body {
 	--border: oklch(0.278 0.033 256.848);
 	/* gray 800 */
 	/* Mirrored in section-variants.ts (active border). Change there too to avoid animation flicker. */
-	--border-sky: oklch(82.8% 0.111 230.318);
-	/* sky 300 */
+	--border-accent: oklch(0.746 0.16 232.661);
+	/* sky 400 */
 	--input: oklch(0.278 0.033 256.848);
 	/* gray 800 */
 	--ring: oklch(0.446 0.03 256.802);
 	/* gray 600 */
-	--chart-1: oklch(48.8% 0.243 264.376);
+	--chart-1: oklch(0.488 0.243 264.376);
 	/* violet 400 */
-	--chart-2: oklch(69.6% 0.17 162.48);
+	--chart-2: oklch(0.696 0.17 162.48);
 	/* emerald 400 */
-	--chart-3: oklch(76.9% 0.188 70.08);
+	--chart-3: oklch(0.769 0.188 70.08);
 	/* yellow 400 */
-	--chart-4: oklch(62.7% 0.265 303.9);
+	--chart-4: oklch(0.627 0.265 303.9);
 	/* fuchsia 400 */
-	--chart-5: oklch(64.5% 0.246 16.439);
+	--chart-5: oklch(0.645 0.246 16.439);
 	/* rose 500 */
 	--menu: oklch(0.21 0.034 264.665);
 	/* gray 900 */
 	--menu-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
-	--menu-primary: oklch(48.8% 0.243 264.376);
+	--menu-primary: oklch(0.488 0.243 264.376);
 	/* violet 400 */
 	--menu-primary-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
@@ -190,7 +190,7 @@ body {
 	--color-destructive: var(--destructive);
 	--color-destructive-foreground: var(--destructive-foreground);
 	--color-border: var(--border);
-	--color-border-sky: var(--border-sky);
+	--color-border-accent: var(--border-accent);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
 	--color-chart-1: var(--chart-1);

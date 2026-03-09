@@ -10,7 +10,7 @@ export function MenuPageLayout({
 }) {
 	return (
 		<div
-			className={`flex min-h-screen w-full flex-col items-center bg-background px-4 pt-20 pb-16 text-foreground ${className}`}
+			className={`flex w-full max-w-6xl flex-col bg-background px-4 pt-20 pb-16 text-foreground ${className}`}
 		>
 			{children}
 		</div>
