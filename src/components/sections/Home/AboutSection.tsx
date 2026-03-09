@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router"
 import { motion } from "motion/react"
 import { useEffect, useRef } from "react"
-import { useActiveSection } from "#/contexts/active-section"
 import uog2 from "#/assets/img/university/UoG2.jpg?format=webp&w=1600"
 import uog3 from "#/assets/img/university/UoG3.jpg?format=webp&w=1600"
 import uog4 from "#/assets/img/university/UoG4.jpg?format=webp&w=1600"
+import { useActiveSection } from "#/contexts/active-section"
 
 type SectionMotionProps = {
 	activeVariant: { borderColor: string; opacity: number }
@@ -21,15 +21,23 @@ const AboutSection = ({
 	transition,
 }: SectionMotionProps) => {
 	const sectionRef = useRef<HTMLElement>(null)
-	const { activeSectionId, registerSection } = useActiveSection()
+	const {
+		activeSectionId,
+		registerSection,
+		setTapOverride,
+	} = useActiveSection()
 	const active = activeSectionId === "about"
 
-	useEffect(() => registerSection("about", sectionRef), [registerSection])
+	useEffect(
+		() => registerSection("about", sectionRef),
+		[registerSection],
+	)
 
 	return (
 		<section
 			ref={sectionRef}
 			className="relative z-10 w-full px-4"
+			onTouchEnd={() => setTapOverride("about")}
 		>
 			<motion.div
 				className="mx-auto overflow-hidden rounded-md border-2 border-border"

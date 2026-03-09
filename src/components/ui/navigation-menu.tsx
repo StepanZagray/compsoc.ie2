@@ -194,8 +194,11 @@ function NavigationMenuComponent({
 }) {
 	const pathname =
 		currentPage === "" ? "/" : `/${currentPage}`
-	const { activeSectionId, setMenuHovered } =
-		useActiveSection()
+	const {
+		activeSectionId,
+		setMenuHovered,
+		setTapOverride,
+	} = useActiveSection()
 	const menuActive = activeSectionId === "menu"
 
 	const [isFullscreenMenuOpen, setisFullscreenMenuOpen] =
@@ -212,6 +215,7 @@ function NavigationMenuComponent({
 			className="fixed top-0 left-0 z-50 flex h-16 w-screen items-center justify-between border-border border-b-2 bg-background transition-[border-color] duration-300"
 			onMouseEnter={() => setMenuHovered(true)}
 			onMouseLeave={() => setMenuHovered(false)}
+			onTouchEnd={() => setTapOverride("menu")}
 			style={{
 				borderBottomColor: menuActive
 					? sectionActiveBorderColor

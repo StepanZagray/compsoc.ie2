@@ -19,8 +19,11 @@ const HeroSection = ({
 	transition,
 }: SectionMotionProps) => {
 	const sectionRef = useRef<HTMLElement>(null)
-	const { activeSectionId, registerSection } =
-		useActiveSection()
+	const {
+		activeSectionId,
+		registerSection,
+		setTapOverride,
+	} = useActiveSection()
 	const active = activeSectionId === "hero"
 
 	useEffect(
@@ -41,6 +44,7 @@ const HeroSection = ({
 		<section
 			ref={sectionRef}
 			className="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-2"
+			onTouchEnd={() => setTapOverride("hero")}
 		>
 			{/* Background photo clipped in a rounded window */}
 			<div className="-translate-x-1/2 -translate-y-1/2 absolute top-[calc(50%+2rem)] left-1/2 z-0">

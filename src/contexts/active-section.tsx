@@ -6,10 +6,13 @@ import {
 	useContext,
 	useEffect,
 	useMemo,
+	useRef,
 	useState,
 } from "react"
 
 export type SectionId = "hero" | "about" | "footer" | "menu"
+
+const TAP_ACTIVE_MS = 500
 
 type ActiveSectionContextValue = {
 	activeSectionId: SectionId | null
@@ -19,6 +22,8 @@ type ActiveSectionContextValue = {
 	) => () => void
 	setFooterHovered: (hovered: boolean) => void
 	setMenuHovered: (hovered: boolean) => void
+	/** On mobile tap: make this section active for 0.5s, then revert to view-based. */
+	setTapOverride: (id: SectionId) => void
 }
 
 const ActiveSectionContext =
@@ -54,6 +59,35 @@ export function ActiveSectionProvider({
 	const [registeredIds, setRegisteredIds] = useState<
 		Set<SectionId>
 	>(new Set())
+	const [tapOverrideId, setTapOverrideId] =
+		useState<SectionId | null>(null)
+	const tapOverrideTimeoutRef = useRef<ReturnType<
+		typeof setTimeout
+	> | null>(null)
+
+	const setTapOverride = useCallback((id: SectionId) => {
+		if (tapOverrideTimeoutRef.current) {
+			clearTimeout(tapOverrideTimeoutRef.current)
+			tapOverrideTimeoutRef.current = null
+		}
+		setTapOverrideId(id)
+		tapOverrideTimeoutRef.current = setTimeout(() => {
+			setTapOverrideId(null)
+			tapOverrideTimeoutRef.current = null
+			// Clear hover so menu/footer don't stay active after tap (synthetic pointer events on touch)
+			setMenuHovered(false)
+			setFooterHovered(false)
+		}, TAP_ACTIVE_MS)
+	}, [])
+
+	useEffect(
+		() => () => {
+			if (tapOverrideTimeoutRef.current) {
+				clearTimeout(tapOverrideTimeoutRef.current)
+			}
+		},
+		[],
+	)
 
 	const registerSection = useCallback(
 		(id: SectionId, ref: RefObject<HTMLElement | null>) => {
@@ -96,6 +130,10 @@ export function ActiveSectionProvider({
 	)
 
 	useEffect(() => {
+		if (tapOverrideId !== null) {
+			setActiveSectionId(tapOverrideId)
+			return
+		}
 		if (menuHovered) {
 			setActiveSectionId("menu")
 			return
@@ -128,7 +166,7 @@ export function ActiveSectionProvider({
 			a[1] >= b[1] ? a : b,
 		)
 		setActiveSectionId(best[1] > 0 ? best[0] : null)
-	}, [menuHovered, footerHovered, ratios, registeredIds])
+	}, [tapOverrideId, menuHovered, footerHovered, ratios, registeredIds])
 
 	const value = useMemo<ActiveSectionContextValue>(
 		() => ({
@@ -136,8 +174,9 @@ export function ActiveSectionProvider({
 			registerSection,
 			setFooterHovered,
 			setMenuHovered,
+			setTapOverride,
 		}),
-		[activeSectionId, registerSection],
+		[activeSectionId, registerSection, setTapOverride],
 	)
 
 	return (

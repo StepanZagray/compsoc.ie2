@@ -58,7 +58,7 @@ function RouteComponent() {
 					<button
 						type="button"
 						onClick={() => setActiveTab("upcoming")}
-						className={`flex-1 rounded px-4 py-2 font-medium text-sm transition-colors ${
+						className={`flex-1 cursor-pointer rounded px-4 py-2 font-medium text-sm transition-colors ${
 							activeTab === "upcoming"
 								? "bg-foreground text-background"
 								: "text-muted-foreground hover:text-foreground"
@@ -69,7 +69,7 @@ function RouteComponent() {
 					<button
 						type="button"
 						onClick={() => setActiveTab("past")}
-						className={`flex-1 rounded px-4 py-2 font-medium text-sm transition-colors ${
+						className={`flex-1 cursor-pointer rounded px-4 py-2 font-medium text-sm transition-colors ${
 							activeTab === "past"
 								? "bg-foreground text-background"
 								: "text-muted-foreground hover:text-foreground"

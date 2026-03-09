@@ -5,11 +5,18 @@ import { useActiveSection } from "#/contexts/active-section"
 
 export function Footer() {
 	const footerRef = useRef<HTMLElement>(null)
-	const { activeSectionId, registerSection, setFooterHovered } =
-		useActiveSection()
+	const {
+		activeSectionId,
+		registerSection,
+		setFooterHovered,
+		setTapOverride,
+	} = useActiveSection()
 	const active = activeSectionId === "footer"
 
-	useEffect(() => registerSection("footer", footerRef), [registerSection])
+	useEffect(
+		() => registerSection("footer", footerRef),
+		[registerSection],
+	)
 
 	return (
 		// biome-ignore lint/a11y/noStaticElementInteractions: hover only for active-section state, not a control
@@ -18,10 +25,15 @@ export function Footer() {
 			className="mt-4 w-full px-4 pb-4"
 			onMouseEnter={() => setFooterHovered(true)}
 			onMouseLeave={() => setFooterHovered(false)}
+			onTouchEnd={() => setTapOverride("footer")}
 		>
 			<motion.div
 				className="mx-auto overflow-hidden rounded-md border-2 border-border bg-background/80 px-4 py-5 shadow-2xl md:px-6 md:py-5"
-				animate={active ? sectionVariants.active : sectionVariants.inactive}
+				animate={
+					active
+						? sectionVariants.active
+						: sectionVariants.inactive
+				}
 				transition={sectionVariants.transition}
 			>
 				<div className="flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
