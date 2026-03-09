@@ -281,7 +281,14 @@ function NavigationMenuComponent({
 												? "true"
 												: undefined
 										}
-										render={<Link to={item.link} />}
+										render={
+											<Link
+												to={item.link}
+												onClick={() =>
+													setisFullscreenMenuOpen(false)
+												}
+											/>
+										}
 										className="h-full w-content text-4xl"
 									>
 										{item.text}
