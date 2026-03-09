@@ -8,6 +8,8 @@ import {
 } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { useEffect, useState } from "react"
+import { ActiveSectionProvider } from "#/contexts/active-section"
+import { Footer } from "#/components/ui/footer"
 import { NavigationMenuComponent } from "#/components/ui/navigation-menu"
 
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools"
@@ -146,11 +148,14 @@ function RootDocument({
 			</head>
 			<body>
 				<TanStackQueryProvider>
-					<NavigationMenuComponent
-						currentPage={currentPage}
-						isDesktop={isDesktop}
-					/>
-					{children}
+					<ActiveSectionProvider>
+						<NavigationMenuComponent
+							currentPage={currentPage}
+							isDesktop={isDesktop}
+						/>
+						{children}
+						<Footer />
+					</ActiveSectionProvider>
 					<TanStackDevtools
 						config={{
 							position: "bottom-right",

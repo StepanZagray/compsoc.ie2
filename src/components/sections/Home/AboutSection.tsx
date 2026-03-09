@@ -1,13 +1,42 @@
 import { Link } from "@tanstack/react-router"
+import { motion } from "motion/react"
+import { useEffect, useRef } from "react"
+import { useActiveSection } from "#/contexts/active-section"
 import uog2 from "#/assets/img/university/UoG2.jpg?format=webp&w=1600"
 import uog3 from "#/assets/img/university/UoG3.jpg?format=webp&w=1600"
 import uog4 from "#/assets/img/university/UoG4.jpg?format=webp&w=1600"
 
-const AboutSection = () => {
+type SectionMotionProps = {
+	activeVariant: { borderColor: string; opacity: number }
+	inactiveVariant: { borderColor: string; opacity: number }
+	transition: {
+		duration: number
+		ease: [number, number, number, number]
+	}
+}
+
+const AboutSection = ({
+	activeVariant,
+	inactiveVariant,
+	transition,
+}: SectionMotionProps) => {
+	const sectionRef = useRef<HTMLElement>(null)
+	const { activeSectionId, registerSection } = useActiveSection()
+	const active = activeSectionId === "about"
+
+	useEffect(() => registerSection("about", sectionRef), [registerSection])
+
 	return (
-		<section className="relative z-10 w-full px-4 pb-32 md:px-4">
-			<div className="mx-auto overflow-hidden rounded-md border-2 border-border">
-				<div className="grid grid-cols-1 md:grid-cols-3">
+		<section
+			ref={sectionRef}
+			className="relative z-10 w-full px-4"
+		>
+			<motion.div
+				className="mx-auto overflow-hidden rounded-md border-2 border-border"
+				animate={active ? activeVariant : inactiveVariant}
+				transition={transition}
+			>
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 					<div className="flex flex-col justify-center border-border border-b-2 bg-background p-6 md:border-r-2 md:p-8">
 						<h2 className="mb-3 font-bold text-lg sm:text-xl">
 							Who we are
@@ -27,7 +56,7 @@ const AboutSection = () => {
 						</p>
 					</div>
 
-					<div className="relative border-b-2 border-border bg-background md:col-span-2">
+					<div className="relative border-border border-b-2 bg-background md:col-span-2">
 						<div className="aspect-4/3 md:absolute md:inset-0 md:aspect-auto">
 							<img
 								src={uog2}
@@ -41,7 +70,7 @@ const AboutSection = () => {
 						/>
 					</div>
 
-					<div className="relative hidden border-b-2 border-border bg-background md:flex md:border-r-2">
+					<div className="relative hidden border-border border-b-2 bg-background md:flex md:border-r-2">
 						<div className="aspect-4/3 md:absolute md:inset-0 md:aspect-auto">
 							<img
 								src={uog3}
@@ -51,7 +80,7 @@ const AboutSection = () => {
 						</div>
 					</div>
 
-					<div className="flex flex-col justify-center border-b-2 border-border bg-background p-6 md:border-r-2 md:p-8">
+					<div className="flex flex-col justify-center border-border border-b-2 bg-background p-6 md:border-r-2 md:p-8">
 						<h2 className="mb-3 font-bold text-lg sm:text-xl">
 							Our mission
 						</h2>
@@ -71,7 +100,7 @@ const AboutSection = () => {
 						</p>
 					</div>
 
-					<div className="relative border-b-2 border-border bg-background">
+					<div className="relative border-border border-b-2 bg-background">
 						<div className="aspect-4/3 md:absolute md:inset-0 md:aspect-auto">
 							<img
 								src={uog4}
@@ -80,7 +109,7 @@ const AboutSection = () => {
 							/>
 						</div>
 						<div
-							className="pointer-events-none absolute inset-0 bg-black/10"
+							className="pointer-events-none absolute inset-0 bg-black/20"
 							aria-hidden
 						/>
 					</div>
@@ -105,7 +134,7 @@ const AboutSection = () => {
 						</p>
 					</div>
 				</div>
-			</div>
+			</motion.div>
 		</section>
 	)
 }

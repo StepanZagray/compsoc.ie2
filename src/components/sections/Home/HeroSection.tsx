@@ -1,14 +1,29 @@
-import { motion, useInView } from "motion/react"
-import { useRef } from "react"
+import { motion } from "motion/react"
+import { useEffect, useRef } from "react"
 import heroImg from "#/assets/img/university/UoG.jpg?format=webp"
+import { useActiveSection } from "#/contexts/active-section"
 import { useTypewriter } from "#/hooks/useTypewriter"
 
-const BORDER_SKY = "oklch(0.828 0.111 230.318)"
-const BORDER = "oklch(0.278 0.033 256.848)"
+type SectionMotionProps = {
+	activeVariant: { borderColor: string; opacity: number }
+	inactiveVariant: { borderColor: string; opacity: number }
+	transition: {
+		duration: number
+		ease: [number, number, number, number]
+	}
+}
 
-const HeroSection = () => {
+const HeroSection = ({
+	activeVariant,
+	inactiveVariant,
+	transition,
+}: SectionMotionProps) => {
 	const sectionRef = useRef<HTMLElement>(null)
-	const inView = useInView(sectionRef, { amount: 0.8 })
+	const { activeSectionId, registerSection } = useActiveSection()
+	const active = activeSectionId === "hero"
+
+	useEffect(() => registerSection("hero", sectionRef), [registerSection])
+
 	const strarray = [
 		"Computer",
 		"Developer",
@@ -16,7 +31,7 @@ const HeroSection = () => {
 		"AI",
 		"Cybersecurity",
 	]
-	const text = useTypewriter(strarray, 75, 1000, inView)
+	const text = useTypewriter(strarray, 75, 1000, active)
 
 	return (
 		<section
@@ -34,9 +49,11 @@ const HeroSection = () => {
 					/>
 				</div>
 			</div>
-
+			<p className="absolute top-22 left-10 z-20 text-base">
+				<span className="text-accent">~ ❯</span> compsoc
+			</p>
 			{/* Hero content */}
-			<div className="relative z-10 flex w-fit max-w-3xl flex-col items-center justify-center">
+			<div className="relative z-20 flex w-fit max-w-3xl flex-col justify-center">
 				<h1 className="mb-4 flex w-fit flex-col font-bold text-[42px]/11 md:flex-row md:text-5xl">
 					<span>
 						University of
@@ -44,56 +61,49 @@ const HeroSection = () => {
 					</span>
 					<span>Galway's</span>
 				</h1>
-				{/* Terminal window */}
-				<div className="relative w-full min-w-84">
-					<div
-						className="absolute inset-0 z-0 rounded-md backdrop-blur-md"
-						aria-hidden
-					/>
-					<motion.div
-						className="relative z-10 w-full overflow-hidden rounded-md border-2 bg-background/80 px-3.5 py-3 shadow-2xl md:px-5 md:py-4"
-						animate={{
-							borderColor: inView ? BORDER_SKY : BORDER,
-							opacity: inView ? 1 : 0.8,
-						}}
-						transition={{
-							duration: 0.35,
-							ease: [0.25, 0.1, 0.25, 1],
-						}}
-					>
-						<p className="flex flex-wrap items-center gap-x-0.5 text-xl">
-							<span className="text-accent">~ ❯&nbsp;</span>
-							<span className="relative">
-								{text.split("").map((char, i) => (
-									<span
-										key={`${String(i).padStart(3, "0")}-${char}`}
-										className="relative inline-block"
-									>
-										{char === " " ? (
-											<span>&nbsp;</span>
-										) : (
-											<span>{char}</span>
-										)}
-									</span>
-								))}
-							</span>
+
+				<p className="flex flex-wrap items-center gap-x-0.5 text-2xl">
+					<span className="relative">
+						{text.split("").map((char, i) => (
 							<span
-								className="ml-px inline-block h-[1em] w-[0.5em] align-middle text-foreground"
-								style={
-									inView
-										? {
-												backgroundColor: "currentColor",
-											}
-										: {
-												border: "2px solid currentColor",
-												backgroundColor: "transparent",
-											}
-								}
-							/>
-							<span> Society</span>
-						</p>
-					</motion.div>
-				</div>
+								key={`${String(i).padStart(3, "0")}-${char}`}
+								className="relative inline-block"
+							>
+								{char === " " ? (
+									<span>&nbsp;</span>
+								) : (
+									<span>{char}</span>
+								)}
+							</span>
+						))}
+					</span>
+					<span
+						className="ml-px inline-block h-[1em] w-[0.5em] align-middle text-foreground"
+						style={
+							active
+								? {
+										backgroundColor: "currentColor",
+									}
+								: {
+										border: "2px solid currentColor",
+										backgroundColor: "transparent",
+									}
+						}
+					/>
+					<span> Society</span>
+				</p>
+			</div>
+			{/* Terminal window */}
+			<div className="-translate-y-1/2 -translate-x-1/2 absolute top-[calc(50%+1.75rem)] left-1/2 z-10">
+				<div
+					className="absolute inset-0 z-0 rounded-md backdrop-blur-sm"
+					aria-hidden
+				/>
+				<motion.div
+					className="relative z-10 h-[calc(100vh-3.5rem-2rem)] w-[calc(100vw-2rem)] overflow-hidden rounded-md border-2 bg-background/80 px-3.5 py-3 shadow-2xl md:px-5 md:py-4"
+					animate={active ? activeVariant : inactiveVariant}
+					transition={transition}
+				></motion.div>
 			</div>
 		</section>
 	)

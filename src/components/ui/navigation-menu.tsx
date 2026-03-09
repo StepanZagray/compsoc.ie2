@@ -7,6 +7,8 @@ import {
 	CompSocLogo,
 	HamburgerMenuIcon,
 } from "#/components/icons"
+import { sectionActiveBorderColor } from "#/constants/section-variants"
+import { useActiveSection } from "#/contexts/active-section"
 import { cn } from "#/lib/utils"
 import { Button } from "./button"
 
@@ -192,6 +194,9 @@ function NavigationMenuComponent({
 }) {
 	const pathname =
 		currentPage === "" ? "/" : `/${currentPage}`
+	const { activeSectionId, setMenuHovered } =
+		useActiveSection()
+	const menuActive = activeSectionId === "menu"
 
 	const [isFullscreenMenuOpen, setisFullscreenMenuOpen] =
 		useState(false)
@@ -202,7 +207,17 @@ function NavigationMenuComponent({
 	}, [isDesktop])
 
 	return (
-		<div className="fixed top-0 left-0 z-50 flex h-14 w-screen items-center justify-between border-border border-b bg-background">
+		// biome-ignore lint/a11y/noStaticElementInteractions: hover only for active-section state
+		<div
+			className="fixed top-0 left-0 z-50 flex h-14 w-screen items-center justify-between border-border border-b-2 bg-background transition-[border-color] duration-300"
+			onMouseEnter={() => setMenuHovered(true)}
+			onMouseLeave={() => setMenuHovered(false)}
+			style={{
+				borderBottomColor: menuActive
+					? sectionActiveBorderColor
+					: undefined,
+			}}
+		>
 			<CompSocLogo className="pl-2" />
 
 			{/* Desktop Navigation Menu — visible from md up via CSS only (no flicker on load) */}
