@@ -36,16 +36,16 @@ const AboutSection = ({
 	return (
 		<section
 			ref={sectionRef}
-			className="relative z-10 w-full px-4"
+			className="relative z-10 mb-2 w-full px-2 md:mb-4 md:px-4"
 			onTouchEnd={() => setTapOverride("about")}
 		>
 			<motion.div
-				className="mx-auto overflow-hidden rounded-md border-2 border-border"
+				className="overflow-hidden rounded-md border-2 border-border"
 				animate={active ? activeVariant : inactiveVariant}
 				transition={transition}
 			>
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-					<div className="flex flex-col justify-center border-border border-b-2 bg-background p-6 md:border-r-2 md:p-8">
+					<div className="flex flex-col justify-center border-border border-b-2 bg-background p-5 md:border-r-2 md:p-8">
 						<h2 className="mb-3 font-bold text-lg sm:text-xl">
 							Who we are
 						</h2>
@@ -88,7 +88,7 @@ const AboutSection = ({
 						</div>
 					</div>
 
-					<div className="flex flex-col justify-center border-border border-b-2 bg-background p-6 md:border-r-2 md:p-8">
+					<div className="flex flex-col justify-center border-border border-b-2 bg-background p-5 md:border-r-2 md:p-8">
 						<h2 className="mb-3 font-bold text-lg sm:text-xl">
 							Our mission
 						</h2>
@@ -122,7 +122,7 @@ const AboutSection = ({
 						/>
 					</div>
 
-					<div className="bg-background p-6 md:col-span-3 md:p-8">
+					<div className="bg-background p-5 md:col-span-3 md:p-8">
 						<h2 className="mb-2 font-bold text-lg sm:text-xl">
 							Our constitution
 						</h2>

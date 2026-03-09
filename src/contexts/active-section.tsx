@@ -64,6 +64,15 @@ export function ActiveSectionProvider({
 	const tapOverrideTimeoutRef = useRef<ReturnType<
 		typeof setTimeout
 	> | null>(null)
+	const [isMobile, setIsMobile] = useState(false)
+
+	useEffect(() => {
+		const mql = window.matchMedia("(max-width: 767px)")
+		const handler = () => setIsMobile(mql.matches)
+		handler()
+		mql.addEventListener("change", handler)
+		return () => mql.removeEventListener("change", handler)
+	}, [])
 
 	const setTapOverride = useCallback((id: SectionId) => {
 		if (tapOverrideTimeoutRef.current) {
@@ -130,20 +139,21 @@ export function ActiveSectionProvider({
 	)
 
 	useEffect(() => {
-		if (tapOverrideId !== null) {
+		// On mobile: scroll only; on desktop: tap override and hover can set active
+		if (!isMobile && tapOverrideId !== null) {
 			setActiveSectionId(tapOverrideId)
 			return
 		}
-		if (menuHovered) {
+		if (!isMobile && menuHovered) {
 			setActiveSectionId("menu")
 			return
 		}
-		if (footerHovered) {
+		if (!isMobile && footerHovered) {
 			setActiveSectionId("footer")
 			return
 		}
-		// Only hero and about compete by scroll; footer is active only on hover
-		const scrollSectionIds = ["hero", "about"] as const
+		// Scroll-based: hero, about, and footer (footer active when ≥90% visible)
+		const scrollSectionIds = ["hero", "about", "footer"] as const
 		const entries = Array.from(registeredIds)
 			.filter(
 				(id): id is (typeof scrollSectionIds)[number] =>
@@ -153,10 +163,15 @@ export function ActiveSectionProvider({
 			)
 			.map((id) => {
 				const raw = ratios[id] ?? 0
-				// Hero must be ≥70% visible to stay active;
-				const effective =
-					id === "hero" && raw < 0.75 ? 0 : raw
-				return [id, effective] as [SectionId, number]
+				// Hero must be ≥75% visible to stay active
+				if (id === "hero") {
+					return [id, raw < 0.75 ? 0 : raw] as [SectionId, number]
+				}
+				// Footer counts only when ≥90% visible
+				if (id === "footer") {
+					return [id, raw >= 0.9 ? raw : 0] as [SectionId, number]
+				}
+				return [id, raw] as [SectionId, number]
 			})
 		if (entries.length === 0) {
 			setActiveSectionId(null)
@@ -166,7 +181,7 @@ export function ActiveSectionProvider({
 			a[1] >= b[1] ? a : b,
 		)
 		setActiveSectionId(best[1] > 0 ? best[0] : null)
-	}, [tapOverrideId, menuHovered, footerHovered, ratios, registeredIds])
+	}, [isMobile, tapOverrideId, menuHovered, footerHovered, ratios, registeredIds])
 
 	const value = useMemo<ActiveSectionContextValue>(
 		() => ({

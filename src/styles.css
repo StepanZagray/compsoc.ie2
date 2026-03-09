@@ -234,22 +234,16 @@ body {
 }
 
 html {
-	overflow: auto; /* scroll on document root = browser viewport (useScroll default) */
+	overflow: auto;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+html::-webkit-scrollbar {
+	display: none;
 }
 
 body {
 	overflow: visible;
 	position: relative;
 	min-height: 100vh;
-}
-
-@media screen and (width >=768px) {
-	html {
-		scrollbar-width: none;
-		-ms-overflow-style: none;
-	}
-	html::-webkit-scrollbar {
-		display: none;
-	}
-
 } 

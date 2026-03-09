@@ -212,7 +212,7 @@ function NavigationMenuComponent({
 	return (
 		// biome-ignore lint/a11y/noStaticElementInteractions: hover only for active-section state
 		<div
-			className="fixed top-0 left-0 z-50 flex h-16 w-screen items-center justify-between border-border border-b-2 bg-background transition-[border-color] duration-300"
+			className="fixed top-0 left-0 z-1000 flex h-16 w-screen items-center justify-between border-border border-b-2 bg-background transition-[border-color] duration-300"
 			onMouseEnter={() => setMenuHovered(true)}
 			onMouseLeave={() => setMenuHovered(false)}
 			onTouchEnd={() => setTapOverride("menu")}
@@ -257,7 +257,7 @@ function NavigationMenuComponent({
 					onClick={() =>
 						setisFullscreenMenuOpen(!isFullscreenMenuOpen)
 					}
-					className="relative flex h-full w-full items-center justify-center p-0!"
+					className="relative flex h-full w-full items-center justify-center p-0! hover:bg-transparent hover:text-foreground focus:bg-transparent focus-visible:border-transparent focus-visible:outline-none focus-visible:ring-0"
 				>
 					<HamburgerMenuIcon
 						isOpen={isFullscreenMenuOpen}

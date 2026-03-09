@@ -43,12 +43,12 @@ const HeroSection = ({
 	return (
 		<section
 			ref={sectionRef}
-			className="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-2"
+			className="relative flex h-[calc(100vh-4rem)] w-full items-center justify-center overflow-hidden"
 			onTouchEnd={() => setTapOverride("hero")}
 		>
 			{/* Background photo clipped in a rounded window */}
-			<div className="-translate-x-1/2 -translate-y-1/2 absolute top-[calc(50%+2rem)] left-1/2 z-0">
-				<div className="relative h-[calc(100vh-4rem-2rem)] w-[calc(100vw-2rem)] overflow-hidden rounded-md">
+			<div className="-translate-x-1/2 -translate-y-1/2 absolute top-[calc(50%)] left-1/2 z-0">
+				<div className="relative h-[calc(100vh-4rem-1rem)] w-[calc(100vw-1rem)] overflow-hidden rounded-md md:h-[calc(100vh-4rem-2rem)] md:w-[calc(100vw-2rem)]">
 					<img
 						src={heroImg}
 						alt=""
@@ -57,13 +57,10 @@ const HeroSection = ({
 					/>
 				</div>
 			</div>
-			{/* terminal prompt */}
-			<p className="absolute top-26 left-10 z-20 text-base">
-				<span className="text-accent">~ ❯</span> compsoc
-			</p>
+
 			{/* Hero content */}
 			<div className="relative z-20 flex w-fit max-w-3xl flex-col justify-center">
-				<h1 className="mb-4 flex w-fit flex-col font-bold text-[42px]/11 md:flex-row md:text-5xl">
+				<h1 className="mb-4 flex w-fit flex-col font-bold text-[36px]/10 md:flex-row md:text-5xl">
 					<span>
 						University of
 						<span className="hidden md:inline">&nbsp;</span>
@@ -71,7 +68,7 @@ const HeroSection = ({
 					<span>Galway's</span>
 				</h1>
 
-				<p className="flex flex-wrap items-center gap-x-0.5 text-2xl">
+				<p className="flex flex-wrap items-center gap-x-0.5 text-xl md:text-2xl">
 					<span className="relative">
 						{text.split("").map((char, i) => (
 							<span
@@ -103,13 +100,17 @@ const HeroSection = ({
 				</p>
 			</div>
 			{/* Terminal window */}
-			<div className="-translate-y-1/2 -translate-x-1/2 absolute top-[calc(50%+2rem)] left-1/2 z-10">
+			<div className="-translate-y-1/2 -translate-x-1/2 absolute top-[calc(50%)] left-1/2 z-10">
 				<div
 					className="absolute inset-0 z-0 rounded-md backdrop-blur-sm"
 					aria-hidden
 				/>
+				{/* terminal prompt */}
+				<p className="absolute top-4 left-4 z-20 text-sm md:top-5 md:left-5 md:text-base">
+					<span className="text-accent">~ ❯</span> compsoc
+				</p>
 				<motion.div
-					className="relative z-10 h-[calc(100vh-4rem-2rem)] w-[calc(100vw-2rem)] overflow-hidden rounded-md border-2 bg-background/80 px-3.5 py-3 shadow-2xl md:px-5 md:py-4"
+					className="relative z-10 h-[calc(100vh-4rem-1rem)] w-[calc(100vw-1rem)] overflow-hidden rounded-md border-2 bg-background/80 px-3.5 py-3 shadow-2xl md:h-[calc(100vh-4rem-2rem)] md:w-[calc(100vw-2rem)] md:px-5 md:py-4"
 					animate={active ? activeVariant : inactiveVariant}
 					transition={transition}
 				></motion.div>

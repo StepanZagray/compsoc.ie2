@@ -9,9 +9,9 @@ import {
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { useEffect, useState } from "react"
 import { NotFound } from "#/components/NotFound"
-import { ActiveSectionProvider } from "#/contexts/active-section"
 import { Footer } from "#/components/ui/footer"
 import { NavigationMenuComponent } from "#/components/ui/navigation-menu"
+import { ActiveSectionProvider } from "#/contexts/active-section"
 
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools"
 import TanStackQueryProvider from "../integrations/tanstack-query/root-provider"
@@ -155,7 +155,10 @@ function RootDocument({
 							currentPage={currentPage}
 							isDesktop={isDesktop}
 						/>
-						{children}
+						<div className="min-h-screen w-screen pt-16">
+							{children}
+						</div>
+
 						<Footer />
 					</ActiveSectionProvider>
 					<TanStackDevtools
