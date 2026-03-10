@@ -75,13 +75,13 @@ const InfographicSection = ({
 					<span className="text-accent">~ ❯</span> compsoc
 					--stats
 				</p>
-				<div className="grid grid-cols-1 gap-8 p-5 sm:grid-cols-2 md:grid-cols-4 md:gap-8 md:p-8">
+				<div className="grid grid-cols-1 gap-10 p-5 sm:grid-cols-2 md:grid-cols-4 md:p-8">
 					{metrics.map(({ icon: Icon, value, label }) => (
 						<div
 							key={label}
 							className="flex flex-col items-center text-center"
 						>
-							<span className="mb-3 inline-flex items-center justify-center p-2.5">
+							<span className="inline-flex items-center justify-center p-2.5">
 								<Icon
 									size={24}
 									className="text-primary md:h-7 md:w-7"
