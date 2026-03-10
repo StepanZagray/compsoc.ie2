@@ -3,12 +3,10 @@ import { ExternalLink, Mail, MapPin } from "lucide-react"
 import { useEffect } from "react"
 import { InstagramIcon } from "#/components/icons/InstagramIcon"
 import { XIcon } from "#/components/icons/XIcon"
-import {
-	PageLayout,
-	PageTitle,
-	Panel,
-} from "#/layouts"
 import { buttonVariants } from "#/components/ui/button"
+import { PageTitle } from "#/components/ui/page-title"
+import { Panel } from "#/components/ui/panel"
+import { PageLayout } from "#/layouts"
 import { cn } from "#/lib/utils"
 
 export const Route = createFileRoute("/(menu)/contact")({

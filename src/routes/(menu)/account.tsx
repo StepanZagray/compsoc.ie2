@@ -1,14 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { Database, Mail, Terminal } from "lucide-react"
-import {
-	Card,
-	CardContent,
-} from "#/components/ui/card"
-import {
-	PageLayout,
-	PageTitle,
-	Panel,
-} from "#/layouts"
+import { Card, CardContent } from "#/components/ui/card"
+import { PageTitle } from "#/components/ui/page-title"
+import { Panel } from "#/components/ui/panel"
+import { PageLayout } from "#/layouts"
 
 export const Route = createFileRoute("/(menu)/account")({
 	component: RouteComponent,

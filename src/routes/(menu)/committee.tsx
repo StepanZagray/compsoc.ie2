@@ -3,15 +3,10 @@ import { Globe, Link as LucideLink } from "lucide-react"
 import { GithubIcon } from "#/components/icons/GithubIcon"
 import { LinkedinIcon } from "#/components/icons/LinkedinIcon"
 import { XIcon } from "#/components/icons/XIcon"
-import {
-	Card,
-	CardContent,
-} from "#/components/ui/card"
-import {
-	PageLayout,
-	PageTitle,
-} from "#/layouts"
 import { buttonVariants } from "#/components/ui/button"
+import { Card, CardContent } from "#/components/ui/card"
+import { PageTitle } from "#/components/ui/page-title"
+import { PageLayout } from "#/layouts"
 import { cn } from "#/lib/utils"
 import {
 	CommitteeYears,
