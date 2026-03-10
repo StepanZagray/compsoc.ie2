@@ -67,7 +67,7 @@ const InfographicSection = ({
 		>
 			{/* Single terminal window containing all metrics */}
 			<motion.div
-				className="flex w-full flex-col overflow-hidden rounded-md border-2 bg-background/80 px-4 py-4 shadow-lg md:py-5"
+				className="flex w-full flex-col gap-3 overflow-hidden rounded-md border-2 bg-background/80 px-4 py-4 shadow-lg md:py-5"
 				animate={active ? activeVariant : inactiveVariant}
 				transition={transition}
 			>
