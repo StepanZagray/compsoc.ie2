@@ -123,7 +123,7 @@ function RootDocument({
 }: {
 	children: React.ReactNode
 }) {
-	const currentPage = useLocation().pathname.slice(1)
+	const currentPath = useLocation().pathname.replace(/\/$/, "") || "/"
 	const DESKTOP_BREAKPOINT = 768
 	const [isDesktop, setIsDesktop] = useState(() => {
 		if (typeof window !== "undefined") {
@@ -150,7 +150,7 @@ function RootDocument({
 				<TanStackQueryProvider>
 					<ActiveSectionProvider>
 						<NavigationMenuComponent
-							currentPage={currentPage}
+							currentPath={currentPath}
 							isDesktop={isDesktop}
 						/>
 						<div className="flex min-h-screen w-screen flex-col items-center justify-between pt-16">

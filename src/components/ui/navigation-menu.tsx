@@ -187,13 +187,11 @@ const mainMenuItems = [
 
 function NavigationMenuComponent({
 	isDesktop,
-	currentPage,
+	currentPath,
 }: {
 	isDesktop: boolean
-	currentPage: string
+	currentPath: string
 }) {
-	const pathname =
-		currentPage === "" ? "/" : `/${currentPage}`
 	const {
 		activeSectionId,
 		setMenuHovered,
@@ -234,9 +232,9 @@ function NavigationMenuComponent({
 								className="flex items-stretch"
 							>
 								<NavigationMenuLink
-									active={pathname === item.link}
+									active={currentPath === item.link}
 									data-active={
-										pathname === item.link
+										currentPath === item.link
 											? "true"
 											: undefined
 									}
@@ -275,9 +273,9 @@ function NavigationMenuComponent({
 									className="flex items-stretch"
 								>
 									<NavigationMenuLink
-										active={pathname === item.link}
+										active={currentPath === item.link}
 										data-active={
-											pathname === item.link
+											currentPath === item.link
 												? "true"
 												: undefined
 										}

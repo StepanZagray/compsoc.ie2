@@ -75,28 +75,35 @@ const InfographicSection = ({
 					<span className="text-accent">~ ❯</span> compsoc
 					--stats
 				</p>
-				<div className="grid grid-cols-1 gap-10 p-5 sm:grid-cols-2 md:grid-cols-4 md:p-8">
-					{metrics.map(({ icon: Icon, value, label }) => (
-						<div
-							key={label}
-							className="flex flex-col items-center text-center"
-						>
-							<span className="inline-flex items-center justify-center p-2.5">
-								<Icon
-									size={24}
-									className="text-primary md:h-7 md:w-7"
-								/>
-							</span>
-							<span className="mb-0.5 font-extrabold text-3xl text-foreground">
-								{typeof value() === "number"
-									? value()
-									: value()}
-							</span>
-							<span className="font-normal text-muted-foreground text-sm tracking-wide">
-								{label}
-							</span>
-						</div>
-					))}
+				<div className="relative flex flex-row items-center justify-center">
+					<div className="grid w-fit grid-cols-1 gap-12 p-5 sm:grid-cols-2 md:grid-cols-4 md:p-8">
+						{metrics.map(({ icon: Icon, value, label }) => (
+							<div
+								key={label}
+								className="flex w-fit flex-col items-center justify-center"
+							>
+								<div className="flex h-content w-content flex-col">
+									<div className="relative flex flex-row items-center gap-2.5">
+										<span className="mb-0.5 inline-flex h-full items-center justify-center">
+											<Icon
+												size={26}
+												className="text-primary"
+											/>
+										</span>
+										<span className="mb-0.5 font-extrabold text-3xl text-foreground">
+											{typeof value() === "number"
+												? value()
+												: value()}
+										</span>
+									</div>
+
+									<span className="font-normal text-muted-foreground text-sm tracking-wide">
+										{label}
+									</span>
+								</div>
+							</div>
+						))}
+					</div>
 				</div>
 			</motion.div>
 		</section>
