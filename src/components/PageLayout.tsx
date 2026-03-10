@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 
-/** Wrapper for menu routes: clears nav (h-16), consistent background and spacing. */
-export function MenuPageLayout({
+/** Wrapper for page content: clears nav (h-16), consistent background and spacing. */
+export function PageLayout({
 	children,
 	className,
 }: {
@@ -17,8 +17,8 @@ export function MenuPageLayout({
 	)
 }
 
-/** Page heading matching About/constitution: title + optional accent line. */
-export function MenuPageTitle({
+/** Page heading: title + optional accent line and subtitle. */
+export function PageTitle({
 	title,
 	subtitle,
 }: {
@@ -40,8 +40,8 @@ export function MenuPageTitle({
 	)
 }
 
-/** Panel matching hero/footer window: rounded border-2 border-border. */
-export function MenuPanel({
+/** Bordered panel: rounded border-2 border-border, matches hero/footer window style. */
+export function Panel({
 	children,
 	className,
 }: {

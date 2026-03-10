@@ -7,15 +7,12 @@ import {
 } from "lucide-react"
 import { useState } from "react"
 import {
-	Card,
-	CardContent,
-} from "#/components/ui/card"
-import {
-	MenuPageLayout,
-	MenuPageTitle,
-	MenuPanel,
-} from "#/components/MenuPageLayout"
+	PageLayout,
+	PageTitle,
+	Panel,
+} from "#/components/PageLayout"
 import { buttonVariants } from "#/components/ui/button"
+import { Card, CardContent } from "#/components/ui/card"
 import { cn } from "#/lib/utils"
 import {
 	type EventType,
@@ -50,14 +47,14 @@ function RouteComponent() {
 		activeTab === "upcoming" ? loadingUpcoming : loadingPast
 
 	return (
-		<MenuPageLayout>
-			<MenuPageTitle
+		<PageLayout>
+			<PageTitle
 				title="Events"
 				subtitle="Discover upcoming events and explore our past activities."
 			/>
 
 			{/* Tabs */}
-			<div className="mb-6 flex gap-1 rounded-md border-2 border-border bg-background/80 p-1">
+			<div className="mb-6 flex gap-1 rounded-md border-2 border-border bg-background/80 p-1 transition-all duration-350">
 				<button
 					type="button"
 					onClick={() => setActiveTab("upcoming")}
@@ -85,19 +82,19 @@ function RouteComponent() {
 			{/* Events list */}
 			<div className="space-y-4">
 				{loading ? (
-					<MenuPanel className="p-8">
+					<Panel className="p-8">
 						<p className="text-center text-muted-foreground text-sm">
 							Loading events…
 						</p>
-					</MenuPanel>
+					</Panel>
 				) : events.length === 0 ? (
-					<MenuPanel className="p-8">
+					<Panel className="p-8">
 						<p className="text-center text-muted-foreground text-sm">
 							{activeTab === "upcoming"
 								? "No upcoming events at the moment. Check back soon."
 								: "No past events to display."}
 						</p>
-					</MenuPanel>
+					</Panel>
 				) : (
 					events.map((event: EventType) => (
 						<EventCard
@@ -107,7 +104,7 @@ function RouteComponent() {
 					))
 				)}
 			</div>
-		</MenuPageLayout>
+		</PageLayout>
 	)
 }
 

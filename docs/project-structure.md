@@ -16,7 +16,7 @@ compsoc.ie2/
 │   │   ├── sections/        # Feature sections (e.g. Home/HeroSection, AboutSection)
 │   │   │   └── Home/
 │   │   ├── ui/              # Shared UI primitives (button, card, footer, navigation-menu)
-│   │   ├── MenuPageLayout.tsx
+│   │   ├── PageLayout.tsx
 │   │   └── NotFound.tsx
 │   ├── constants/           # Shared constants (e.g. section-variants)
 │   ├── contexts/            # React context providers (e.g. active-section)

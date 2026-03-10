@@ -4,10 +4,10 @@ import { useEffect } from "react"
 import { InstagramIcon } from "#/components/icons/InstagramIcon"
 import { XIcon } from "#/components/icons/XIcon"
 import {
-	MenuPageLayout,
-	MenuPageTitle,
-	MenuPanel,
-} from "#/components/MenuPageLayout"
+	PageLayout,
+	PageTitle,
+	Panel,
+} from "#/components/PageLayout"
 import { buttonVariants } from "#/components/ui/button"
 import { cn } from "#/lib/utils"
 
@@ -29,13 +29,13 @@ function ContactPage() {
 	}, [])
 
 	return (
-		<MenuPageLayout>
-			<MenuPageTitle
+		<PageLayout>
+			<PageTitle
 				title="Get in touch"
 				subtitle="Connect with our community, attend events, and become part of CompSoc."
 			/>
 
-			<MenuPanel className="mb-8">
+			<Panel className="mb-8">
 				<div className="border-border border-b-2 p-6">
 					<h2 className="flex items-center gap-2 font-semibold text-foreground">
 						<MapPin className="size-5 text-accent" />
@@ -73,10 +73,10 @@ function ContactPage() {
 						<ExternalLink className="size-4" />
 					</a>
 				</div>
-			</MenuPanel>
+			</Panel>
 
 			<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-				<MenuPanel>
+				<Panel>
 					<div className="border-border border-b-2 p-6">
 						<h2 className="flex items-center gap-2 font-semibold text-foreground">
 							<Mail className="size-5 text-accent" />
@@ -149,9 +149,9 @@ function ContactPage() {
 							</div>
 						</div>
 					</div>
-				</MenuPanel>
+				</Panel>
 
-				<MenuPanel>
+				<Panel>
 					<div className="border-border border-b-2 p-6">
 						<h2 className="flex items-center gap-2 font-semibold text-foreground">
 							<XIcon className="size-5 text-accent" />
@@ -176,8 +176,8 @@ function ContactPage() {
 							</a>
 						</div>
 					</div>
-				</MenuPanel>
+				</Panel>
 			</div>
-		</MenuPageLayout>
+		</PageLayout>
 	)
 }

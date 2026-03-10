@@ -8,9 +8,9 @@ import {
 	CardContent,
 } from "#/components/ui/card"
 import {
-	MenuPageLayout,
-	MenuPageTitle,
-} from "#/components/MenuPageLayout"
+	PageLayout,
+	PageTitle,
+} from "#/components/PageLayout"
 import { buttonVariants } from "#/components/ui/button"
 import { cn } from "#/lib/utils"
 import {
@@ -26,8 +26,8 @@ export const Route = createFileRoute("/(menu)/committee")({
 
 function CommitteePage() {
 	return (
-		<MenuPageLayout>
-			<MenuPageTitle
+		<PageLayout>
+			<PageTitle
 				title="Committee"
 				subtitle="Meet the CompSoc committee members from recent years."
 			/>
@@ -60,7 +60,7 @@ function CommitteePage() {
 					</div>
 				))}
 			</div>
-		</MenuPageLayout>
+		</PageLayout>
 	)
 }
 
