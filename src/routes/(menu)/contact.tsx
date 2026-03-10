@@ -7,7 +7,7 @@ import {
 	PageLayout,
 	PageTitle,
 	Panel,
-} from "#/components/PageLayout"
+} from "#/layouts"
 import { buttonVariants } from "#/components/ui/button"
 import { cn } from "#/lib/utils"
 

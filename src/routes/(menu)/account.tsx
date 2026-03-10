@@ -8,7 +8,7 @@ import {
 	PageLayout,
 	PageTitle,
 	Panel,
-} from "#/components/PageLayout"
+} from "#/layouts"
 
 export const Route = createFileRoute("/(menu)/account")({
 	component: RouteComponent,
@@ -93,7 +93,7 @@ function FeatureCard({
 	return (
 		<Card className="flex flex-col items-center text-center">
 			<CardContent className="flex flex-col items-center text-center">
-				<span className="mb-3 inline-flex items-center justify-center transition-transform duration-200 group-hover/card:scale-110">
+				<span className="mb-3 inline-flex items-center justify-center transition-transform duration-300 group-hover/card:scale-110">
 					{icon}
 				</span>
 				<h2 className="mb-2 font-bold text-lg">{title}</h2>

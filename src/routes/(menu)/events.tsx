@@ -6,13 +6,11 @@ import {
 	MapPin,
 } from "lucide-react"
 import { useState } from "react"
-import {
-	PageLayout,
-	PageTitle,
-	Panel,
-} from "#/components/PageLayout"
 import { buttonVariants } from "#/components/ui/button"
 import { Card, CardContent } from "#/components/ui/card"
+import { PageTitle } from "#/components/ui/page-title"
+import { Panel } from "#/components/ui/panel"
+import { PageLayout } from "#/layouts"
 import { cn } from "#/lib/utils"
 import {
 	type EventType,
@@ -54,7 +52,7 @@ function RouteComponent() {
 			/>
 
 			{/* Tabs */}
-			<div className="mb-6 flex gap-1 rounded-md border-2 border-border bg-background/80 p-1 transition-all duration-350">
+			<div className="mb-6 flex gap-1 rounded-md border-2 border-border bg-background/80 p-1 transition-all duration-300">
 				<button
 					type="button"
 					onClick={() => setActiveTab("upcoming")}

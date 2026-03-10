@@ -10,7 +10,7 @@ import {
 import {
 	PageLayout,
 	PageTitle,
-} from "#/components/PageLayout"
+} from "#/layouts"
 import { buttonVariants } from "#/components/ui/button"
 import { cn } from "#/lib/utils"
 import {
@@ -100,7 +100,7 @@ function CommitteeCard({
 				<img
 					src={photo}
 					alt={person.name}
-					className="mb-3 size-24 rounded-full border-2 border-border object-cover transition-colors duration-200 group-hover/card:border-border-accent md:size-28"
+					className="mb-3 size-24 rounded-full border-2 border-border object-cover transition-colors duration-300 group-hover/card:border-border-accent md:size-28"
 					loading="lazy"
 				/>
 				<h3 className="font-bold text-foreground">

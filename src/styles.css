@@ -3,7 +3,21 @@
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
 
-
+/* Self-hosted Poppins (logo only). Place woff2 files in public/fonts/ – see public/fonts/README.md */
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/poppins/poppins-300.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/poppins/poppins-500.woff2") format("woff2");
+}
 
 body {
 	@apply m-0;
