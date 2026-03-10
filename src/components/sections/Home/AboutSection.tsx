@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router"
 import { motion } from "motion/react"
 import { useEffect, useRef } from "react"
-import uog2 from "#/assets/img/university/UoG2.jpg?format=webp&w=1600"
-import uog3 from "#/assets/img/university/UoG3.jpg?format=webp&w=1600"
-import uog4 from "#/assets/img/university/UoG4.jpg?format=webp&w=1600"
+import uog2 from "#/assets/img/university/UoG2.jpg?format=webp&w=1400"
+import uog3 from "#/assets/img/university/UoG3.jpg?format=webp&w=1000"
+import uog4 from "#/assets/img/university/UoG4.jpg?format=webp&w=1000"
 import { useActiveSection } from "#/contexts/active-section"
 
 type SectionMotionProps = {

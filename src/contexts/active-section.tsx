@@ -10,7 +10,7 @@ import {
 	useState,
 } from "react"
 
-export type SectionId = "hero" | "about" | "footer" | "menu"
+export type SectionId = "hero" | "about" | "stats" | "footer" | "menu"
 
 const TAP_ACTIVE_MS = 500
 
@@ -48,11 +48,10 @@ export function ActiveSectionProvider({
 		useState<SectionId | null>(null)
 	const [footerHovered, setFooterHovered] = useState(false)
 	const [menuHovered, setMenuHovered] = useState(false)
-	const [ratios, setRatios] = useState<
-		Record<SectionId, number>
-	>({
+	const [ratios, setRatios] = useState<Record<SectionId, number>>({
 		hero: 0,
 		about: 0,
+		stats: 0,
 		footer: 0,
 		menu: 0,
 	})
@@ -152,8 +151,8 @@ export function ActiveSectionProvider({
 			setActiveSectionId("footer")
 			return
 		}
-		// Scroll-based: hero and about only; footer is active only on hover
-		const scrollSectionIds = ["hero", "about"] as const
+		// Scroll-based: hero, about, stats; footer is active only on hover
+		const scrollSectionIds = ["hero", "about", "stats"] as const
 		const entries = Array.from(registeredIds)
 			.filter(
 				(id): id is (typeof scrollSectionIds)[number] =>

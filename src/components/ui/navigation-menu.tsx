@@ -148,7 +148,7 @@ function NavigationMenuLink({
 		<NavigationMenuPrimitive.Link
 			data-slot="navigation-menu-link"
 			className={cn(
-				"flex h-full w-full items-center justify-center gap-1.5 p-2 text-sm outline-none transition-colors [&_svg:not([class*='size-'])]:size-4",
+				"flex h-full w-full items-center justify-center gap-1.5 p-2 text-muted-foreground text-sm outline-none transition-colors [&_svg:not([class*='size-'])]:size-4",
 				"hover:text-foreground-light focus:text-foreground-light focus-visible:text-foreground-light data-[active=true]:text-foreground-light",
 				className,
 			)}

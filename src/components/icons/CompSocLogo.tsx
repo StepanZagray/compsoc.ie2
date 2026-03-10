@@ -1,3 +1,4 @@
+import logoUrl from "#/assets/img/compsoc/compsoc_logo.png?format=webp&w=100"
 import { cn } from "#/lib/utils"
 
 export function CompSocLogo({
@@ -13,7 +14,7 @@ export function CompSocLogo({
 			)}
 		>
 			<img
-				src="/assets/img/compsoc/compsoc_logo.png"
+				src={logoUrl}
 				alt=""
 				className="relative h-10 object-contain"
 			/>

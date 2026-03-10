@@ -4,106 +4,101 @@ import {
 	UserRoundCog,
 	UsersRound,
 } from "lucide-react"
-import {
-	Card,
-	CardContent,
-	CardHeader,
-} from "#/components/ui/card"
+import { motion } from "motion/react"
+import { useEffect, useRef } from "react"
+import { useActiveSection } from "#/contexts/active-section"
 import { NumberOfCommitteeMembers } from "#/services/committee"
 
-const InfographicSection = () => {
+type SectionMotionProps = {
+	activeVariant: { borderColor: string; opacity: number }
+	inactiveVariant: { borderColor: string; opacity: number }
+	transition: {
+		duration: number
+		ease: [number, number, number, number]
+	}
+}
+
+const metrics = [
+	{
+		icon: CalendarDays,
+		value: () => new Date().getFullYear() - 1977,
+		label: "years established",
+	},
+	{
+		icon: UsersRound,
+		value: () => "1,388",
+		label: "members and growing",
+	},
+	{
+		icon: UserRoundCog,
+		value: () => NumberOfCommitteeMembers,
+		label: "committee members",
+	},
+	{
+		icon: Database,
+		value: () => "5",
+		label: "GB free server space",
+	},
+]
+
+const InfographicSection = ({
+	activeVariant,
+	inactiveVariant,
+	transition,
+}: SectionMotionProps) => {
+	const sectionRef = useRef<HTMLElement>(null)
+	const {
+		activeSectionId,
+		registerSection,
+		setTapOverride,
+	} = useActiveSection()
+	const active = activeSectionId === "stats"
+
+	useEffect(
+		() => registerSection("stats", sectionRef),
+		[registerSection],
+	)
+
 	return (
-		<section className="flex w-full flex-col items-center px-2 pb-8 md:px-6">
-			<div className="grid w-full max-w-4xl grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4 md:gap-8">
-				{/* Years established */}
-				<Card className="group flex flex-col items-center px-2 py-6 text-center md:px-4 md:py-8">
-					<CardHeader className="flex flex-col items-center p-0 pb-2">
-						<div className="relative mb-2 md:mb-3">
-							<div className="absolute inset-0 rounded-full bg-linear-to-br from-primary/20 via-transparent to-secondary/20 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
-							<span className="relative inline-flex items-center justify-center rounded-full border border-primary/20 bg-primary/10 p-2 backdrop-blur-sm transition-all duration-500 ease-out group-hover:scale-110 group-hover:border-primary/40 md:p-3">
-								<CalendarDays
-									size={28}
-									className="text-primary md:h-9 md:w-9"
+		<section
+			ref={sectionRef}
+			className="flex w-full flex-col items-center px-4 pb-4"
+			onTouchEnd={() => setTapOverride("stats")}
+		>
+			{/* Single terminal window containing all metrics */}
+			<motion.div
+				className="flex w-full flex-col overflow-hidden rounded-md border-2 bg-background/80 px-4 py-4 shadow-lg md:py-5"
+				animate={active ? activeVariant : inactiveVariant}
+				transition={transition}
+			>
+				<p className="relative text-sm md:text-base">
+					<span className="text-accent">~ ❯</span> compsoc
+					--stats
+				</p>
+				<div className="grid grid-cols-1 gap-8 p-5 sm:grid-cols-2 md:grid-cols-4 md:gap-8 md:p-8">
+					{metrics.map(({ icon: Icon, value, label }) => (
+						<div
+							key={label}
+							className="flex flex-col items-center text-center"
+						>
+							<span className="mb-3 inline-flex items-center justify-center p-2.5">
+								<Icon
+									size={24}
+									className="text-primary md:h-7 md:w-7"
 								/>
 							</span>
-						</div>
-					</CardHeader>
-					<CardContent className="flex flex-col items-center p-0">
-						<h2 className="mb-1 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text font-extrabold text-2xl text-transparent transition-all duration-300 ease-out group-hover:from-primary group-hover:to-primary/80 sm:text-3xl md:text-4xl">
-							{new Date().getFullYear() - 1977}
-						</h2>
-						<p className="font-normal text-sm tracking-wide">
-							<strong>years</strong> established
-						</p>
-					</CardContent>
-				</Card>
-				{/* Members */}
-				<Card className="group flex flex-col items-center px-2 py-6 text-center md:px-4 md:py-8">
-					<CardHeader className="flex flex-col items-center p-0 pb-2">
-						<div className="relative mb-2 md:mb-3">
-							<div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
-							<span className="relative inline-flex items-center justify-center rounded-full border border-primary/20 bg-primary/10 p-2 backdrop-blur-sm transition-all duration-500 ease-out group-hover:scale-110 group-hover:border-primary/40 md:p-3">
-								<UsersRound
-									size={28}
-									className="text-primary md:h-9 md:w-9"
-								/>
+							<span className="mb-0.5 font-extrabold text-3xl text-foreground">
+								{typeof value() === "number"
+									? value()
+									: value()}
+							</span>
+							<span className="font-normal text-muted-foreground text-sm tracking-wide">
+								{label}
 							</span>
 						</div>
-					</CardHeader>
-					<CardContent className="flex flex-col items-center p-0">
-						<h2 className="mb-1 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text font-extrabold text-2xl text-transparent transition-all duration-300 ease-out group-hover:from-primary group-hover:to-primary/80 sm:text-3xl md:text-4xl">
-							1,388
-						</h2>
-						<p className="font-normal text-sm tracking-wide">
-							<strong>members</strong> and growing
-						</p>
-					</CardContent>
-				</Card>
-				{/* Committee members */}
-				<Card className="group flex flex-col items-center px-2 py-6 text-center md:px-4 md:py-8">
-					<CardHeader className="flex flex-col items-center p-0 pb-2">
-						<div className="relative mb-2 md:mb-3">
-							<div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
-							<span className="relative inline-flex items-center justify-center rounded-full border border-primary/20 bg-primary/10 p-2 backdrop-blur-sm transition-all duration-500 ease-out group-hover:scale-110 group-hover:border-primary/40 md:p-3">
-								<UserRoundCog
-									size={28}
-									className="text-primary md:h-9 md:w-9"
-								/>
-							</span>
-						</div>
-					</CardHeader>
-					<CardContent className="flex flex-col items-center p-0">
-						<h2 className="mb-1 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text font-extrabold text-2xl text-transparent transition-all duration-300 ease-out group-hover:from-primary group-hover:to-primary/80 sm:text-3xl md:text-4xl">
-							{NumberOfCommitteeMembers}
-						</h2>
-						<p className="font-normal text-sm tracking-wide">
-							<strong>committee</strong> members
-						</p>
-					</CardContent>
-				</Card>
-				{/* Server space */}
-				<Card className="group flex flex-col items-center px-2 py-6 text-center md:px-4 md:py-8">
-					<CardHeader className="flex flex-col items-center p-0 pb-2">
-						<div className="relative mb-2 md:mb-3">
-							<div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
-							<span className="relative inline-flex items-center justify-center rounded-full border border-primary/20 bg-primary/10 p-2 backdrop-blur-sm transition-all duration-500 ease-out group-hover:scale-110 group-hover:border-primary/40 md:p-3">
-								<Database
-									size={28}
-									className="text-primary md:h-9 md:w-9"
-								/>
-							</span>
-						</div>
-					</CardHeader>
-					<CardContent className="flex flex-col items-center p-0">
-						<h2 className="mb-1 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text font-extrabold text-2xl text-transparent transition-all duration-300 ease-out group-hover:from-primary group-hover:to-primary/80 sm:text-3xl md:text-4xl">
-							5
-						</h2>
-						<p className="font-normal text-sm tracking-wide">
-							<strong>GB</strong> free server space
-						</p>
-					</CardContent>
-				</Card>
-			</div>
+					))}
+				</div>
+			</motion.div>
 		</section>
 	)
 }

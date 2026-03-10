@@ -1,6 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { Database, Mail, Terminal } from "lucide-react"
 import {
+	Card,
+	CardContent,
+} from "#/components/ui/card"
+import {
 	MenuPageLayout,
 	MenuPageTitle,
 	MenuPanel,
@@ -87,14 +91,16 @@ function FeatureCard({
 	description: string
 }) {
 	return (
-		<div className="group flex flex-col items-center rounded-md border-2 border-border bg-background/80 p-6 text-center transition-all duration-200 hover:border-border-accent hover:shadow-foreground/5 hover:shadow-md">
-			<span className="mb-3 inline-flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
-				{icon}
-			</span>
-			<h2 className="mb-2 font-bold text-lg">{title}</h2>
-			<p className="text-muted-foreground text-sm leading-6">
-				{description}
-			</p>
-		</div>
+		<Card className="flex flex-col items-center text-center">
+			<CardContent className="flex flex-col items-center text-center">
+				<span className="mb-3 inline-flex items-center justify-center transition-transform duration-200 group-hover/card:scale-110">
+					{icon}
+				</span>
+				<h2 className="mb-2 font-bold text-lg">{title}</h2>
+				<p className="text-muted-foreground text-sm leading-6">
+					{description}
+				</p>
+			</CardContent>
+		</Card>
 	)
 }

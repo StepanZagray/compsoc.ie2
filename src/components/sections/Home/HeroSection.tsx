@@ -1,6 +1,6 @@
 import { motion } from "motion/react"
 import { useEffect, useRef } from "react"
-import heroImg from "#/assets/img/university/UoG.jpg?format=webp"
+import heroImg from "#/assets/img/university/UoG.jpg?format=webp&w=200"
 import { useActiveSection } from "#/contexts/active-section"
 import { useTypewriter } from "#/hooks/useTypewriter"
 
@@ -47,8 +47,8 @@ const HeroSection = ({
 			onTouchEnd={() => setTapOverride("hero")}
 		>
 			{/* Background photo clipped in a rounded window */}
-			<div className="-translate-x-1/2 -translate-y-1/2 absolute top-[calc(50%)] left-1/2 z-0">
-				<div className="relative h-[calc(100vh-4rem-2rem)] w-[calc(100vw-2rem)] overflow-hidden rounded-md">
+			<div className="-translate-x-1/2 -translate-y-1/2 absolute top-[calc(50%)] left-1/2 z-0 h-[calc(100%-2rem)] w-[calc(100%-2rem)]">
+				<div className="relative h-full w-full overflow-hidden rounded-md">
 					<img
 						src={heroImg}
 						alt=""
@@ -100,7 +100,7 @@ const HeroSection = ({
 				</p>
 			</div>
 			{/* Terminal window */}
-			<div className="-translate-y-1/2 -translate-x-1/2 absolute top-[calc(50%)] left-1/2 z-10">
+			<div className="-translate-y-1/2 -translate-x-1/2 absolute top-[calc(50%)] left-1/2 z-10 h-[calc(100%-2rem)]">
 				<div
 					className="absolute inset-0 z-0 rounded-md backdrop-blur-sm"
 					aria-hidden
@@ -110,7 +110,7 @@ const HeroSection = ({
 					<span className="text-accent">~ ❯</span> compsoc
 				</p>
 				<motion.div
-					className="relative z-10 h-[calc(100vh-4rem-2rem)] w-[calc(100vw-2rem)] overflow-hidden rounded-md border-2 bg-background/80 px-3.5 py-3 shadow-2xl md:px-5 md:py-4"
+					className="relative z-10 h-full w-[calc(100vw-2rem)] overflow-hidden rounded-md border-2 bg-background/70 px-3.5 py-3 shadow-2xl md:px-5 md:py-4"
 					animate={active ? activeVariant : inactiveVariant}
 					transition={transition}
 				></motion.div>

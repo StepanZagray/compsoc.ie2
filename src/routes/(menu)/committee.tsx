@@ -4,9 +4,12 @@ import { GithubIcon } from "#/components/icons/GithubIcon"
 import { LinkedinIcon } from "#/components/icons/LinkedinIcon"
 import { XIcon } from "#/components/icons/XIcon"
 import {
+	Card,
+	CardContent,
+} from "#/components/ui/card"
+import {
 	MenuPageLayout,
 	MenuPageTitle,
-	MenuPanel,
 } from "#/components/MenuPageLayout"
 import { buttonVariants } from "#/components/ui/button"
 import { cn } from "#/lib/utils"
@@ -92,12 +95,12 @@ function CommitteeCard({
 		: defaultPhoto
 	const bio = person.bio?.trim() ? person.bio : defaultBio
 	return (
-		<MenuPanel className="group mb-6 flex break-inside-avoid flex-col items-center text-center transition-all duration-200 hover:border-border-accent hover:shadow-foreground/5 hover:shadow-md">
-			<div className="flex flex-col items-center p-6">
+		<Card className="mb-6 flex break-inside-avoid flex-col items-center text-center">
+			<CardContent className="flex flex-col items-center p-6">
 				<img
 					src={photo}
 					alt={person.name}
-					className="mb-3 size-24 rounded-full border-2 border-border object-cover transition-colors duration-200 group-hover:border-border-accent md:size-28"
+					className="mb-3 size-24 rounded-full border-2 border-border object-cover transition-colors duration-200 group-hover/card:border-border-accent md:size-28"
 					loading="lazy"
 				/>
 				<h3 className="font-bold text-foreground">
@@ -109,7 +112,7 @@ function CommitteeCard({
 				<p className="text-muted-foreground text-sm leading-6">
 					{bio}
 				</p>
-			</div>
+			</CardContent>
 			{person.social_links &&
 				person.social_links.length > 0 && (
 					<div className="flex flex-wrap justify-center gap-2 border-border border-t-2 p-4">
@@ -139,6 +142,6 @@ function CommitteeCard({
 						})}
 					</div>
 				)}
-		</MenuPanel>
+		</Card>
 	)
 }

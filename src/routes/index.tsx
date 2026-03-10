@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 import AboutSection from "#/components/sections/Home/AboutSection"
 import HeroSection from "#/components/sections/Home/HeroSection"
+import InfographicSection from "#/components/sections/Home/InfographicSection"
 import { sectionVariants } from "#/constants/section-variants"
 
 export const Route = createFileRoute("/")({
@@ -16,6 +17,11 @@ function HomePage() {
 				transition={sectionVariants.transition}
 			/>
 			<AboutSection
+				activeVariant={sectionVariants.active}
+				inactiveVariant={sectionVariants.inactive}
+				transition={sectionVariants.transition}
+			/>
+			<InfographicSection
 				activeVariant={sectionVariants.active}
 				inactiveVariant={sectionVariants.inactive}
 				transition={sectionVariants.transition}

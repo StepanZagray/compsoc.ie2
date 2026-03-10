@@ -7,6 +7,10 @@ import {
 } from "lucide-react"
 import { useState } from "react"
 import {
+	Card,
+	CardContent,
+} from "#/components/ui/card"
+import {
 	MenuPageLayout,
 	MenuPageTitle,
 	MenuPanel,
@@ -110,8 +114,8 @@ function RouteComponent() {
 function EventCard({ event }: { event: EventType }) {
 	const title = decodeHtml(event.Title)
 	return (
-		<MenuPanel>
-			<div className="border-border border-b-2 p-6">
+		<Card>
+			<CardContent className="border-border border-b-2 p-6">
 				<h3 className="font-bold text-foreground">
 					{title}
 				</h3>
@@ -127,7 +131,7 @@ function EventCard({ event }: { event: EventType }) {
 						</span>
 					)}
 				</div>
-			</div>
+			</CardContent>
 			<div
 				className="prose prose-sm dark:prose-invert max-w-none p-6 text-muted-foreground [&_a]:text-accent"
 				// biome-ignore lint/security/noDangerouslySetInnerHtml: event content from API
@@ -152,7 +156,7 @@ function EventCard({ event }: { event: EventType }) {
 					<ExternalLink className="size-4" />
 				</a>
 			</div>
-		</MenuPanel>
+		</Card>
 	)
 }
 

@@ -13,6 +13,8 @@ import { Footer } from "#/components/ui/footer"
 import { NavigationMenuComponent } from "#/components/ui/navigation-menu"
 import { ActiveSectionProvider } from "#/contexts/active-section"
 
+import faviconUrl from "#/assets/img/compsoc/favicon.png?format=webp&w=200"
+import appleTouchIconUrl from "#/assets/img/compsoc/apple-touch-icon.png?format=webp&w=200"
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools"
 import TanStackQueryProvider from "../integrations/tanstack-query/root-provider"
 import appCss from "../styles.css?url"
@@ -101,11 +103,11 @@ export const Route =
 				},
 				{
 					rel: "icon",
-					href: "/assets/img/compsoc/favicon.png",
+					href: faviconUrl,
 				},
 				{
 					rel: "apple-touch-icon",
-					href: "/assets/img/compsoc/apple-touch-icon.png",
+					href: appleTouchIconUrl,
 				},
 				{
 					rel: "stylesheet",
