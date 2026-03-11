@@ -67,7 +67,7 @@ const InfographicSection = ({
 		>
 			{/* Single terminal window containing all metrics */}
 			<motion.div
-				className="flex w-full flex-col gap-3 overflow-hidden rounded-md border-2 bg-background/80 px-4 py-4 shadow-lg md:py-5"
+				className="flex w-full flex-col overflow-hidden rounded-md border-2 bg-background/80 px-4 py-4 shadow-lg md:py-5"
 				animate={active ? activeVariant : inactiveVariant}
 				transition={transition}
 			>
@@ -75,8 +75,8 @@ const InfographicSection = ({
 					<span className="text-accent">~ ❯</span> compsoc
 					--stats
 				</p>
-				<div className="relative flex flex-row items-center justify-center">
-					<div className="grid w-fit grid-cols-1 gap-12 p-5 sm:grid-cols-2 md:grid-cols-4 md:p-8">
+				<div className="relative flex flex-row items-center justify-center px-6 py-12">
+					<div className="grid w-fit grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-4">
 						{metrics.map(({ icon: Icon, value, label }) => (
 							<div
 								key={label}
