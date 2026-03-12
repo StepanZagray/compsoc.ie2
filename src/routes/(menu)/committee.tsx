@@ -1,9 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { Globe, Link as LucideLink } from "lucide-react"
+import { useState } from "react"
 import { GithubIcon } from "#/components/icons/GithubIcon"
 import { LinkedinIcon } from "#/components/icons/LinkedinIcon"
 import { XIcon } from "#/components/icons/XIcon"
-import { buttonVariants } from "#/components/ui/button"
+import {
+	Button,
+	buttonVariants,
+} from "#/components/ui/button"
 import { Card, CardContent } from "#/components/ui/card"
 import { PageTitle } from "#/components/ui/page-title"
 import { PageLayout } from "#/layouts"
@@ -19,15 +23,54 @@ export const Route = createFileRoute("/(menu)/committee")({
 	component: CommitteePage,
 })
 
+const ALL_YEARS = null as string | null
+
 function CommitteePage() {
+	const [selectedYear, setSelectedYear] = useState<
+		string | null
+	>(ALL_YEARS)
+
+	const years = CommitteeYears.map((year) => year.year)
+	const visibleYears =
+		selectedYear === null
+			? CommitteeYears
+			: CommitteeYears.filter(
+					(year) => year.year === selectedYear,
+				)
+
 	return (
 		<PageLayout>
 			<PageTitle
 				title="Committee"
 				subtitle="Meet the CompSoc committee members from recent years."
 			/>
+			<div className="mb-6 flex flex-wrap gap-2">
+				<Button
+					variant={
+						selectedYear === null ? "default" : "outline"
+					}
+					size="sm"
+					onClick={() => setSelectedYear(ALL_YEARS)}
+					className="px-3"
+				>
+					All
+				</Button>
+				{years.map((year) => (
+					<Button
+						key={year}
+						variant={
+							selectedYear === year ? "default" : "outline"
+						}
+						size="sm"
+						onClick={() => setSelectedYear(year)}
+						className="px-3"
+					>
+						{year}
+					</Button>
+				))}
+			</div>
 			<div className="flex flex-col gap-12">
-				{CommitteeYears.map((year) => (
+				{visibleYears.map((year) => (
 					<div
 						key={year.year}
 						className="flex flex-col gap-6"
