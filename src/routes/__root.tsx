@@ -155,7 +155,7 @@ function RootDocument({
 						/>
 						<div className="flex min-h-screen w-screen flex-col items-center justify-between pt-16">
 							{children}
-							<Footer />
+							<Footer currentPath={currentPath} />
 						</div>
 					</ActiveSectionProvider>
 					<TanStackDevtools

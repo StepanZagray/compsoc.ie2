@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react"
 import { sectionVariants } from "#/constants/section-variants"
 import { useActiveSection } from "#/contexts/active-section"
 
-export function Footer() {
+export function Footer({ currentPath = "/" }: { currentPath?: string }) {
 	const footerRef = useRef<HTMLElement>(null)
 	const {
 		activeSectionId,
@@ -12,6 +12,7 @@ export function Footer() {
 		setTapOverride,
 	} = useActiveSection()
 	const active = activeSectionId === "footer"
+	const isHomePage = currentPath === "/"
 
 	useEffect(
 		() => registerSection("footer", footerRef),
@@ -22,7 +23,7 @@ export function Footer() {
 		// biome-ignore lint/a11y/noStaticElementInteractions: hover only for active-section state, not a control
 		<footer
 			ref={footerRef}
-			className="w-full px-4 pb-4"
+			className={`w-full px-4 pb-4 ${!isHomePage ? "mx-auto max-w-6xl" : ""}`}
 			onMouseEnter={() => setFooterHovered(true)}
 			onMouseLeave={() => setFooterHovered(false)}
 			onTouchEnd={() => setTapOverride("footer")}
