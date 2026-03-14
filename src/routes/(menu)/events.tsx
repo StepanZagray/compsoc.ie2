@@ -255,7 +255,7 @@ function EventCard({ event }: { event: EventType }) {
 					rel="noopener noreferrer"
 					className={cn(
 						buttonVariants({
-							variant: "outline",
+							variant: "secondary",
 							size: "sm",
 						}),
 						"inline-flex items-center gap-2",

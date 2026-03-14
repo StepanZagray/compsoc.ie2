@@ -133,6 +133,8 @@ body {
 	/* Mirrored in section-variants.ts (active border). Change there too to avoid animation flicker. */
 	--border-accent: oklch(0.828 0.111 230.318);
 	/* sky 300 */
+	--border-secondary: oklch(97.7% 0.013 236.62);
+	/* sky 50 */
 	--input: oklch(0.928 0.006 264.531);
 	/* gray 200 */
 	--ring: oklch(0.707 0.022 261.325);
@@ -207,6 +209,8 @@ body {
 	/* Mirrored in section-variants.ts (active border). Change there too to avoid animation flicker. */
 	--border-accent: oklch(0.746 0.16 232.661);
 	/* sky 400 */
+	--border-secondary: oklch(87.2% 0.01 258.338);
+	/* gray 300 */
 	--input: oklch(0.278 0.033 256.848);
 	/* gray 800 */
 	--ring: oklch(0.446 0.03 256.802);
@@ -260,6 +264,7 @@ body {
 	--color-destructive-foreground: var(--destructive-foreground);
 	--color-border: var(--border);
 	--color-border-accent: var(--border-accent);
+	--color-border-secondary: var(--border-secondary);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
 	--color-chart-1: var(--chart-1);
