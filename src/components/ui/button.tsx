@@ -12,19 +12,19 @@ const buttonVariants = cva(
 		variants: {
 			variant: {
 				default:
-					"bg-primary text-primary-foreground hover:bg-primary/80",
+					"bg-primary text-primary-foreground hover:bg-primary/80 data-[active=true]:hover:bg-primary aria-[pressed=true]:hover:bg-primary",
 				outline:
-					"border-border bg-background shadow-xs hover:border-border-accent text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
+					"border-border bg-background shadow-xs text-foreground hover:border-border-secondary hover:shadow-xs aria-expanded:bg-muted aria-expanded:text-foreground data-[active=true]:bg-muted data-[active=true]:border-border data-[active=true]:hover:border-border data-[active=true]:hover:shadow-xs data-[active=true]:hover:bg-muted aria-[pressed=true]:bg-muted aria-[pressed=true]:border-border aria-[pressed=true]:hover:border-border aria-[pressed=true]:hover:shadow-xs aria-[pressed=true]:hover:bg-muted",
 				secondary:
-					"border-border bg-background shadow-xs hover:border-border-secondary text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
+					"border-border bg-background shadow-xs text-foreground hover:border-border-secondary hover:shadow-xs aria-expanded:bg-muted aria-expanded:text-foreground data-[active=true]:bg-muted data-[active=true]:border-border data-[active=true]:hover:border-border data-[active=true]:hover:shadow-xs data-[active=true]:hover:bg-muted aria-[pressed=true]:bg-muted aria-[pressed=true]:border-border aria-[pressed=true]:hover:border-border aria-[pressed=true]:hover:shadow-xs aria-[pressed=true]:hover:bg-muted",
 
 				ghost:
-					"hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+					"hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50 data-[active=true]:hover:bg-muted aria-[pressed=true]:hover:bg-muted dark:data-[active=true]:hover:bg-muted/50 dark:aria-[pressed=true]:hover:bg-muted/50",
 				destructive:
-					"bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-				link: "text-primary underline-offset-4 hover:underline",
+					"bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40 data-[active=true]:hover:bg-destructive/10 dark:data-[active=true]:hover:bg-destructive/20 aria-[pressed=true]:hover:bg-destructive/10 dark:aria-[pressed=true]:hover:bg-destructive/20",
+				link: "text-primary underline-offset-4 hover:underline data-[active=true]:hover:underline aria-[pressed=true]:hover:underline",
 				transperent:
-					"bg-transperent hover:text-accent-foreground",
+					"bg-transperent hover:text-accent-foreground data-[active=true]:hover:text-accent-foreground aria-[pressed=true]:hover:text-accent-foreground",
 			},
 			size: {
 				default:

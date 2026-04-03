@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { ExternalLink, Mail, MapPin } from "lucide-react"
-import { useEffect } from "react"
+import { DiscordIcon } from "#/components/icons/DiscordIcon"
 import { InstagramIcon } from "#/components/icons/InstagramIcon"
 import { XIcon } from "#/components/icons/XIcon"
 import { buttonVariants } from "#/components/ui/button"
@@ -13,19 +13,11 @@ export const Route = createFileRoute("/(menu)/contact")({
 	component: ContactPage,
 })
 
-function ContactPage() {
-	useEffect(() => {
-		const script = document.createElement("script")
-		script.src = "https://platform.twitter.com/widgets.js"
-		script.async = true
-		const twitterEmbed = document.querySelector(
-			".twitter-embed",
-		)
-		if (twitterEmbed) {
-			twitterEmbed.appendChild(script)
-		}
-	}, [])
+/** Matches Card hover on events/committee; md+ only so touch devices stay calm. */
+const sectionPanelHover =
+	"md:transition-all md:duration-300 md:hover:border-border-accent md:hover:shadow-foreground/5 md:hover:shadow-md"
 
+function ContactPage() {
 	return (
 		<PageLayout>
 			<PageTitle
@@ -33,7 +25,7 @@ function ContactPage() {
 				subtitle="Connect with our community, attend events, and become part of CompSoc."
 			/>
 
-			<Panel className="mb-8">
+			<Panel className={sectionPanelHover}>
 				<div className="border-border border-b-2 p-6">
 					<h2 className="flex items-center gap-2 font-semibold text-foreground">
 						<MapPin className="size-5 text-accent" />
@@ -73,8 +65,8 @@ function ContactPage() {
 				</div>
 			</Panel>
 
-			<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-				<Panel>
+			<div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+				<Panel className={sectionPanelHover}>
 					<div className="border-border border-b-2 p-6">
 						<h2 className="flex items-center gap-2 font-semibold text-foreground">
 							<Mail className="size-5 text-accent" />
@@ -85,7 +77,7 @@ function ContactPage() {
 							media.
 						</p>
 					</div>
-					<div className="space-y-6 p-6">
+					<div className="space-y-4 p-6">
 						<div>
 							<h3 className="font-medium text-foreground">
 								Email us
@@ -144,35 +136,62 @@ function ContactPage() {
 								>
 									<InstagramIcon className="size-4" />
 								</a>
+								<a
+									href="https://discord.com/invite/2y5ruBw"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Discord"
+									className={cn(
+										buttonVariants({
+											variant: "outline",
+											size: "sm",
+										}),
+									)}
+								>
+									<DiscordIcon className="size-4" />
+								</a>
 							</div>
 						</div>
 					</div>
 				</Panel>
 
-				<Panel>
+				<Panel className={sectionPanelHover}>
 					<div className="border-border border-b-2 p-6">
 						<h2 className="flex items-center gap-2 font-semibold text-foreground">
-							<XIcon className="size-5 text-accent" />
-							Latest updates
+							<InstagramIcon className="size-5 text-accent" />
+							Latest on Instagram
 						</h2>
 						<p className="mt-1 text-muted-foreground text-sm">
-							Follow us on X for the latest news.
+							Photos and updates from our community.
 						</p>
 					</div>
-					<div className="flex min-h-[280px] items-center justify-center p-6">
-						<div className="twitter-embed w-full">
-							<a
-								title="Latest updates"
-								className="twitter-timeline"
-								data-theme="dark"
-								data-tweet-limit="3"
-								data-chrome="noheader nofooter noborders transparent"
-								href="https://x.com/UGCompSoc"
-								aria-label="View latest updates from CompSoc Galway on X"
-							>
-								Latest updates
-							</a>
+					<div className="p-4 md:p-6">
+						<div className="overflow-hidden rounded-md border border-border bg-background">
+							<iframe
+								title="CompSoc Galway on Instagram"
+								src="https://www.instagram.com/compsocgalway/embed/"
+								className="h-[min(540px,75vh)] w-full border-0"
+								loading="lazy"
+								allow="clipboard-write; encrypted-media; picture-in-picture"
+								referrerPolicy="strict-origin-when-cross-origin"
+							/>
 						</div>
+						<a
+							href="https://www.instagram.com/compsocgalway/"
+							target="_blank"
+							rel="noopener noreferrer"
+							className={cn(
+								buttonVariants({
+									variant: "outline",
+									size: "sm",
+								}),
+								"mt-4 inline-flex w-full items-center justify-center gap-2 sm:w-auto",
+							)}
+						>
+							<InstagramIcon className="size-4" />
+							Open on Instagram
+							<ExternalLink className="size-4" />
+						</a>
 					</div>
 				</Panel>
 			</div>

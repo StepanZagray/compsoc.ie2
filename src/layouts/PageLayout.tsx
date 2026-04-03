@@ -10,7 +10,7 @@ export function PageLayout({
 }) {
 	return (
 		<div
-			className={`flex w-full max-w-6xl flex-col bg-background px-4 pt-20 pb-16 text-foreground ${className}`}
+			className={`flex w-full max-w-6xl flex-col gap-4 bg-background px-4 pt-20 pb-4 text-foreground ${className}`}
 		>
 			{children}
 		</div>

@@ -120,7 +120,7 @@ function RouteComponent() {
 			/>
 
 			{/* Tabs */}
-			<div className="mb-6 flex gap-1 rounded-md border-2 border-border bg-background/80 p-1 transition-all duration-300">
+			<div className="flex gap-1 rounded-md border-2 border-border bg-background/80 p-1 transition-all duration-300">
 				<button
 					type="button"
 					onClick={() =>
@@ -165,7 +165,7 @@ function RouteComponent() {
 
 			{/* Search bar for past events only */}
 			{activeTab === "past" && (
-				<div className="mb-6">
+				<div>
 					<div className="relative">
 						<Search className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-3 size-4 text-muted-foreground peer-focus/search:text-foreground" />
 						<Input

@@ -1,4 +1,5 @@
 export { CompSocLogo } from "./CompSocLogo"
+export { DiscordIcon } from "./DiscordIcon"
 export { GithubIcon } from "./GithubIcon"
 export { HamburgerMenuIcon } from "./HamburgerIcon"
 export { InstagramIcon } from "./InstagramIcon"

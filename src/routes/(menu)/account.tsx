@@ -16,7 +16,7 @@ function RouteComponent() {
 				title="CompSoc Account"
 				subtitle="We offer all CompSoc members free access to an account on our servers."
 			/>
-			<div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+			<div className="grid grid-cols-1 gap-4 md:grid-cols-3">
 				<FeatureCard
 					icon={<Database className="size-9 text-accent" />}
 					title="Storage Space"
@@ -33,7 +33,7 @@ function RouteComponent() {
 					description="CompSoc members will receive their own @compsoc.ie email account."
 				/>
 			</div>
-			<Panel className="mt-8">
+			<Panel>
 				<div className="grid grid-cols-1 border-border border-b-2 md:grid-cols-2 md:border-r-2 md:border-b-0">
 					<div className="flex flex-col justify-center p-6 md:p-8">
 						<p className="text-muted-foreground text-sm leading-7">

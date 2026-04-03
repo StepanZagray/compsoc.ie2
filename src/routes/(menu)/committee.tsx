@@ -44,12 +44,13 @@ function CommitteePage() {
 				title="Committee"
 				subtitle="Meet the CompSoc committee members from recent years."
 			/>
-			<div className="mb-6 flex flex-wrap gap-2">
+			<div className="flex flex-wrap gap-2">
 				<Button
 					variant={
 						selectedYear === null ? "default" : "outline"
 					}
 					size="sm"
+					data-active={selectedYear === null ? true : undefined}
 					onClick={() => setSelectedYear(ALL_YEARS)}
 					className="px-3"
 				>
@@ -62,6 +63,7 @@ function CommitteePage() {
 							selectedYear === year ? "default" : "outline"
 						}
 						size="sm"
+						data-active={selectedYear === year || undefined}
 						onClick={() => setSelectedYear(year)}
 						className="px-3"
 					>
@@ -69,18 +71,18 @@ function CommitteePage() {
 					</Button>
 				))}
 			</div>
-			<div className="flex flex-col gap-12">
+			<div className="flex flex-col gap-4">
 				{visibleYears.map((year) => (
 					<div
 						key={year.year}
-						className="flex flex-col gap-6"
+						className="flex flex-col gap-4"
 					>
 						<h2 className="font-bold text-foreground text-xl md:text-2xl">
 							Committee {year.year}
 						</h2>
 						<div
 							className="columns-1 sm:columns-2 md:columns-3"
-							style={{ columnGap: "1.5rem" }}
+							style={{ columnGap: "1rem" }}
 						>
 							{year.committee?.map((person, idx) => (
 								<CommitteeCard
@@ -133,12 +135,12 @@ function CommitteeCard({
 		: defaultPhoto
 	const bio = person.bio?.trim() ? person.bio : defaultBio
 	return (
-		<Card className="mb-6 flex break-inside-avoid flex-col items-center text-center">
+		<Card className="mb-4 flex break-inside-avoid flex-col items-center text-center">
 			<CardContent className="flex flex-col items-center p-6">
 				<img
 					src={photo}
 					alt={person.name}
-					className="mb-3 size-24 rounded-full border-2 border-border object-cover transition-colors duration-300 group-hover/card:border-border-accent md:size-28"
+					className="mb-3 size-24 rounded-full border-2 border-border object-cover transition-colors duration-300 group-hover/card:border-foreground/30 md:size-28"
 					loading="lazy"
 				/>
 				<h3 className="font-bold text-foreground">
