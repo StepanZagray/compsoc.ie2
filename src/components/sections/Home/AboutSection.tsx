@@ -121,8 +121,20 @@ const AboutSection = ({
 							aria-hidden
 						/>
 					</div>
-
-					<div className="bg-background p-5 md:col-span-3 md:p-8">
+					<div className="relative border-border border-b-2 bg-background md:col-span-2">
+						<div className="aspect-4/3 md:absolute md:inset-0 md:aspect-auto">
+							<img
+								src={uog2}
+								alt="University of Galway campus"
+								className="h-full w-full object-cover"
+							/>
+						</div>
+						<div
+							className="pointer-events-none absolute inset-0 bg-black/10"
+							aria-hidden
+						/>
+					</div>
+					<div className="bg-background p-5 md:col-span-1 md:min-h-64 md:p-8">
 						<h2 className="mb-2 font-bold text-lg sm:text-xl">
 							Our constitution
 						</h2>
