@@ -1,6 +1,6 @@
 # Active Section Provider
 
-The **Active Section Provider** (`src/contexts/active-section.tsx`) is a React context that tracks which section of the page is currently "active." Only one section is active at a time. It drives:
+The **Active Section Provider** (`src/contexts/active-section.tsx`) is a React context for the **home page section experience**. It tracks which landing-page section is currently "active." Only one section is active at a time. It drives:
 
 - Hero, About, and Footer section styling (border color, opacity) via Motion
 - Nav bar bottom border when the menu is active
@@ -15,7 +15,7 @@ export type SectionId = "hero" | "about" | "footer" | "menu"
 
 ## API
 
-Consumers use the `useActiveSection()` hook (must be used inside `ActiveSectionProvider`):
+Consumers use the `useActiveSection()` hook (must be used inside `ActiveSectionProvider`). This hook is intended for **home page sections and home-page-adjacent UI** such as the nav/footer active styling, not as a generic active-state system for every route:
 
 | Member | Description |
 |--------|-------------|
@@ -52,6 +52,11 @@ Only **hero** and **about** are used in the "best ratio" calculation; footer is 
 - For **500ms** after a tap, that section stays active regardless of scroll/hover.
 - When the timeout fires, `tapOverrideId` is cleared and **menu/footer hover state is also cleared** so they don’t stay active due to synthetic pointer events on touch devices.
 - After that, the normal view-based logic (scroll + hover) decides the active section again.
+
+## Scope
+
+- This context exists to coordinate the **home page** (`src/routes/index.tsx`) section transitions and the nav/footer styling that responds to that page.
+- Even though `ActiveSectionProvider` is mounted in the root layout, treat `useActiveSection()` as a **home-page-only pattern** unless the context logic is deliberately expanded and this doc is updated.
 
 ## Where it’s used
 

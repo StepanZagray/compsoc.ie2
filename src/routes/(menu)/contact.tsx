@@ -142,7 +142,7 @@ function ContactPage() {
 								events, services, and our community.
 							</p>
 							<a
-								href="https://yourspace.nuigalway.ie/"
+								href="https://yourspace.universityofgalway.ie/account/index.php?object=VXNlck9yZ2FuaXNhdGlvbk1lbWJlcg==&method=am9pbk9yZ2FuaXNhdGlvblZpZXc=&action=Nw==&actionType=YWRk"
 								target="_blank"
 								rel="noopener noreferrer"
 								className={cn(
