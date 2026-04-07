@@ -62,7 +62,7 @@ function RouteComponent() {
 						<p className="text-muted-foreground text-sm leading-7">
 							*To become a CompSoc member,{" "}
 							<a
-								href="https://yourspace.nuigalway.ie/"
+								href="https://yourspace.universityofgalway.ie/account/index.php?object=VXNlck9yZ2FuaXNhdGlvbk1lbWJlcg==&method=am9pbk9yZ2FuaXNhdGlvblZpZXc=&action=Nw==&actionType=YWRk"
 								className="font-medium text-accent underline underline-offset-2 hover:text-accent/80"
 							>
 								login to YourSpace and join

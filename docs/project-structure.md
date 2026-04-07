@@ -46,7 +46,7 @@ compsoc.ie2/
 - **Routes:** File-based routing under `src/routes/`. Layout groups use parentheses: `(menu)`, `(other)`. Root layout and shell live in `__root.tsx`.
 - **UI components:** Shared primitives (button, card, nav, footer) live in `src/components/ui/`. This project uses Base UI + CVA; shadcn is referenced in `.cursorrules` for adding components.
 - **Sections:** Page-specific sections (e.g. Hero, About) live under `src/components/sections/<page>/`.
-- **State:** Global UI state (e.g. active section) lives in `src/contexts/`. TanStack Query is used for server/data state.
+- **State:** Shared UI state lives in `src/contexts/`. The active-section context is currently a **home page** concern, while TanStack Query is used for server/data state.
 - **Data:** Fetch helpers and types live in `src/services/`. Route loaders or TanStack Query use these as needed.
 - **Styling:** Tailwind CSS v4. Theme and shared colors are in `src/styles.css`. Section motion variants are in `src/constants/section-variants.ts` and must stay in sync with CSS for animation (see [design-tokens.md](design-tokens.md)).
 - **Class names:** Use `cn()` from `#/lib/utils` to merge conditional Tailwind classes; it wraps [clsx](https://github.com/lukeed/clsx) and [tailwind-merge](https://github.com/dcastil/tailwind-merge) so later classes override earlier ones without conflicts.

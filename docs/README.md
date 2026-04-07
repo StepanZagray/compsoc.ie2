@@ -15,6 +15,6 @@ Documentation for the CompSoc.ie project. This folder is for humans and agents; 
 ## For agents
 
 - Use **`#/`** for imports from `src/` (e.g. `#/components/ui/button`).
-- **Active section:** See [active-section-provider.md](active-section-provider.md). Only one section is active; tap override lasts 0.5s then view-based logic applies.
+- **Active section:** See [active-section-provider.md](active-section-provider.md). This is intended for the **home page** section system, even though the provider is mounted at the app root. Only one section is active; tap override lasts 0.5s then view-based logic applies.
 - **Design tokens:** Changing section/nav border colors requires edits in both `src/constants/section-variants.ts` and `src/styles.css` — see [design-tokens.md](design-tokens.md).
 - **UI components:** Base UI + CVA in `src/components/ui/`. For new shadcn-style components, use the command in `.cursorrules` (e.g. `pnpm dlx shadcn@latest add <component>`).
