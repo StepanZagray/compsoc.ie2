@@ -1,5 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { ExternalLink, Mail, MapPin } from "lucide-react"
+import {
+	Check,
+	Copy,
+	ExternalLink,
+	Mail,
+	MapPin,
+} from "lucide-react"
+import { useCallback, useRef, useState } from "react"
 import { DiscordIcon } from "#/components/icons/DiscordIcon"
 import { InstagramIcon } from "#/components/icons/InstagramIcon"
 import { XIcon } from "#/components/icons/XIcon"
@@ -86,19 +93,7 @@ function ContactPage() {
 								Send us an email and we&apos;ll get back to
 								you as soon as possible.
 							</p>
-							<a
-								href="mailto:compsoc@socs.universityofgalway.ie"
-								className={cn(
-									buttonVariants({
-										variant: "outline",
-										size: "sm",
-									}),
-									"mt-2 inline-flex items-center gap-2",
-								)}
-							>
-								compsoc@socs.universityofgalway.ie
-								<ExternalLink className="size-4" />
-							</a>
+							<CopyEmailButton />
 						</div>
 						<div>
 							<h3 className="font-medium text-foreground">
@@ -152,6 +147,31 @@ function ContactPage() {
 								</a>
 							</div>
 						</div>
+						<div>
+							<h3 className="font-medium text-foreground">
+								Join us
+							</h3>
+							<p className="mt-1 text-muted-foreground text-sm">
+								Become a member through YourSpace to
+								access events, services, and our
+								community.
+							</p>
+							<a
+								href="https://yourspace.nuigalway.ie/"
+								target="_blank"
+								rel="noopener noreferrer"
+								className={cn(
+									buttonVariants({
+										variant: "outline",
+										size: "sm",
+									}),
+									"mt-2 inline-flex items-center gap-2",
+								)}
+							>
+								Join on YourSpace
+								<ExternalLink className="size-4" />
+							</a>
+						</div>
 					</div>
 				</Panel>
 
@@ -196,5 +216,37 @@ function ContactPage() {
 				</Panel>
 			</div>
 		</PageLayout>
+	)
+}
+
+const EMAIL = "compsoc@socs.universityofgalway.ie"
+
+function CopyEmailButton() {
+	const [copied, setCopied] = useState(false)
+	const timer = useRef<ReturnType<typeof setTimeout>>(null)
+
+	const copy = useCallback(() => {
+		navigator.clipboard.writeText(EMAIL)
+		setCopied(true)
+		if (timer.current) clearTimeout(timer.current)
+		timer.current = setTimeout(() => setCopied(false), 2000)
+	}, [])
+
+	return (
+		<button
+			type="button"
+			onClick={copy}
+			className={cn(
+				buttonVariants({ variant: "outline", size: "sm" }),
+				"mt-2 inline-flex cursor-pointer items-center gap-2",
+			)}
+		>
+			{EMAIL}
+			{copied ? (
+				<Check className="size-4 text-accent" />
+			) : (
+				<Copy className="size-4" />
+			)}
+		</button>
 	)
 }
