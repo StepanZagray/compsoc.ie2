@@ -10,6 +10,7 @@ Documentation for the CompSoc.ie project. This folder is for humans and agents; 
 | [project-structure.md](project-structure.md) | Directory layout, conventions, key files. |
 | [design-tokens.md](design-tokens.md) | Section motion constants, CSS variables, keeping colors in sync. |
 | [deployment.md](deployment.md) | Cloudflare Pages SSG: build command, output `dist/client`. |
+| [updating-committee.md](updating-committee.md) | How to add/update committee members and years. |
 
 ## For agents
 
