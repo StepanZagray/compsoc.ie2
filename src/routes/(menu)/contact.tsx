@@ -110,7 +110,7 @@ function ContactPage() {
 									className={cn(
 										buttonVariants({
 											variant: "outline",
-											size: "sm",
+											size: "icon",
 										}),
 									)}
 								>
@@ -124,8 +124,9 @@ function ContactPage() {
 									className={cn(
 										buttonVariants({
 											variant: "outline",
-											size: "sm",
+											size: "icon",
 										}),
+										"pl-0.25",
 									)}
 								>
 									<DiscordIcon className="size-4" />
@@ -137,9 +138,8 @@ function ContactPage() {
 								Join us
 							</h3>
 							<p className="mt-1 text-muted-foreground text-sm">
-								Become a member through YourSpace to
-								access events, services, and our
-								community.
+								Become a member through YourSpace to access
+								events, services, and our community.
 							</p>
 							<a
 								href="https://yourspace.nuigalway.ie/"

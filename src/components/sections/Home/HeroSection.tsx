@@ -102,54 +102,43 @@ const HeroSection = ({
 					/>
 					<span> Society</span>
 				</p>
-				<a
-					href="https://yourspace.nuigalway.ie/"
-					target="_blank"
-					rel="noopener noreferrer"
-					className={cn(
-						"group/join relative mt-4 inline-flex h-fit w-fit items-center",
-						"overflow-hidden rounded-md",
-						"px-4 py-2 text-accent-foreground text-lg shadow-xs",
-						"transition-[box-shadow,color]",
-						"hover:text-primary-foreground hover:shadow-xs",
-					)}
-				>
-					{/* Pulsing glow behind accent fill */}
-					<span
-						aria-hidden
-						className="absolute inset-0.5 animate-glow-border rounded-md bg-border-accent"
-					/>
-					{/* Accent fill, 2px inset from button edge */}
-					<span
-						aria-hidden
-						className="absolute inset-0.5 rounded-sm bg-accent"
-					/>
-					{/* Primary sliding rectangle, full button bounds */}
-					<span
-						aria-hidden
+				<div className="mt-4 flex items-center gap-2">
+					<a
+						href="https://yourspace.nuigalway.ie/"
+						target="_blank"
+						rel="noopener noreferrer"
 						className={cn(
-							"absolute inset-0 w-full origin-top-left bg-primary",
-							"-translate-x-full skew-x-[-20deg]",
-							"transition-transform duration-350 ease-[cubic-bezier(0.25,0.1,0.25,1)]",
-							"group-hover/join:translate-x-[-1%]",
+							"group/join relative inline-flex h-[42px] w-fit items-center",
+							"overflow-hidden rounded-md",
+							"px-4 py-2 text-accent-foreground shadow-xs",
+							"transition-[box-shadow,color]",
+							"hover:text-primary-foreground hover:shadow-xs",
 						)}
-					/>
-					<span className="relative z-10">
-						Join the society
-					</span>
-				</a>
-			</div>
-			{/* Terminal window */}
-			<div className="-translate-y-1/2 -translate-x-1/2 absolute top-[calc(50%)] left-1/2 z-10 h-[calc(100%-2rem)]">
-				<div
-					className="absolute inset-0 z-0 rounded-md backdrop-blur-xs"
-					aria-hidden
-				/>
-				{/* terminal prompt */}
-				<p className="absolute top-4 left-4 z-20 text-sm md:top-5 md:left-5 md:text-base">
-					<span className="text-accent">~ ❯</span> compsoc
-				</p>
-				<div className="absolute right-4 bottom-4 z-20 flex gap-2 md:right-5 md:bottom-5">
+					>
+						{/* Pulsing glow behind accent fill */}
+						<span
+							aria-hidden
+							className="absolute inset-0.5 animate-glow-border rounded-md bg-border-accent"
+						/>
+						{/* Accent fill, 2px inset from button edge */}
+						<span
+							aria-hidden
+							className="absolute inset-0.5 rounded-sm bg-accent"
+						/>
+						{/* Primary sliding rectangle, full button bounds */}
+						<span
+							aria-hidden
+							className={cn(
+								"absolute inset-0 w-full origin-top-left bg-primary",
+								"-translate-x-full skew-x-[-20deg]",
+								"transition-transform duration-350 ease-[cubic-bezier(0.25,0.1,0.25,1)]",
+								"group-hover/join:translate-x-[-1%]",
+							)}
+						/>
+						<span className="relative z-10">
+							Join the society
+						</span>
+					</a>
 					<a
 						href="https://instagram.com/compsocgalway/"
 						target="_blank"
@@ -158,7 +147,7 @@ const HeroSection = ({
 						className={cn(
 							buttonVariants({
 								variant: "outline",
-								size: "sm",
+								size: "icon-lg",
 							}),
 							"bg-background/80 backdrop-blur-sm",
 						)}
@@ -173,7 +162,7 @@ const HeroSection = ({
 						className={cn(
 							buttonVariants({
 								variant: "outline",
-								size: "sm",
+								size: "icon-lg",
 							}),
 							"bg-background/80 backdrop-blur-sm",
 						)}
@@ -181,6 +170,17 @@ const HeroSection = ({
 						<DiscordIcon className="size-4" />
 					</a>
 				</div>
+			</div>
+			{/* Terminal window */}
+			<div className="-translate-y-1/2 -translate-x-1/2 absolute top-[calc(50%)] left-1/2 z-10 h-[calc(100%-2rem)]">
+				<div
+					className="absolute inset-0 z-0 rounded-md backdrop-blur-xs"
+					aria-hidden
+				/>
+				{/* terminal prompt */}
+				<p className="absolute top-4 left-4 z-20 text-sm md:top-5 md:left-5 md:text-base">
+					<span className="text-accent">~ ❯</span> compsoc
+				</p>
 				<motion.div
 					className="relative z-10 h-full w-[calc(100vw-2rem)] overflow-hidden rounded-md border-2 bg-background/70 px-3.5 py-3 shadow-2xl md:px-5 md:py-4"
 					animate={active ? activeVariant : inactiveVariant}
