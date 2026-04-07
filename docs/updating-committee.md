@@ -66,7 +66,6 @@ The icon key is matched by substring. Supported keywords:
 | Key contains | Icon shown |
 |--------------|------------|
 | `github`     | GitHub     |
-| `twitter`, `x` | X (Twitter) |
 | `linkedin`   | LinkedIn   |
 | `link`, `website`, `globe` | Generic link |
 
