@@ -9,7 +9,6 @@ import {
 import { useCallback, useRef, useState } from "react"
 import { DiscordIcon } from "#/components/icons/DiscordIcon"
 import { InstagramIcon } from "#/components/icons/InstagramIcon"
-import { XIcon } from "#/components/icons/XIcon"
 import { buttonVariants } from "#/components/ui/button"
 import { PageTitle } from "#/components/ui/page-title"
 import { Panel } from "#/components/ui/panel"
@@ -103,20 +102,6 @@ function ContactPage() {
 								Stay updated with news and announcements.
 							</p>
 							<div className="mt-3 flex gap-2">
-								<a
-									href="https://x.com/UGCompsoc"
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label="X (Twitter)"
-									className={cn(
-										buttonVariants({
-											variant: "outline",
-											size: "sm",
-										}),
-									)}
-								>
-									<XIcon className="size-4" />
-								</a>
 								<a
 									href="https://instagram.com/compsocgalway/"
 									target="_blank"

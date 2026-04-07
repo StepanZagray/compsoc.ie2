@@ -3,7 +3,6 @@ import { Globe, Link as LucideLink } from "lucide-react"
 import { useState } from "react"
 import { GithubIcon } from "#/components/icons/GithubIcon"
 import { LinkedinIcon } from "#/components/icons/LinkedinIcon"
-import { XIcon } from "#/components/icons/XIcon"
 import {
 	Button,
 	buttonVariants,
@@ -109,8 +108,6 @@ function getIcon(icon: string) {
 		.toLowerCase()
 		.replace(/^bx bxl?-/, "")
 	if (normalized.includes("github")) return GithubIcon
-	if (normalized.includes("twitter") || normalized === "x")
-		return XIcon
 	if (normalized.includes("linkedin")) return LinkedinIcon
 	if (
 		normalized.includes("link") ||

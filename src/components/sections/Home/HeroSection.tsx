@@ -3,7 +3,6 @@ import { useEffect, useRef } from "react"
 import heroImg from "#/assets/img/university/UoG.jpg?format=webp&w=400"
 import { DiscordIcon } from "#/components/icons/DiscordIcon"
 import { InstagramIcon } from "#/components/icons/InstagramIcon"
-import { XIcon } from "#/components/icons/XIcon"
 import { buttonVariants } from "#/components/ui/button"
 import { useActiveSection } from "#/contexts/active-section"
 import { useTypewriter } from "#/hooks/useTypewriter"
@@ -151,21 +150,6 @@ const HeroSection = ({
 					<span className="text-accent">~ ❯</span> compsoc
 				</p>
 				<div className="absolute right-4 bottom-4 z-20 flex gap-2 md:right-5 md:bottom-5">
-					<a
-						href="https://x.com/UGCompsoc"
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="X (Twitter)"
-						className={cn(
-							buttonVariants({
-								variant: "outline",
-								size: "sm",
-							}),
-							"bg-background/80 backdrop-blur-sm",
-						)}
-					>
-						<XIcon className="size-4" />
-					</a>
 					<a
 						href="https://instagram.com/compsocgalway/"
 						target="_blank"
