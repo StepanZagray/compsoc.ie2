@@ -104,7 +104,7 @@ const HeroSection = ({
 				</p>
 				<div className="mt-4 flex items-center gap-2">
 					<a
-						href="https://yourspace.universityofgalway.ie/account/index.php?object=VXNlck9yZ2FuaXNhdGlvbk1lbWJlcg==&method=am9pbk9yZ2FuaXNhdGlvblZpZXc=&action=Nw==&actionType=YWRk"
+						href="https://socs.universityofgalway.ie/societies/compsoc"
 						target="_blank"
 						rel="noopener noreferrer"
 						className={cn(
