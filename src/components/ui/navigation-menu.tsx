@@ -210,7 +210,7 @@ function NavigationMenuComponent({
 	return (
 		// biome-ignore lint/a11y/noStaticElementInteractions: hover only for active-section state
 		<div
-			className="fixed top-0 left-0 z-1000 flex h-16 w-screen items-center justify-between border-border border-b-2 bg-background transition-[border-color] duration-300"
+			className="fixed top-0 left-0 z-1000 flex h-16 w-screen items-center justify-between border-border border-b-2 bg-background px-4 transition-[border-color] duration-300"
 			onMouseEnter={() => setMenuHovered(true)}
 			onMouseLeave={() => setMenuHovered(false)}
 			onTouchEnd={() => setTapOverride("menu")}
@@ -220,7 +220,13 @@ function NavigationMenuComponent({
 					: undefined,
 			}}
 		>
-			<CompSocLogo className="ml-3" />
+			<Link
+				to="/"
+				aria-label="Home"
+				className="flex h-full items-center rounded-md focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+			>
+				<CompSocLogo />
+			</Link>
 
 			{/* Desktop Navigation Menu — visible from md up via CSS only (no flicker on load) */}
 			<div className="hidden md:flex">
@@ -302,14 +308,14 @@ function NavigationMenuComponent({
 }
 
 export {
-	NavigationMenuComponent,
 	NavigationMenu,
+	NavigationMenuComponent,
 	NavigationMenuContent,
 	NavigationMenuIndicator,
 	NavigationMenuItem,
 	NavigationMenuLink,
 	NavigationMenuList,
+	NavigationMenuPositioner,
 	NavigationMenuTrigger,
 	navigationMenuTriggerStyle,
-	NavigationMenuPositioner,
 }

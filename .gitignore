@@ -11,6 +11,7 @@ dist-ssr
 .vinxi
 __unconfig*
 todos.json
+bun.lock
 
 # Local Netlify folder
 .netlify
