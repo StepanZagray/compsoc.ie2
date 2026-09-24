@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-@import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
 
 /* Self-hosted Poppins */
@@ -30,13 +29,6 @@
 	src: url("/fonts/jetbrains-mono/jetbrains-mono-v24-latin-variable.woff2") format("woff2");
 }
 
-body {
-	@apply m-0;
-	font-family: "JetBrains Mono", ui-monospace, monospace;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
 /* Colors were taken from https://tailwindcss.com/docs/colors */
 /*
  * When changing any of the border/active colors below, also update the matching
@@ -57,18 +49,12 @@ body {
 	/* white */
 	--card-foreground: oklch(0.278 0.033 256.848);
 	/* gray 800 */
-	--popover: oklch(1 0 0);
-	/* white */
-	--popover-foreground: oklch(0.278 0.033 256.848);
-	/* gray 800 */
 	--primary: oklch(0.685 0.169 237.323);
 	/* sky 500 */
 	--primary-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
 	--secondary: oklch(0.685 0.169 237.323);
 	/* sky 500 */
-	--secondary-foreground: oklch(0.372 0.044 257.287);
-	/* slate 700 */
 	--muted: oklch(0.967 0.003 264.542);
 	/* gray 100 */
 	--muted-foreground: oklch(0.551 0.027 264.364);
@@ -79,8 +65,6 @@ body {
 	/* gray 50 */
 	--destructive: oklch(0.577 0.245 27.325);
 	/* rose 500 */
-	--destructive-foreground: oklch(0.985 0.002 247.839);
-	/* gray 50 */
 	--border: oklch(0.928 0.006 264.531);
 	/* gray 200 */
 	/* Mirrored in section-variants.ts (active border). Change there too to avoid animation flicker. */
@@ -92,33 +76,9 @@ body {
 	/* gray 200 */
 	--ring: oklch(0.707 0.022 261.325);
 	/* gray 400 */
-	--chart-1: oklch(0.828 0.189 84.429);
-	/* lime 300 */
-	--chart-2: oklch(0.6 0.118 184.704);
-	/* teal 400 */
-	--chart-3: oklch(0.398 0.07 227.392);
-	/* blue 700 */
-	--chart-4: oklch(0.646 0.222 41.116);
-	/* amber 400 */
-	--chart-5: oklch(0.769 0.188 70.08);
-	/* yellow 400 */
 	--radius: 0.625rem;
 	--menu: oklch(0.13 0.028 261.692);
 	/* gray 950 */
-	--menu-foreground: oklch(0.985 0.002 247.839);
-	/* gray 50 */
-	--menu-primary: oklch(0.685 0.169 237.323);
-	/* sky 500 */
-	--menu-primary-foreground: oklch(0.985 0.002 247.839);
-	/* gray 50 */
-	--menu-accent: oklch(0.685 0.169 237.323);
-	/* sky 500 */
-	--menu-accent-foreground: oklch(0.985 0.002 247.839);
-	/* gray 50 */
-	--menu-border: oklch(0.872 0.01 258.338);
-	/* gray 300 */
-	--menu-ring: oklch(0.707 0.022 261.325);
-	/* gray 400 */
 }
 
 .dark {
@@ -132,18 +92,12 @@ body {
 	/* gray 950 */
 	--card-foreground: oklch(0.985 0.002 247.839);
 	/* gray 50 */
-	--popover: oklch(0.13 0.028 261.692);
-	/* gray 950 */
-	--popover-foreground: oklch(0.985 0.002 247.839);
-	/* gray 50 */
 	--primary: oklch(0.985 0.002 247.839);
 	/* gray 50 */
 	--primary-foreground: oklch(0.21 0.034 264.665);
 	/* gray 900 */
 	--secondary: oklch(0.372 0.169 237.323);
 	/* sky 700 */
-	--secondary-foreground: oklch(0.971 0.045 237.323);
-	/* sky 100 */
 	--muted: oklch(0.278 0.033 256.848);
 	/* gray 800 */
 	--muted-foreground: oklch(0.707 0.022 261.325);
@@ -154,8 +108,6 @@ body {
 	/* gray 50 */
 	--destructive: oklch(0.396 0.141 25.723);
 	/* rose 700 */
-	--destructive-foreground: oklch(0.985 0.002 247.839);
-	/* gray 50 */
 	/* Mirrored in section-variants.ts (inactive border). Change there too to avoid animation flicker. */
 	--border: oklch(0.278 0.033 256.848);
 	/* gray 800 */
@@ -168,32 +120,8 @@ body {
 	/* gray 800 */
 	--ring: oklch(0.446 0.03 256.802);
 	/* gray 600 */
-	--chart-1: oklch(0.488 0.243 264.376);
-	/* violet 400 */
-	--chart-2: oklch(0.696 0.17 162.48);
-	/* emerald 400 */
-	--chart-3: oklch(0.769 0.188 70.08);
-	/* yellow 400 */
-	--chart-4: oklch(0.627 0.265 303.9);
-	/* fuchsia 400 */
-	--chart-5: oklch(0.645 0.246 16.439);
-	/* rose 500 */
 	--menu: oklch(0.21 0.034 264.665);
 	/* gray 900 */
-	--menu-foreground: oklch(0.985 0.002 247.839);
-	/* gray 50 */
-	--menu-primary: oklch(0.488 0.243 264.376);
-	/* violet 400 */
-	--menu-primary-foreground: oklch(0.985 0.002 247.839);
-	/* gray 50 */
-	--menu-accent: oklch(0.278 0.033 256.848);
-	/* gray 800 */
-	--menu-accent-foreground: oklch(0.985 0.002 247.839);
-	/* gray 50 */
-	--menu-border: oklch(0.278 0.033 256.848);
-	/* gray 800 */
-	--menu-ring: oklch(0.446 0.03 256.802);
-	/* gray 600 */
 }
 
 @theme inline {
@@ -220,40 +148,24 @@ body {
 	--color-foreground-light: var(--foreground-light);
 	--color-card: var(--card);
 	--color-card-foreground: var(--card-foreground);
-	--color-popover: var(--popover);
-	--color-popover-foreground: var(--popover-foreground);
 	--color-primary: var(--primary);
 	--color-primary-foreground: var(--primary-foreground);
 	--color-secondary: var(--secondary);
-	--color-secondary-foreground: var(--secondary-foreground);
 	--color-muted: var(--muted);
 	--color-muted-foreground: var(--muted-foreground);
 	--color-accent: var(--accent);
 	--color-accent-foreground: var(--accent-foreground);
 	--color-destructive: var(--destructive);
-	--color-destructive-foreground: var(--destructive-foreground);
 	--color-border: var(--border);
 	--color-border-accent: var(--border-accent);
 	--color-border-secondary: var(--border-secondary);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
-	--color-chart-1: var(--chart-1);
-	--color-chart-2: var(--chart-2);
-	--color-chart-3: var(--chart-3);
-	--color-chart-4: var(--chart-4);
-	--color-chart-5: var(--chart-5);
 	--radius-sm: calc(var(--radius) - 4px);
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
 	--color-menu: var(--menu);
-	--color-menu-foreground: var(--menu-foreground);
-	--color-menu-primary: var(--menu-primary);
-	--color-menu-primary-foreground: var(--menu-primary-foreground);
-	--color-menu-accent: var(--menu-accent);
-	--color-menu-accent-foreground: var(--menu-accent-foreground);
-	--color-menu-border: var(--menu-border);
-	--color-menu-ring: var(--menu-ring);
 }
 
 /*
@@ -288,6 +200,8 @@ body {
 	height: 100vh;
 	margin: 0;
 	padding: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 html {

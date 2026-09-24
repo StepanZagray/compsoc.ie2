@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
 import {
 	Calendar,
@@ -13,13 +12,13 @@ import { Input } from "#/components/ui/input"
 import { LoadMore } from "#/components/ui/load-more"
 import { PageTitle } from "#/components/ui/page-title"
 import { Panel } from "#/components/ui/panel"
+import { useEvents } from "#/hooks/useEvents"
 import { PageLayout } from "#/layouts"
 import { seo } from "#/lib/seo"
 import { cn } from "#/lib/utils"
 import {
 	type EventsScope,
 	type EventType,
-	getEvents,
 	splitEvents,
 } from "#/services/events"
 
@@ -61,14 +60,10 @@ function RouteComponent() {
 		activeTab === "past" ? "all" : "upcoming"
 
 	const {
-		data: allEvents = [],
+		events: allEvents,
 		isLoading,
 		isError,
-	} = useQuery({
-		queryKey: ["events", scope],
-		queryFn: () => getEvents(scope),
-		staleTime: Number.POSITIVE_INFINITY,
-	})
+	} = useEvents(scope)
 	const { past, upcoming } = useMemo(
 		() => splitEvents(allEvents),
 		[allEvents],

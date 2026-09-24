@@ -15,7 +15,6 @@
     "biome",
     "cloudflare",
     "compiler",
-    "shadcn",
-    "tanstack-query"
+    "shadcn"
   ]
 }

@@ -21,7 +21,6 @@ compsoc.ie2/
 │   ├── constants/           # Shared constants (e.g. section-variants)
 │   ├── contexts/            # React context providers (e.g. active-section)
 │   ├── hooks/               # Reusable hooks (e.g. useTypewriter)
-│   ├── integrations/        # Third-party integration setup (e.g. tanstack-query)
 │   ├── lib/                 # Utilities (e.g. utils.ts, cn)
 │   ├── routes/              # TanStack Router file-based routes
 │   │   ├── __root.tsx       # Root layout, shell, notFoundComponent
