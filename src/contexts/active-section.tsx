@@ -12,7 +12,9 @@ import {
 
 export type SectionId =
 	| "hero"
-	| "about"
+	| "about-who"
+	| "about-mission"
+	| "about-constitution"
 	| "stats"
 	| "footer"
 	| "menu"
@@ -34,6 +36,28 @@ type ActiveSectionContextValue = {
 const ActiveSectionContext =
 	createContext<ActiveSectionContextValue | null>(null)
 
+/** How many pixels of scrolling are left before the bottom of the page. */
+function pageScrollRemaining(): number {
+	const root = document.documentElement
+	return (
+		root.scrollHeight - window.innerHeight - window.scrollY
+	)
+}
+
+/**
+ * The line, in viewport pixels from the top, that decides what has focus:
+ * whatever is under it (or nearest to it) is active. It sits at the middle of
+ * the viewport, but over the last half-screen of scrolling it slides down to
+ * the bottom edge, so short things near the end of the page, which never
+ * reach the middle, still get their turn.
+ */
+function focusLine(): number {
+	return Math.max(
+		window.innerHeight / 2,
+		window.innerHeight - pageScrollRemaining(),
+	)
+}
+
 export function useActiveSection() {
 	const ctx = useContext(ActiveSectionContext)
 	if (!ctx) {
@@ -53,18 +77,15 @@ export function ActiveSectionProvider({
 		useState<SectionId | null>(null)
 	const [footerHovered, setFooterHovered] = useState(false)
 	const [menuHovered, setMenuHovered] = useState(false)
-	const [ratios, setRatios] = useState<
-		Record<SectionId, number>
-	>({
-		hero: 0,
-		about: 0,
-		stats: 0,
-		footer: 0,
-		menu: 0,
-	})
+	// Registered sections, and the one the scroll position makes active.
+	const sectionsRef = useRef(
+		new Map<SectionId, RefObject<HTMLElement | null>>(),
+	)
 	const [registeredIds, setRegisteredIds] = useState<
 		Set<SectionId>
 	>(new Set())
+	const [scrollActiveId, setScrollActiveId] =
+		useState<SectionId | null>(null)
 	const [tapOverrideId, setTapOverrideId] =
 		useState<SectionId | null>(null)
 	const tapOverrideTimeoutRef = useRef<ReturnType<
@@ -106,34 +127,10 @@ export function ActiveSectionProvider({
 
 	const registerSection = useCallback(
 		(id: SectionId, ref: RefObject<HTMLElement | null>) => {
+			sectionsRef.current.set(id, ref)
 			setRegisteredIds((prev) => new Set(prev).add(id))
-			const el = ref.current
-			if (!el) {
-				return () => {
-					setRegisteredIds((prev) => {
-						const next = new Set(prev)
-						next.delete(id)
-						return next
-					})
-				}
-			}
-			const observer = new IntersectionObserver(
-				(entries) => {
-					for (const entry of entries) {
-						const ratio = entry.intersectionRatio
-						setRatios((prev) => ({ ...prev, [id]: ratio }))
-					}
-				},
-				{
-					threshold: [
-						0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,
-						1,
-					],
-				},
-			)
-			observer.observe(el)
 			return () => {
-				observer.disconnect()
+				sectionsRef.current.delete(id)
 				setRegisteredIds((prev) => {
 					const next = new Set(prev)
 					next.delete(id)
@@ -143,6 +140,56 @@ export function ActiveSectionProvider({
 		},
 		[],
 	)
+
+	// Scroll-based focus: the section under the focus line (or the nearest one,
+	// if the line falls in a gap) is active. At the very bottom
+	// of the page the footer is, since it can never reach the middle.
+	// biome-ignore lint/correctness/useExhaustiveDependencies: registeredIds re-runs the measure when sections mount
+	useEffect(() => {
+		let frame = 0
+		const measure = () => {
+			frame = 0
+			if (
+				pageScrollRemaining() <= 2 &&
+				sectionsRef.current.has("footer")
+			) {
+				setScrollActiveId("footer")
+				return
+			}
+			const middle = focusLine()
+			let best: SectionId | null = null
+			let bestDistance = Number.POSITIVE_INFINITY
+			for (const [id, ref] of sectionsRef.current) {
+				if (id === "footer" || id === "menu") continue
+				const rect = ref.current?.getBoundingClientRect()
+				if (!rect || rect.height === 0) continue
+				const distance =
+					middle < rect.top
+						? rect.top - middle
+						: middle > rect.bottom
+							? middle - rect.bottom
+							: 0
+				if (distance < bestDistance) {
+					bestDistance = distance
+					best = id
+				}
+			}
+			setScrollActiveId(best)
+		}
+		const schedule = () => {
+			frame ||= requestAnimationFrame(measure)
+		}
+		measure()
+		window.addEventListener("scroll", schedule, {
+			passive: true,
+		})
+		window.addEventListener("resize", schedule)
+		return () => {
+			cancelAnimationFrame(frame)
+			window.removeEventListener("scroll", schedule)
+			window.removeEventListener("resize", schedule)
+		}
+	}, [registeredIds])
 
 	useEffect(() => {
 		// On mobile: scroll only; on desktop: tap override and hover can set active
@@ -158,45 +205,13 @@ export function ActiveSectionProvider({
 			setActiveSectionId("footer")
 			return
 		}
-		// Scroll-based: hero, about, stats; footer is active only on hover
-		const scrollSectionIds = [
-			"hero",
-			"about",
-			"stats",
-		] as const
-		const entries = Array.from(registeredIds)
-			.filter(
-				(id): id is (typeof scrollSectionIds)[number] =>
-					scrollSectionIds.includes(
-						id as (typeof scrollSectionIds)[number],
-					),
-			)
-			.map((id) => {
-				const raw = ratios[id] ?? 0
-				// Hero must be ≥75% visible to stay active
-				if (id === "hero") {
-					return [id, raw < 0.75 ? 0 : raw] as [
-						SectionId,
-						number,
-					]
-				}
-				return [id, raw] as [SectionId, number]
-			})
-		if (entries.length === 0) {
-			setActiveSectionId(null)
-			return
-		}
-		const best = entries.reduce((a, b) =>
-			a[1] >= b[1] ? a : b,
-		)
-		setActiveSectionId(best[1] > 0 ? best[0] : null)
+		setActiveSectionId(scrollActiveId)
 	}, [
 		isMobile,
 		tapOverrideId,
 		menuHovered,
 		footerHovered,
-		ratios,
-		registeredIds,
+		scrollActiveId,
 	])
 
 	const value = useMemo<ActiveSectionContextValue>(

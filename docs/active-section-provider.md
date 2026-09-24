@@ -32,19 +32,14 @@ Active section is resolved in this order:
 1. **Tap override** — If a section was recently tapped (within 0.5s), that section is active.
 2. **Menu hover** — If the nav bar is hovered, `"menu"` is active.
 3. **Footer hover** — If the footer is hovered, `"footer"` is active.
-4. **Scroll** — Among **hero** and **about** only, the section with the **largest intersection ratio** is active. Hero must be ≥75% visible to stay active; below that, about can win.
+4. **Scroll** — The section under the **focus line** is active (the nearest one if the line falls in a gap). The line is the middle of the viewport, sliding down to the bottom edge over the last half-screen of scrolling so short sections near the end still get a turn. At the very bottom of the page the **footer** is active.
 
 Footer and menu do **not** participate in scroll-based activation; they are active only when hovered (or when tap override is set).
 
 ## Scroll-based registration
 
-Sections that should compete by scroll (hero, about, footer for observation) call `registerSection(id, ref)` in a `useEffect`:
-
-- The context adds the section to an `IntersectionObserver` with thresholds `[0, 0.1, …, 1]`.
-- Each section’s latest `intersectionRatio` is stored.
-- Cleanup (returned from `registerSection`) disconnects the observer and unregisters the section.
-
-Only **hero** and **about** are used in the "best ratio" calculation; footer is observed but its ratio is ignored for active-section logic.
+- `registerSection(id, ref)` stores the section's ref; the returned function removes it.
+- One rAF-throttled scroll/resize listener measures every registered section (except menu and footer) against the focus line and picks the active one. The footer is only chosen at the very bottom of the page.
 
 ## Mobile tap behavior
 
@@ -69,7 +64,7 @@ Only **hero** and **about** are used in the "best ratio" calculation; footer is 
 ## Constants
 
 - **Tap duration:** `TAP_ACTIVE_MS = 500` in `active-section.tsx`.
-- **Hero threshold:** Hero’s ratio is treated as 0 when &lt; 0.75 so about can become active (see `effective` in the effect).
+- **Focus line:** `Math.max(innerHeight / 2, innerHeight - remaining)` in the measure effect; the footer wins when `remaining <= 2`.
 
 ## Adding a new section that uses active state
 

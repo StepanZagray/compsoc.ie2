@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react"
 import universityLogoUrl from "#/assets/img/university/universityofgalway.jpg?format=webp&w=100"
 import { sectionStyle } from "#/constants/section-variants"
 import { useActiveSection } from "#/contexts/active-section"
+import { useScrollWindow } from "#/hooks/useScrollWindow"
 
 export function Footer({
 	currentPath = "/",
@@ -9,6 +10,8 @@ export function Footer({
 	currentPath?: string
 }) {
 	const footerRef = useRef<HTMLElement>(null)
+	// The footer can't rise to 0.8 at the bottom of the page.
+	useScrollWindow(footerRef, 0.95)
 	const {
 		activeSectionId,
 		registerSection,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export const useTypewriter = (
 	words: string[],
@@ -6,10 +6,16 @@ export const useTypewriter = (
 	delay = 1000,
 	active = true,
 ) => {
-	const [text, setText] = useState("")
+	// Start with the first word already typed, so the prerendered HTML reads
+	// as a full sentence before JS runs.
+	const [text, setText] = useState(words[0])
 	const [index, setIndex] = useState(0)
 	const [isDeleting, setIsDeleting] = useState(false)
-	const [charIndex, setCharIndex] = useState(0)
+	const [charIndex, setCharIndex] = useState(
+		words[0].length,
+	)
+	const holdRef =
+		useRef<ReturnType<typeof setTimeout>>(undefined)
 
 	useEffect(() => {
 		if (!active) return
@@ -23,7 +29,10 @@ export const useTypewriter = (
 						)
 						setCharIndex(charIndex + 1)
 					} else {
-						setTimeout(() => setIsDeleting(true), delay)
+						holdRef.current = setTimeout(
+							() => setIsDeleting(true),
+							delay,
+						)
 					}
 				} else {
 					// Deleting effect
@@ -39,7 +48,10 @@ export const useTypewriter = (
 			isDeleting ? speed / 2 : speed,
 		)
 
-		return () => clearTimeout(timeout)
+		return () => {
+			clearTimeout(timeout)
+			clearTimeout(holdRef.current)
+		}
 	}, [
 		active,
 		isDeleting,

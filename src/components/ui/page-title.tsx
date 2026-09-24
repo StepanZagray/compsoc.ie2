@@ -8,7 +8,7 @@ export function PageTitle({
 }) {
 	return (
 		<div className="w-full">
-			<h1 className="font-bold text-3xl tracking-tight md:text-4xl">
+			<h1 className="heading-1">
 				{title}
 				<span className="mt-3 block h-0.5 w-16 rounded-full bg-accent" />
 			</h1>

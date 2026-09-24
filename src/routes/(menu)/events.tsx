@@ -280,7 +280,7 @@ function EventCard({ event }: { event: EventType }) {
 	return (
 		<Card>
 			<CardContent className="border-border border-b-2 p-6">
-				<h3 className="font-bold text-foreground">
+				<h3 className="heading-3 text-foreground">
 					{event.Title}
 				</h3>
 				<div className="mt-2 flex flex-wrap items-center gap-4 text-muted-foreground text-sm">

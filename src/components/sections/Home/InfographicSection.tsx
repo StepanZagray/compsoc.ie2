@@ -1,12 +1,15 @@
 import {
 	CalendarDays,
-	Database,
+	PartyPopper,
+	Trophy,
 	UserRoundCog,
 	UsersRound,
 } from "lucide-react"
 import { useEffect, useRef } from "react"
+import { CountUp } from "#/components/ui/count-up"
 import { sectionStyle } from "#/constants/section-variants"
 import { useActiveSection } from "#/contexts/active-section"
+import { useScrollWindow } from "#/hooks/useScrollWindow"
 import { NumberOfCommitteeMembers } from "#/services/committee-size"
 
 type SectionMotionProps = {
@@ -21,23 +24,19 @@ type SectionMotionProps = {
 const metrics = [
 	{
 		icon: CalendarDays,
-		value: () => new Date().getFullYear() - 1977,
-		label: "years established",
+		value: __BUILD_YEAR__ - 1977,
+		label: "years since 1977",
 	},
-	{
-		icon: UsersRound,
-		value: () => "1,388",
-		label: "members and growing",
-	},
+	{ icon: UsersRound, value: 1388, label: "members" },
 	{
 		icon: UserRoundCog,
-		value: () => NumberOfCommitteeMembers,
-		label: "committee members",
+		value: Number(NumberOfCommitteeMembers),
+		label: "on the committee",
 	},
 	{
-		icon: Database,
-		value: () => "5",
-		label: "GB free server space",
+		icon: PartyPopper,
+		value: __EVENT_STATS__.total,
+		label: `events since ${__EVENT_STATS__.since}`,
 	},
 ]
 
@@ -47,6 +46,7 @@ const InfographicSection = ({
 	transition,
 }: SectionMotionProps) => {
 	const sectionRef = useRef<HTMLElement>(null)
+	useScrollWindow(sectionRef)
 	const {
 		activeSectionId,
 		registerSection,
@@ -65,9 +65,8 @@ const InfographicSection = ({
 			className="flex w-full flex-col items-center px-4 pb-4"
 			onTouchEnd={() => setTapOverride("stats")}
 		>
-			{/* Single terminal window containing all metrics */}
 			<div
-				className="flex w-full flex-col overflow-hidden rounded-md border-2 bg-background/80 px-4 py-4 shadow-lg md:py-5"
+				className="flex w-full flex-col overflow-hidden rounded-md border-2 bg-background/80 p-4 shadow-lg md:p-6"
 				style={sectionStyle(
 					active,
 					activeVariant,
@@ -75,39 +74,57 @@ const InfographicSection = ({
 					transition,
 				)}
 			>
-				<p className="relative text-sm md:text-base">
+				<p className="text-sm md:text-base">
 					<span className="text-accent">~ ❯</span> compsoc
 					--stats
 				</p>
-				<div className="relative flex flex-row items-center justify-center px-6 py-12">
-					<div className="grid w-fit grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-4">
-						{metrics.map(({ icon: Icon, value, label }) => (
-							<div
-								key={label}
-								className="flex w-fit flex-col items-center justify-center"
-							>
-								<div className="flex h-content w-content flex-col">
-									<div className="relative flex flex-row items-center gap-2.5">
-										<span className="mb-0.5 inline-flex h-full items-center justify-center">
-											<Icon
-												size={26}
-												className="text-primary"
-											/>
-										</span>
-										<span className="mb-0.5 font-extrabold text-3xl text-foreground">
-											{typeof value() === "number"
-												? value()
-												: value()}
-										</span>
-									</div>
 
-									<span className="font-normal text-muted-foreground text-sm tracking-wide">
-										{label}
-									</span>
-								</div>
+				<div className="mt-8 grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12">
+					{/* The award leads: it's the society's most recent national recognition. */}
+					<div>
+						{/* The trophy tile is the height of the two title lines
+						    beside it (48px). */}
+						<div className="flex items-center gap-4">
+							<div className="flex size-12 shrink-0 items-center justify-center rounded-md border-2 border-amber-300/40 bg-amber-300/10">
+								<Trophy
+									className="size-6 text-amber-300"
+									aria-hidden
+								/>
+							</div>
+							<div>
+								<p className="text-amber-300 text-sm">
+									BICS National Awards 2025
+								</p>
+								<h2 className="heading-2 text-foreground">
+									Best Intervarsity
+								</h2>
+							</div>
+						</div>
+						<p className="mt-3 text-muted-foreground text-sm leading-6">
+							Awarded for the Capture the Flag intervarsity
+							we hosted: a hacking competition between
+							college teams, with every challenge written by
+							our committee.
+						</p>
+					</div>
+
+					<dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4 lg:gap-x-4">
+						{metrics.map(({ icon: Icon, value, label }) => (
+							<div key={label} className="flex flex-col">
+								<dd className="flex items-center gap-2.5 font-extrabold text-3xl text-foreground">
+									<Icon
+										size={24}
+										className="shrink-0 text-accent"
+										aria-hidden
+									/>
+									<CountUp value={value} />
+								</dd>
+								<dt className="mt-1 text-muted-foreground text-sm">
+									{label}
+								</dt>
 							</div>
 						))}
-					</div>
+					</dl>
 				</div>
 			</div>
 		</section>

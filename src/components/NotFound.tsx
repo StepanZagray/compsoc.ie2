@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router"
 export function NotFound() {
 	return (
 		<div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background px-4 text-foreground">
-			<h1 className="font-bold text-4xl">404</h1>
+			<h1 className="heading-1">404</h1>
 			<p className="text-center text-muted-foreground">
 				This page doesn’t exist or has been moved.
 			</p>

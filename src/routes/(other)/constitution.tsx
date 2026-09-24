@@ -26,12 +26,12 @@ function RouteComponent() {
 	return (
 		<div className="flex min-h-screen w-full flex-col items-center bg-background pt-12 pb-16 md:pt-24">
 			<div className="w-full max-w-3xl px-6 md:px-8">
-				<h1 className="mb-10 font-bold text-3xl tracking-tight md:text-4xl">
+				<h1 className="heading-1 mb-10">
 					Constitution
 					<span className="mt-3 block h-0.5 w-16 rounded-full bg-accent" />
 				</h1>
-				<div className="text-muted-foreground text-sm leading-7 [&_.level3]:mt-2 [&_.level3]:space-y-3 [&_h3:first-child]:mt-0 [&_h3]:mt-10 [&_h3]:border-border [&_h3]:border-b [&_h3]:pb-2 [&_h3]:font-semibold [&_h3]:text-base [&_h3]:text-foreground [&_li]:pl-1 [&_ul]:ml-5 [&_ul]:list-disc [&_ul]:space-y-1">
-					<h3>Article 1: Name of the Society</h3>
+				<div className="[&_h2]:heading-2 text-muted-foreground text-sm leading-7 [&_.level3]:mt-2 [&_.level3]:space-y-3 [&_h2:first-child]:mt-0 [&_h2]:mt-10 [&_h2]:border-border [&_h2]:border-b [&_h2]:pb-2 [&_h2]:text-foreground [&_li]:pl-1 [&_ul]:ml-5 [&_ul]:list-disc [&_ul]:space-y-1">
+					<h2>Article 1: Name of the Society</h2>
 					<div className="level3">
 						<p>
 							1.1 The name of the Society shall be Computer
@@ -51,10 +51,10 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>
+					<h2>
 						Article 2: Alliances/Affiliations with External
 						bodies
-					</h3>
+					</h2>
 					<div className="level3">
 						<p>
 							2.1 The Society is not aligned and/or
@@ -70,7 +70,7 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>Article 3: Aims of the Society</h3>
+					<h2>Article 3: Aims of the Society</h2>
 					<div className="level3">
 						<p>The aims of the Society shall be:</p>
 						<ul>
@@ -91,7 +91,7 @@ function RouteComponent() {
 						</ul>
 					</div>
 
-					<h3>Article 4: Membership</h3>
+					<h2>Article 4: Membership</h2>
 					<div className="level3">
 						<p>
 							4.1 All current students and current staff of
@@ -151,7 +151,7 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>Article 5: The Committee</h3>
+					<h2>Article 5: The Committee</h2>
 					<div className="level3">
 						<p>
 							5.1 A Committee shall conduct the business of
@@ -429,9 +429,9 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>
+					<h2>
 						Article 6: Standing Orders of the Society.
-					</h3>
+					</h2>
 					<div className="level3">
 						<p>
 							6.1 The Society does not have Standing Orders.
@@ -457,7 +457,7 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>Article 7: Annual General Meetings</h3>
+					<h2>Article 7: Annual General Meetings</h2>
 					<div className="level3">
 						<p>
 							7.1.1 The Annual General Meeting of the
@@ -479,7 +479,7 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>Article 8: Extraordinary General Meetings</h3>
+					<h2>Article 8: Extraordinary General Meetings</h2>
 					<div className="level3">
 						<p>
 							8.1 An Extraordinary General Meeting of the
@@ -542,7 +542,7 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>Article 9: Election of the Committee</h3>
+					<h2>Article 9: Election of the Committee</h2>
 					<div className="level3">
 						<p>
 							9.1 The Committee of the Society shall be
@@ -589,7 +589,7 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>Article 10: Voting at General Meetings</h3>
+					<h2>Article 10: Voting at General Meetings</h2>
 					<div className="level3">
 						<p>
 							10.1 Voting shall be by show of hands, unless
@@ -611,9 +611,9 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>
+					<h2>
 						Article 11: Resignations from the Committee
-					</h3>
+					</h2>
 					<div className="level3">
 						<p>
 							11.1 The resignation of any member of the
@@ -635,7 +635,7 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>Article 12: Handover Documents</h3>
+					<h2>Article 12: Handover Documents</h2>
 					<div className="level3">
 						<p>
 							12.1 Each outgoing officer of the Committee
@@ -649,9 +649,9 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>
+					<h2>
 						Article 13: Instigation of Disciplinary Action
-					</h3>
+					</h2>
 					<div className="level3">
 						<p>
 							13.1 The Committee and all members of the
@@ -709,7 +709,7 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>Article 14: Management of Finance</h3>
+					<h2>Article 14: Management of Finance</h2>
 					<div className="level3">
 						<p>
 							14.1 The finances of the Society shall be
@@ -735,9 +735,9 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>
+					<h2>
 						Article 15: Amendments to the Constitution
-					</h3>
+					</h2>
 					<div className="level3">
 						<p>
 							15.1 Amendments to this Constitution may be
@@ -764,7 +764,7 @@ function RouteComponent() {
 						</p>
 					</div>
 
-					<h3>Article 16: Dissolution of the Society</h3>
+					<h2>Article 16: Dissolution of the Society</h2>
 					<div className="level3">
 						<p>
 							16.1 The Society may be dissolved by a

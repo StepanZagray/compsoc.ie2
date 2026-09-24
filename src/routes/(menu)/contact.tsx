@@ -41,7 +41,7 @@ function ContactPage() {
 
 			<Panel className={sectionPanelHover}>
 				<div className="border-border border-b-2 p-6">
-					<h2 className="flex items-center gap-2 font-semibold text-foreground">
+					<h2 className="heading-2 flex items-center gap-2 text-foreground">
 						<MapPin className="size-5 text-accent" />
 						Our location
 					</h2>
@@ -82,7 +82,7 @@ function ContactPage() {
 			<div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
 				<Panel className={sectionPanelHover}>
 					<div className="border-border border-b-2 p-6">
-						<h2 className="flex items-center gap-2 font-semibold text-foreground">
+						<h2 className="heading-2 flex items-center gap-2 text-foreground">
 							<Mail className="size-5 text-accent" />
 							Contact & social
 						</h2>
@@ -93,7 +93,7 @@ function ContactPage() {
 					</div>
 					<div className="space-y-4 p-6">
 						<div>
-							<h3 className="font-medium text-foreground">
+							<h3 className="heading-3 text-foreground">
 								Email us
 							</h3>
 							<p className="mt-1 text-muted-foreground text-sm">
@@ -103,7 +103,7 @@ function ContactPage() {
 							<CopyEmailButton />
 						</div>
 						<div>
-							<h3 className="font-medium text-foreground">
+							<h3 className="heading-3 text-foreground">
 								Follow us
 							</h3>
 							<p className="mt-1 text-muted-foreground text-sm">
@@ -142,7 +142,7 @@ function ContactPage() {
 							</div>
 						</div>
 						<div>
-							<h3 className="font-medium text-foreground">
+							<h3 className="heading-3 text-foreground">
 								Join us
 							</h3>
 							<p className="mt-1 text-muted-foreground text-sm">
@@ -170,7 +170,7 @@ function ContactPage() {
 
 				<Panel className={sectionPanelHover}>
 					<div className="border-border border-b-2 p-6">
-						<h2 className="flex items-center gap-2 font-semibold text-foreground">
+						<h2 className="heading-2 flex items-center gap-2 text-foreground">
 							<InstagramIcon className="size-5 text-accent" />
 							Latest on Instagram
 						</h2>

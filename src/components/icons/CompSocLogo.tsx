@@ -19,9 +19,9 @@ export function CompSocLogo({
 				className="relative h-10 object-contain"
 			/>
 			<div className="-mt-1 flex h-full flex-col items-center justify-center font-[Poppins,sans-serif]">
-				<h1 className="font-medium text-[1.0625rem]">
+				<span className="font-medium text-[1.0625rem]">
 					CompSoc
-				</h1>
+				</span>
 				<p className="-mt-1.5 font-light text-[0.5rem] opacity-75">
 					University of Galway
 				</p>

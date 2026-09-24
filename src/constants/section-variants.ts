@@ -10,7 +10,7 @@ export const sectionVariants = {
 	},
 	inactive: {
 		borderColor: "oklch(0.278 0.033 256.848)",
-		opacity: 0.8,
+		opacity: 0.7,
 	},
 	transition: {
 		duration: 0.3,

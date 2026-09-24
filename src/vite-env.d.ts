@@ -38,3 +38,8 @@ declare module "*&as=img" {
 
 /** Injected by `define` in vite.config.ts from committee.json. */
 declare const __COMMITTEE_SIZE__: string
+declare const __BUILD_YEAR__: number
+declare const __EVENT_STATS__: {
+	total: number
+	since: number
+}

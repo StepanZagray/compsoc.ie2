@@ -99,7 +99,7 @@ function FeatureCard({
 				<span className="mb-3 inline-flex items-center justify-center transition-transform duration-300 group-hover/card:scale-110">
 					{icon}
 				</span>
-				<h2 className="mb-2 font-bold text-lg">{title}</h2>
+				<h2 className="heading-2 mb-2">{title}</h2>
 				<p className="text-muted-foreground text-sm leading-6">
 					{description}
 				</p>

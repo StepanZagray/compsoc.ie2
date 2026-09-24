@@ -104,7 +104,7 @@ function CommitteePage() {
 						key={year.year}
 						className="flex flex-col gap-4"
 					>
-						<h2 className="font-bold text-foreground text-xl md:text-2xl">
+						<h2 className="heading-2 text-foreground">
 							Committee {year.year}
 						</h2>
 						<div
@@ -182,7 +182,7 @@ function CommitteeCard({
 					loading="lazy"
 					decoding="async"
 				/>
-				<h3 className="font-bold text-foreground">
+				<h3 className="heading-3 text-foreground">
 					{person.name}
 				</h3>
 				<p className="mb-3 text-muted-foreground text-sm">

@@ -14,6 +14,7 @@ import { NotFound } from "#/components/NotFound"
 import { Footer } from "#/components/ui/footer"
 import { NavigationMenuComponent } from "#/components/ui/navigation-menu"
 import { ActiveSectionProvider } from "#/contexts/active-section"
+import { markHydrated } from "#/lib/first-load"
 import {
 	canonicalUrl,
 	DEFAULT_DESCRIPTION,
@@ -157,6 +158,8 @@ function RootDocument({
 		}
 		return true
 	})
+
+	useEffect(markHydrated, [])
 
 	useEffect(() => {
 		const onResize = () => {
