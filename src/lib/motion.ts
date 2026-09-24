@@ -1,13 +1,15 @@
 /**
  * Lazy access to the `motion` animation library.
  *
- * Nothing in the eager bundle imports motion: every caller goes through
- * loadMotion(), which Vite splits into its own chunk. The hero
- * starts the download on mount, while the CSS-only intro in styles.css plays, so
- * by the time the intro ends the library is usually already there.
+ * Only used where CSS genuinely can't do the job: springs that follow the
+ * pointer and keep their momentum when retargeted (the hero wallpaper's
+ * parallax and the magnetic buttons). Everything else animates in CSS.
  *
- * Everything built on it is an enhancement: until (or unless) it loads, the page
- * shows its final, static state.
+ * Nothing in the eager bundle imports motion: every caller goes through
+ * loadMotion(), which Vite splits into its own chunk. The hero starts the
+ * download on mount, while the CSS-only intro in styles.css plays.
+ * Everything built on it is an enhancement: until (or unless) it loads, the
+ * page shows its final, static state.
  */
 type MotionModule = typeof import("./motion-exports")
 

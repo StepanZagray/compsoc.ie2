@@ -43,9 +43,9 @@ Otherwise the animated sections will jump or flicker because Motion interpolates
 
 
 
-## First-load intro and lazy motion
+## First-load intro, CSS animation and lazy motion
 
-**Files:** `src/styles.css` (bottom), `src/components/sections/Home/HeroSection.tsx`, `src/hooks/useScrollWindow.ts`, `src/lib/motion.ts`
+**Files:** `src/styles.css` (bottom), `src/components/sections/Home/HeroSection.tsx`, `src/hooks/useLogoFlight.ts`, `src/components/ui/count-up.tsx`, `src/lib/motion.ts`
 
 The home page is modelled on a riced Hyprland desktop:
 - The hero is a terminal window tiled over a wallpaper (the campus photo), which shows through the 1rem gaps and the blur. It shows fastfetch-style output: the logo as pixel art, `compsoc@galway`, the headline and the buttons.
@@ -63,23 +63,25 @@ The first-load intro is CSS only and plays straight from the prerendered HTML, b
 
 - Scrolling is locked (`overflow: hidden` on `html`) until 1500 ms.
 - Terminal text never fades or slides: it is either typed or printed. Keep it that way.
-- `.intro` is only rendered the first time the hero renders in a page load.
+- `.intro` is only rendered in the hero's hydration render (`useIsHydrating()`), so it matches the server HTML and never replays after client-side navigation.
 - Everything is inside `@media (prefers-reduced-motion: no-preference)`.
-- Windows further down (About, Stats, Footer) use `useScrollWindow()`. Once motion has loaded, it ties a Hyprland-style popin (80% scale plus fade, anchored at the top edge) to scroll, finishing when the window top reaches 80% down the viewport (the footer: 95%), with motion's `scroll()`, and reverses when scrolled back. Until then the windows are simply visible.
+- Windows further down (About rows, Stats, Footer) have `.scroll-window`: a native scroll-driven animation (`animation-timeline: view()`) pops them in from 80% with a fade, anchored at the top edge, finishing when the top edge is 20vh into view (the footer, `.scroll-window-late`: 5vh). Without `animation-timeline` support they're simply shown.
 
 The logo art is generated: `python3 scripts/ascii-logo.py 24` writes `src/components/sections/Home/ascii-logo.ts` from `compsoc_logo.png`. The hero draws it as SVG pixels on a 0.6em × 1em cell grid (block glyphs leave seams).
+
+**CSS first.** Everything that can be CSS is CSS:
+- The intro, the window pop-ins (scroll-driven), the mobile menu.
+- `CountUp` (`src/components/ui/count-up.tsx`): a registered `@property --count` integer animates from 0 to `--to` and is printed through a CSS counter, so the number renders without JS. JS only arms it at 0 while off screen and starts it at 60% visible. CSS counters can't insert thousands separators, so it shows `1388`; screen readers and print get `1,388`.
+- `useLogoFlight()` (run by the hero) needs JS for geometry but no library: a rAF-throttled scroll listener scrubs a shared-element transition. The hero logo arcs into the bar's empty icon slot (sideways and shrinking early, then straight up, so it never crosses the always-visible wordmark) and swaps for the bar icon as it lands. Before hydration and under reduced motion, `.nav-logo[data-hero-top] img` hides the bar icon at the hero and shows it once the hero isn't active.
+
+**Motion only where CSS can't:** springs that follow the pointer and keep their momentum when retargeted.
+- `useMagnetic()` pulls the hero buttons toward the pointer. Mouse/trackpad only, kept small so the buttons never overlap.
+- The wallpaper's pointer parallax, on `(hover: hover) and (pointer: fine)` only.
 
 Motion is **never imported statically**. Use `loadMotion()` from `src/lib/motion.ts`,
 which dynamically imports `src/lib/motion-exports.ts`. Export only what you use
 from that file: a bare `import("motion")` can't be tree-shaken and grows the
-chunk from ~21 KB to ~47 KB gzipped. Home page cost today: under 1 KB eager, and
-a ~21 KB chunk the hero starts fetching on mount.
-
-Everything built on motion is an enhancement over a correct static state:
-- `CountUp` (`src/components/ui/count-up.tsx`) prerenders the final number. It resets to 0 only after motion has loaded, and only while off screen.
-- `useLogoFlight()` (run by the hero) is a scroll-scrubbed shared-element transition: the hero logo lifts out and arcs into the bar's empty icon slot (sideways and shrinking early, then straight up, so it never crosses the wordmark) beside the always-visible wordmark, its opacity animating from the hero's (0.7 when the hero window is inactive) to full, and swapping for the bar icon as it lands (no fades). Before motion loads (and under reduced motion) the CSS rule `.nav-logo[data-hero-top] img` hides the bar icon at the hero and shows it once the hero isn't active.
-- `useMagnetic()` pulls the hero buttons toward the pointer on a spring. It's mouse/trackpad only and kept small so the buttons never overlap.
-- The wallpaper's pointer parallax only attaches on `(hover: hover) and (pointer: fine)`.
+chunk to ~47 KB gzipped. The hero starts fetching it on mount, during the intro.
 
 Measured options (home page, gzip) for reference:
 
@@ -90,7 +92,7 @@ Measured options (home page, gzip) for reference:
 | `LazyMotion` + async `domAnimation` | +14.5 KB | 14.5 KB |
 | `LazyMotion` + async `domMax` | +14.4 KB | 27.9 KB |
 | `React.lazy` island using `motion/react` | +0.2 KB | 39.4 KB |
-| `import("motion")` → `animate` + `scroll` (used) | +0.1 KB | 21.3 KB |
+| `import("motion")` → `animate` (used) | +0.1 KB | 18.8 KB |
 | `import("motion/mini")` → `animate` (WAAPI only, no springs/JS values) | +0.1 KB | ~3.7 KB |
 
 For layout/presence animations (`layoutId`, `AnimatePresence`) on a single

@@ -9,7 +9,6 @@ import {
 	type SectionId,
 	useActiveSection,
 } from "#/contexts/active-section"
-import { useScrollWindow } from "#/hooks/useScrollWindow"
 import { cn } from "#/lib/utils"
 
 type SectionMotionProps = {
@@ -152,7 +151,6 @@ function AboutRow({
 	children: (active: boolean) => ReactNode
 }) {
 	const ref = useRef<HTMLElement>(null)
-	useScrollWindow(ref)
 	const {
 		activeSectionId,
 		registerSection,
@@ -174,11 +172,11 @@ function AboutRow({
 	return (
 		<section
 			ref={ref}
-			className="relative z-10 mb-4 w-full px-4"
+			className="scroll-window relative z-10 mb-4 w-full px-4"
 			onTouchEnd={() => setTapOverride(id)}
 		>
 			{/* Dimming lives here, not on the section: the section's opacity
-			    belongs to the scroll popin (useScrollWindow). */}
+			    belongs to the scroll popin (.scroll-window). */}
 			<div
 				className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
 				style={{ opacity, transition: fade }}

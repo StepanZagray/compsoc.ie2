@@ -38,7 +38,7 @@ function NavigationMenuComponent({
 
 	// On the home page the logo lives in the hero and flies up into the bar as
 	// the hero scrolls away (useLogoFlight, run by the hero). `heroTop` drives
-	// the CSS fallback until motion has loaded (null: before the first scroll
+	// the CSS state before hydration and under reduced motion (null: before the first scroll
 	// measurement, when a home page load is always at the hero).
 	const heroTop =
 		currentPath === "/" &&

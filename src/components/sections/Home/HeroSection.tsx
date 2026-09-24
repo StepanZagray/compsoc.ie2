@@ -11,10 +11,10 @@ import { DiscordIcon } from "#/components/icons/DiscordIcon"
 import { InstagramIcon } from "#/components/icons/InstagramIcon"
 import { sectionStyle } from "#/constants/section-variants"
 import { useActiveSection } from "#/contexts/active-section"
+import { useIsHydrating } from "#/hooks/useIsHydrating"
 import { useLogoFlight } from "#/hooks/useLogoFlight"
 import { useMagnetic } from "#/hooks/useMagnetic"
 import { useTypewriter } from "#/hooks/useTypewriter"
-import { isHydrated } from "#/lib/first-load"
 import {
 	loadMotion,
 	prefersReducedMotion,
@@ -56,9 +56,11 @@ const HeroSection = ({
 		[registerSection],
 	)
 
-	// The CSS intro only plays when home is the page that was loaded, never
-	// after client-side navigation.
-	const [intro] = useState(() => !isHydrated())
+	// The CSS intro only plays when home is the page that was loaded (its
+	// hydration render), never after client-side navigation. Latched so the
+	// class stays for this page view once hydration is over.
+	const hydrating = useIsHydrating()
+	const [intro] = useState(hydrating)
 
 	// Start downloading motion now; the CSS intro covers the wait. Once it's
 	// here, the wallpaper drifts toward the pointer on a spring (mouse/trackpad only).

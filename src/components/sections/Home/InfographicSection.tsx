@@ -9,7 +9,6 @@ import { useEffect, useRef } from "react"
 import { CountUp } from "#/components/ui/count-up"
 import { sectionStyle } from "#/constants/section-variants"
 import { useActiveSection } from "#/contexts/active-section"
-import { useScrollWindow } from "#/hooks/useScrollWindow"
 import { NumberOfCommitteeMembers } from "#/services/committee-size"
 
 type SectionMotionProps = {
@@ -46,7 +45,6 @@ const InfographicSection = ({
 	transition,
 }: SectionMotionProps) => {
 	const sectionRef = useRef<HTMLElement>(null)
-	useScrollWindow(sectionRef)
 	const {
 		activeSectionId,
 		registerSection,
@@ -62,7 +60,7 @@ const InfographicSection = ({
 	return (
 		<section
 			ref={sectionRef}
-			className="flex w-full flex-col items-center px-4 pb-4"
+			className="scroll-window flex w-full flex-col items-center px-4 pb-4"
 			onTouchEnd={() => setTapOverride("stats")}
 		>
 			<div

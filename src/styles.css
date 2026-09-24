@@ -529,10 +529,76 @@ body {
 /*
  * The bar's logo icon is hidden while the home hero (which shows the logo
  * itself) is in view; the wordmark beside it always shows. This is the
- * prerendered state and the no-motion fallback; useLogoFlight takes over with
- * a scroll-driven flight once motion has loaded. No fade: the logo is never
+ * prerendered state and the reduced-motion fallback; useLogoFlight takes over
+ * with a scroll-driven flight after hydration. No fade: the logo is never
  * see-through.
  */
-.nav-logo[data-hero-top]:not([data-motion]) img {
+.nav-logo[data-hero-top]:not([data-flight]) img {
 	visibility: hidden;
+}
+
+/*
+ * Windows below the hero pop in (Hyprland popin, 80% -> 100%) as they scroll
+ * into view, scrubbed by scroll position with a native scroll-driven
+ * animation: from the window's top edge entering at the bottom of the
+ * viewport until it is a fifth of the way up. Where animation-timeline isn't
+ * supported the windows are simply shown.
+ */
+@media (prefers-reduced-motion: no-preference) {
+	@supports (animation-timeline: view()) {
+		.scroll-window {
+			transform-origin: 50% 0;
+			animation: scroll-window linear both;
+			animation-timeline: view();
+			animation-range: cover 0% cover 20vh;
+		}
+		/* At the bottom of the page the footer can't rise a fifth of the way. */
+		.scroll-window-late {
+			animation-range: cover 0% cover 5vh;
+		}
+	}
+}
+
+@keyframes scroll-window {
+	from {
+		opacity: 0;
+		scale: 0.8;
+		animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+	to {
+		opacity: 1;
+		scale: 1;
+	}
+}
+
+/*
+ * Count-up numbers (CountUp): a registered integer animates and is printed
+ * through a CSS counter, so it shows its final value by default and needs no
+ * JS to render. CountUp arms it at 0 while off screen and runs it in view.
+ */
+@property --count {
+	syntax: "<integer>";
+	inherits: false;
+	initial-value: 0;
+}
+.count-up {
+	--count: var(--to);
+	counter-reset: count var(--count);
+}
+.count-up::after {
+	content: counter(count);
+}
+.count-up[data-count="armed"] {
+	--count: 0;
+}
+.count-up[data-count="run"] {
+	animation: count-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes count-up {
+	from {
+		--count: 0;
+	}
+	to {
+		--count: var(--to);
+	}
 }

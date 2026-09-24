@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react"
 import universityLogoUrl from "#/assets/img/university/universityofgalway.jpg?format=webp&w=100"
 import { sectionStyle } from "#/constants/section-variants"
 import { useActiveSection } from "#/contexts/active-section"
-import { useScrollWindow } from "#/hooks/useScrollWindow"
 
 export function Footer({
 	currentPath = "/",
@@ -10,8 +9,6 @@ export function Footer({
 	currentPath?: string
 }) {
 	const footerRef = useRef<HTMLElement>(null)
-	// The footer can't rise to 0.8 at the bottom of the page.
-	useScrollWindow(footerRef, 0.95)
 	const {
 		activeSectionId,
 		registerSection,
@@ -30,7 +27,7 @@ export function Footer({
 		// biome-ignore lint/a11y/noStaticElementInteractions: hover only for active-section state, not a control
 		<footer
 			ref={footerRef}
-			className={`w-full px-4 pb-4 ${!isHomePage ? "mx-auto max-w-6xl" : ""}`}
+			className={`scroll-window scroll-window-late w-full px-4 pb-4 ${!isHomePage ? "mx-auto max-w-6xl" : ""}`}
 			onMouseEnter={() => setFooterHovered(true)}
 			onMouseLeave={() => setFooterHovered(false)}
 			onTouchEnd={() => setTapOverride("footer")}
