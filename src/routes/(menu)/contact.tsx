@@ -28,9 +28,6 @@ export const Route = createFileRoute("/(menu)/contact")({
 })
 
 /** Matches Card hover on events/committee; md+ only so touch devices stay calm. */
-const sectionPanelHover =
-	"md:transition-all md:duration-300 md:hover:border-border-accent md:hover:shadow-foreground/5 md:hover:shadow-md"
-
 function ContactPage() {
 	return (
 		<PageLayout>
@@ -39,7 +36,7 @@ function ContactPage() {
 				subtitle="Connect with our community, attend events, and become part of CompSoc."
 			/>
 
-			<Panel className={sectionPanelHover}>
+			<Panel>
 				<div className="border-border border-b-2 p-6">
 					<h2 className="heading-2 flex items-center gap-2 text-foreground">
 						<MapPin className="size-5 text-accent" />
@@ -80,7 +77,7 @@ function ContactPage() {
 			</Panel>
 
 			<div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-				<Panel className={sectionPanelHover}>
+				<Panel>
 					<div className="border-border border-b-2 p-6">
 						<h2 className="heading-2 flex items-center gap-2 text-foreground">
 							<Mail className="size-5 text-accent" />
@@ -168,7 +165,7 @@ function ContactPage() {
 					</div>
 				</Panel>
 
-				<Panel className={sectionPanelHover}>
+				<Panel>
 					<div className="border-border border-b-2 p-6">
 						<h2 className="heading-2 flex items-center gap-2 text-foreground">
 							<InstagramIcon className="size-5 text-accent" />

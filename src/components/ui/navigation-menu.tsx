@@ -144,8 +144,11 @@ function NavigationMenuComponent({
 											: undefined
 									}
 									className={cn(
-										"flex h-full w-30 items-center justify-center gap-1.5 p-2 text-muted-foreground text-sm outline-none transition-colors [&_svg:not([class*='size-'])]:size-4",
-										"hover:text-foreground-light focus:text-foreground-light focus-visible:text-foreground-light data-[active=true]:text-foreground-light",
+										"flex h-full w-30 items-center justify-center gap-1.5 p-2 text-muted-foreground text-sm outline-none transition-colors duration-300 [&_svg:not([class*='size-'])]:size-4",
+										// Current page: bright, like a focused window's text. Under
+										// the pointer: the accent, like every other link on the site.
+										"data-[active=true]:text-foreground-light",
+										"hover:text-accent focus-visible:text-accent",
 									)}
 								>
 									{item.text}
@@ -177,7 +180,7 @@ function NavigationMenuComponent({
 				id="mobile-menu"
 				data-open={open || undefined}
 				inert={!open}
-				className="mobile-menu absolute top-0 left-0 flex h-dvh w-screen bg-background md:hidden"
+				className="mobile-menu absolute top-0 left-0 z-30 flex h-dvh w-screen bg-background md:hidden"
 			>
 				<nav
 					data-slot="navigation-menu"

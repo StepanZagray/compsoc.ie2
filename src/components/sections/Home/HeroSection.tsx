@@ -254,7 +254,7 @@ const HeroSection = ({
 							    "University of Galway's" steps down to an eyebrow and
 							    "Computer Society" carries the weight, the rotating word on
 							    its own line so its changing length can't reflow anything. */}
-							<h1 className="whitespace-nowrap font-bold text-[min(2.75rem,10.5vw)]/[1.1] tracking-tight md:mt-3 md:text-[min(2.25rem,3.4vw)]/tight lg:text-5xl/tight">
+							<h1 className="whitespace-nowrap font-bold text-[min(2.75rem,10.5vw)]/[1.1] tracking-tight md:mt-3 md:text-[min(2.25rem,3.4vw)]/tight lg:text-[min(3.75rem,4.1vw)]/[1.12]">
 								<span
 									className="intro-print block max-md:mb-2 max-md:font-medium max-md:text-lg max-md:text-muted-foreground max-md:tracking-normal"
 									style={row(2)}

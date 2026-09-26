@@ -18,7 +18,13 @@ export function CompSocLogo({
 				alt=""
 				className="relative h-10 object-contain"
 			/>
-			<div className="-mt-1 flex h-full flex-col items-center justify-center font-[Poppins,sans-serif]">
+			<div className="nav-wordmark relative -mt-1 flex h-full flex-col items-center justify-center font-[Poppins,sans-serif]">
+				{/* Dims the wordmark while the home hero has the logo; the
+				    logo flight wipes it away (see useLogoFlight). */}
+				<span
+					className="nav-wordmark-shade pointer-events-none absolute inset-y-0 left-0 z-10 w-full bg-background/45 opacity-0"
+					aria-hidden
+				/>
 				<span className="font-medium text-[1.0625rem]">
 					CompSoc
 				</span>

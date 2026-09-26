@@ -142,7 +142,7 @@ function RouteComponent() {
 			/>
 
 			{/* Tabs */}
-			<div className="flex gap-1 rounded-md border-2 border-border bg-background/80 p-1 transition-all duration-300">
+			<div className="flex gap-1 rounded-md border-2 border-border bg-background/80 p-1 transition-colors duration-300 hover:border-border-accent">
 				<button
 					type="button"
 					onClick={() =>

@@ -1,5 +1,10 @@
 import { Link } from "@tanstack/react-router"
-import { type ReactNode, useEffect, useRef } from "react"
+import {
+	type CSSProperties,
+	type ReactNode,
+	useEffect,
+	useRef,
+} from "react"
 import uog from "#/assets/img/university/UoG.jpg?format=webp&w=480;768;1000&as=img"
 import uog2 from "#/assets/img/university/UoG2.jpg?format=webp&w=640;1024;1400&as=img"
 import uog3 from "#/assets/img/university/UoG3.jpg?format=webp&w=480;768;1000&as=img"
@@ -9,6 +14,8 @@ import {
 	type SectionId,
 	useActiveSection,
 } from "#/contexts/active-section"
+import { useWindowEnter } from "#/hooks/useWindowEnter"
+import { prefersReducedMotion } from "#/lib/motion"
 import { cn } from "#/lib/utils"
 
 type SectionMotionProps = {
@@ -62,6 +69,7 @@ const AboutSection = (props: SectionMotionProps) => (
 					</TerminalTile>
 					<ImageTile
 						picture={uog2}
+						name="campus-aerial.jpg"
 						sizes={WIDE}
 						alt="University of Galway campus from the air"
 						className="lg:col-span-2"
@@ -75,6 +83,7 @@ const AboutSection = (props: SectionMotionProps) => (
 				<>
 					<ImageTile
 						picture={uog3}
+						name="blossom.jpg"
 						sizes={NARROW}
 						alt="Cherry blossom on campus"
 						className="hidden lg:block"
@@ -98,6 +107,7 @@ const AboutSection = (props: SectionMotionProps) => (
 					</TerminalTile>
 					<ImageTile
 						picture={uog4}
+						name="grounds.jpg"
 						sizes={NARROW}
 						alt="University of Galway grounds"
 					/>
@@ -110,6 +120,7 @@ const AboutSection = (props: SectionMotionProps) => (
 				<>
 					<ImageTile
 						picture={uog}
+						name="quadrangle.jpg"
 						sizes={WIDE}
 						alt="University of Galway Quadrangle"
 						// After the text on phones; beside it (first) from md up.
@@ -168,6 +179,7 @@ function AboutRow({
 		() => registerSection(id, ref),
 		[registerSection, id],
 	)
+	useWindowEnter(ref)
 
 	return (
 		<section
@@ -187,7 +199,14 @@ function AboutRow({
 	)
 }
 
-/** A small terminal window that has just run `cat <file>`. */
+/**
+ * A small terminal window that has just run `cat <file>`.
+ *
+ * The first time it scrolls into view it replays that: the command is typed,
+ * then the file prints (.tile[data-reveal] in styles.css). Only tiles still below
+ * the fold after hydration are armed, so nothing already on screen, in the
+ * prerendered page or under reduced motion, is ever hidden.
+ */
 function TerminalTile({
 	file,
 	title,
@@ -201,25 +220,71 @@ function TerminalTile({
 	className?: string
 	children: ReactNode
 }) {
+	const ref = useRef<HTMLElement>(null)
+	const command = `cat ${file}`
+
+	useEffect(() => {
+		const el = ref.current
+		if (
+			!el ||
+			prefersReducedMotion() ||
+			el.getBoundingClientRect().top < window.innerHeight
+		) {
+			return
+		}
+		el.dataset.reveal = "armed"
+		// Runs once the tile is well into view. Keyed to visibility, not
+		// focus: a jump down the page can skip a row's turn at focus.
+		const observer = new IntersectionObserver(
+			(entries) => {
+				// Well into view: 40% of the tile, or 40% of the screen for a
+				// tile too tall to ever be 40% visible.
+				const seen = entries.some(
+					(entry) =>
+						entry.intersectionRatio >= 0.4 ||
+						entry.intersectionRect.height >=
+							window.innerHeight * 0.4,
+				)
+				if (!seen) return
+				observer.disconnect()
+				el.dataset.reveal = "run"
+			},
+			{ threshold: [0, 0.2, 0.4] },
+		)
+		observer.observe(el)
+		return () => {
+			observer.disconnect()
+			delete el.dataset.reveal
+		}
+	}, [])
+
 	return (
 		<article
+			ref={ref}
 			className={cn(
 				"tile rounded-md border-2 bg-background/80 p-4 md:p-6",
 				className,
 			)}
 			data-focused={focused || undefined}
+			style={{ "--chars": command.length } as CSSProperties}
 		>
 			<p className="text-muted-foreground text-sm">
-				<span className="text-accent">~ ❯</span> cat {file}
+				<span className="text-accent">~ ❯</span>{" "}
+				<span className="reveal-type inline-block overflow-hidden whitespace-nowrap align-bottom">
+					{command}
+				</span>
 			</p>
 			{/* Rendered the way glow shows markdown: the heading keeps its hashes. */}
-			<h2 className="heading-2 mt-4 mb-2">
+			<h2 className="reveal-print heading-2 mt-4 mb-2">
 				<span className="text-accent" aria-hidden>
 					##{" "}
 				</span>
 				{title}
 			</h2>
-			<p className="text-muted-foreground text-sm leading-7">
+			<p
+				className="reveal-print text-muted-foreground text-sm leading-7"
+				style={{ "--i": 1 } as CSSProperties}
+			>
 				{children}
 			</p>
 		</article>
@@ -229,11 +294,14 @@ function TerminalTile({
 /** An image viewer window: nothing but the picture. */
 function ImageTile({
 	picture,
+	name,
 	sizes,
 	alt,
 	className,
 }: {
 	picture: Picture
+	/** Shown as the viewer's title, like imv's. */
+	name: string
 	sizes: string
 	alt: string
 	className?: string
@@ -241,7 +309,7 @@ function ImageTile({
 	return (
 		<figure
 			className={cn(
-				"tile relative aspect-4/3 overflow-hidden rounded-md border-2 md:aspect-auto md:min-h-64",
+				"tile group/image relative aspect-4/3 overflow-hidden rounded-md border-2 md:aspect-auto md:min-h-64",
 				className,
 			)}
 		>
@@ -254,13 +322,19 @@ function ImageTile({
 				alt={alt}
 				loading="lazy"
 				decoding="async"
-				className="absolute inset-0 h-full w-full object-cover"
+				className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/image:scale-[1.04] motion-reduce:transition-none"
 			/>
 			{/* Tones the photos down to sit in the dark theme. */}
 			<div
-				className="pointer-events-none absolute inset-0 bg-black/25"
+				className="pointer-events-none absolute inset-0 bg-black/25 transition-colors duration-500 group-hover/image:bg-black/10"
 				aria-hidden
 			/>
+			<figcaption
+				className="absolute bottom-3 left-3 rounded-sm bg-background/80 px-2 py-0.5 text-muted-foreground text-xs backdrop-blur-sm"
+				aria-hidden
+			>
+				{name}
+			</figcaption>
 		</figure>
 	)
 }

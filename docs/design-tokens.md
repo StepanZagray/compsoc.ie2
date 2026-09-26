@@ -48,7 +48,7 @@ Otherwise the animated sections will jump or flicker because Motion interpolates
 **Files:** `src/styles.css` (bottom), `src/components/sections/Home/HeroSection.tsx`, `src/hooks/useLogoFlight.ts`, `src/components/ui/count-up.tsx`, `src/lib/motion.ts`
 
 The home page is modelled on a riced Hyprland desktop:
-- The hero is a terminal window tiled over a wallpaper (the campus photo), which shows through the 1rem gaps and the blur. It shows fastfetch-style output: the logo as pixel art, `compsoc@galway`, the headline and the buttons.
+- The hero is a terminal window tiled over a wallpaper (the campus photo), which shows through the 1rem gaps and the blur. It shows fastfetch-style output: the logo as block-character text, `compsoc@galway`, the headline and the buttons.
 - Every section is a window.
 
 The first-load intro is CSS only and plays straight from the prerendered HTML, before any JS runs:
@@ -61,18 +61,19 @@ The first-load intro is CSS only and plays straight from the prerendered HTML, b
 | 780 | Output prints row by row, instantly like stdout: `--row` × `--intro-row` (18 ms) |
 | ~900 | Buttons are uncovered by the CTA's skewed slab sweeping across them (`--sweep-row`) |
 
-- Scrolling is locked (`overflow: hidden` on `html`) until 1500 ms.
+- Scrolling is never locked. If the page scrolls mid-intro, the logo flight takes over at once (its copy of the logo is whole, not re-printed) while the rest of the terminal keeps printing.
 - Terminal text never fades or slides: it is either typed or printed. Keep it that way.
 - `.intro` is only rendered in the hero's hydration render (`useIsHydrating()`), so it matches the server HTML and never replays after client-side navigation.
 - Everything is inside `@media (prefers-reduced-motion: no-preference)`.
-- Windows further down (About rows, Stats, Footer) have `.scroll-window`: a native scroll-driven animation (`animation-timeline: view()`) pops them in from 80% with a fade, anchored at the top edge, finishing when the top edge is 20vh into view (the footer, `.scroll-window-late`: 5vh). Without `animation-timeline` support they're simply shown.
+- About terminals replay their `cat` the first time they're 40% in view, after the window's popin: the command types (`steps()` over `--chars`), then the file prints (`.tile[data-reveal]`). Only tiles below the fold after hydration are armed.
+- Windows further down (About rows, Stats, Footer) have `.scroll-window` and `useWindowEnter()`. While armed or running they're excluded from scroll anchoring (`overflow-anchor: none`): Firefox counts the entry's scale when tracking its anchor and would otherwise nudge the page by up to ~30px: a one-shot Hyprland popin (85% -> 100% with a fade, 480 ms) the first time the window is 15% in view. Only windows below the fold after hydration are armed, so nothing is hidden without JS or under reduced motion. What a window prints (the About `cat`, the count-up) waits `--enter` (360 ms) so it starts once the window is up.
 
 The logo art is generated: `python3 scripts/ascii-logo.py 24` writes `src/components/sections/Home/ascii-logo.ts` from `compsoc_logo.png`. The hero draws it as SVG pixels on a 0.6em × 1em cell grid (block glyphs leave seams).
 
 **CSS first.** Everything that can be CSS is CSS:
 - The intro, the window pop-ins (scroll-driven), the mobile menu.
-- `CountUp` (`src/components/ui/count-up.tsx`): a registered `@property --count` integer animates from 0 to `--to` and is printed through a CSS counter, so the number renders without JS. JS only arms it at 0 while off screen and starts it at 60% visible. CSS counters can't insert thousands separators, so it shows `1388`; screen readers and print get `1,388`.
-- `useLogoFlight()` (run by the hero) needs JS for geometry but no library: a rAF-throttled scroll listener scrubs a shared-element transition. The hero logo arcs into the bar's empty icon slot (sideways and shrinking early, then straight up, so it never crosses the always-visible wordmark) and swaps for the bar icon as it lands. Before hydration and under reduced motion, `.nav-logo[data-hero-top] img` hides the bar icon at the hero and shows it once the hero isn't active.
+- `CountUp` (`src/components/ui/count-up.tsx`): prerendered with its final value; after hydration a number that starts off screen is reset to 0 and counted up with `requestAnimationFrame` (1.4 s, ease-out) once it's 60% visible and its window has popped in (`--enter`). Plain JS rather than a CSS counter trick, so it animates in every browser and can print thousands separators (`1,388`).
+- `useLogoFlight()` (run by the hero) needs JS for geometry but no library: a rAF-throttled scroll listener scrubs a shared-element transition. A fixed clone of the hero logo rises and shrinks first (ease-out), straight up through the empty space above it and faster than the page scrolls, then slides sideways (ease-in) only once it's up in the bar, so it never crosses text. It swaps for the bar icon as it lands, and the bar's wordmark sits dimmed under a shade (`.nav-wordmark-shade`) that ends at the logo's leading edge, so the logo clears the shade off the wordmark as it slides over it. Before hydration and under reduced motion, `.nav-logo[data-hero-top]` hides the bar's icon and dims its wordmark at the hero and undoes both once the hero isn't active (only when scripting is enabled; without JS the lockup just shows).
 
 **Motion only where CSS can't:** springs that follow the pointer and keep their momentum when retargeted.
 - `useMagnetic()` pulls the hero buttons toward the pointer. Mouse/trackpad only, kept small so the buttons never overlap.

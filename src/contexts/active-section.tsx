@@ -68,10 +68,17 @@ export function useActiveSection() {
 	return ctx
 }
 
+/**
+ * `scrollFocus`: whether the scroll position decides the active section. On
+ * for the home page, whose sections are one continuous desktop you move
+ * through; everywhere else only the cursor (hover) or a tap activates.
+ */
 export function ActiveSectionProvider({
 	children,
+	scrollFocus,
 }: {
 	children: ReactNode
+	scrollFocus: boolean
 }) {
 	const [activeSectionId, setActiveSectionId] =
 		useState<SectionId | null>(null)
@@ -205,8 +212,9 @@ export function ActiveSectionProvider({
 			setActiveSectionId("footer")
 			return
 		}
-		setActiveSectionId(scrollActiveId)
+		setActiveSectionId(scrollFocus ? scrollActiveId : null)
 	}, [
+		scrollFocus,
 		isMobile,
 		tapOverrideId,
 		menuHovered,

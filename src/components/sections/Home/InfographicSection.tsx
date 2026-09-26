@@ -1,14 +1,9 @@
-import {
-	CalendarDays,
-	PartyPopper,
-	Trophy,
-	UserRoundCog,
-	UsersRound,
-} from "lucide-react"
+import { Trophy } from "lucide-react"
 import { useEffect, useRef } from "react"
 import { CountUp } from "#/components/ui/count-up"
 import { sectionStyle } from "#/constants/section-variants"
 import { useActiveSection } from "#/contexts/active-section"
+import { useWindowEnter } from "#/hooks/useWindowEnter"
 import { NumberOfCommitteeMembers } from "#/services/committee-size"
 
 type SectionMotionProps = {
@@ -22,18 +17,15 @@ type SectionMotionProps = {
 
 const metrics = [
 	{
-		icon: CalendarDays,
 		value: __BUILD_YEAR__ - 1977,
 		label: "years since 1977",
 	},
-	{ icon: UsersRound, value: 1388, label: "members" },
+	{ value: 1388, label: "members" },
 	{
-		icon: UserRoundCog,
 		value: Number(NumberOfCommitteeMembers),
 		label: "on the committee",
 	},
 	{
-		icon: PartyPopper,
 		value: __EVENT_STATS__.total,
 		label: `events since ${__EVENT_STATS__.since}`,
 	},
@@ -56,6 +48,7 @@ const InfographicSection = ({
 		() => registerSection("stats", sectionRef),
 		[registerSection],
 	)
+	useWindowEnter(sectionRef)
 
 	return (
 		<section
@@ -106,18 +99,18 @@ const InfographicSection = ({
 						</p>
 					</div>
 
+					{/* Each figure hangs off a rule, like a column of `df` output:
+					    the number carries the weight, the label stays quiet. */}
 					<dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4 lg:gap-x-4">
-						{metrics.map(({ icon: Icon, value, label }) => (
-							<div key={label} className="flex flex-col">
-								<dd className="flex items-center gap-2.5 font-extrabold text-3xl text-foreground">
-									<Icon
-										size={24}
-										className="shrink-0 text-accent"
-										aria-hidden
-									/>
+						{metrics.map(({ value, label }) => (
+							<div
+								key={label}
+								className="flex flex-col border-border border-l-2 pl-4"
+							>
+								<dd className="font-extrabold text-4xl text-foreground tracking-tight lg:text-5xl">
 									<CountUp value={value} />
 								</dd>
-								<dt className="mt-1 text-muted-foreground text-sm">
+								<dt className="mt-2 text-muted-foreground text-sm">
 									{label}
 								</dt>
 							</div>

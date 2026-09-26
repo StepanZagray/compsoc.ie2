@@ -165,7 +165,9 @@ function RootDocument({
 				<HeadContent />
 			</head>
 			<body>
-				<ActiveSectionProvider>
+				<ActiveSectionProvider
+					scrollFocus={currentPath === "/"}
+				>
 					<NavigationMenuComponent
 						currentPath={currentPath}
 						isDesktop={isDesktop}

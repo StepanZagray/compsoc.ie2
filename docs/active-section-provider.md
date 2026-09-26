@@ -27,12 +27,12 @@ Consumers use the `useActiveSection()` hook (must be used inside `ActiveSectionP
 
 ## Priority (who wins)
 
-Active section is resolved in this order:
+Active section is resolved in this order. Scroll-based focus is on only for the home page (`<ActiveSectionProvider scrollFocus={currentPath === "/"}>` in `__root.tsx`); on every other page windows are focused by the cursor alone (`Panel` and `Card` take the accent border on hover, the footer and bar through their hover handlers), or by a tap on touch.
 
 1. **Tap override** — If a section was recently tapped (within 0.5s), that section is active.
 2. **Menu hover** — If the nav bar is hovered, `"menu"` is active.
 3. **Footer hover** — If the footer is hovered, `"footer"` is active.
-4. **Scroll** — The section under the **focus line** is active (the nearest one if the line falls in a gap). The line is the middle of the viewport, sliding down to the bottom edge over the last half-screen of scrolling so short sections near the end still get a turn. At the very bottom of the page the **footer** is active.
+4. **Scroll** (home page only) — The section under the **focus line** is active (the nearest one if the line falls in a gap). The line is the middle of the viewport, sliding down to the bottom edge over the last half-screen of scrolling so short sections near the end still get a turn. At the very bottom of the page the **footer** is active.
 
 Footer and menu do **not** participate in scroll-based activation; they are active only when hovered (or when tap override is set).
 
