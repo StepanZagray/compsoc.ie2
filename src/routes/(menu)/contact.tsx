@@ -5,8 +5,15 @@ import {
 	ExternalLink,
 	Mail,
 	MapPin,
+	UserPlus,
 } from "lucide-react"
-import { useCallback, useRef, useState } from "react"
+import {
+	type ComponentType,
+	type ReactNode,
+	useCallback,
+	useRef,
+	useState,
+} from "react"
 import { DiscordIcon } from "#/components/icons/DiscordIcon"
 import { InstagramIcon } from "#/components/icons/InstagramIcon"
 import { buttonVariants } from "#/components/ui/button"
@@ -27,7 +34,57 @@ export const Route = createFileRoute("/(menu)/contact")({
 		}),
 })
 
-/** Matches Card hover on events/committee; md+ only so touch devices stay calm. */
+const EMAIL = "compsoc@socs.universityofgalway.ie"
+
+type Channel = {
+	name: string
+	detail: ReactNode
+	Icon: ComponentType<{ className?: string }>
+} /** Opens in a new tab. */ & (
+	| { href: string; copy?: never }
+	/** Copies this text on click. */
+	| { copy: string; href?: never }
+)
+
+/** Every way to reach us, one row each in the contact window. */
+const CHANNELS: ReadonlyArray<Channel> = [
+	{
+		name: "Email",
+		// Line breaks only between the address's parts, never mid-word;
+		// a size down on phones, where its longest part is just too wide.
+		detail: (
+			<span className="max-sm:text-xs">
+				compsoc@
+				<wbr />
+				socs.
+				<wbr />
+				universityofgalway.ie
+			</span>
+		),
+		copy: EMAIL,
+		Icon: Mail,
+	},
+	{
+		name: "Instagram",
+		detail: "@compsocgalway",
+		href: "https://instagram.com/compsocgalway/",
+		Icon: InstagramIcon,
+	},
+	{
+		name: "Discord",
+		detail: "discord.compsoc.ie",
+		href: "https://discord.compsoc.ie/",
+		Icon: DiscordIcon,
+	},
+	{
+		name: "Join on YourSpace",
+		detail:
+			"Become a member to access events, services, and our community.",
+		href: "https://socs.universityofgalway.ie/societies/compsoc",
+		Icon: UserPlus,
+	},
+]
+
 function ContactPage() {
 	return (
 		<PageLayout>
@@ -67,7 +124,7 @@ function ContactPage() {
 								variant: "outline",
 								size: "sm",
 							}),
-							"inline-flex items-center gap-2",
+							"gap-2",
 						)}
 					>
 						View on Maps
@@ -77,92 +134,23 @@ function ContactPage() {
 			</Panel>
 
 			<div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-				<Panel>
+				<Panel className="flex flex-col">
 					<div className="border-border border-b-2 p-6">
 						<h2 className="heading-2 flex items-center gap-2 text-foreground">
 							<Mail className="size-5 text-accent" />
 							Contact & social
 						</h2>
-						<p className="mt-1 text-muted-foreground text-sm">
-							Get in touch via email or follow us on social
-							media.
-						</p>
 					</div>
-					<div className="space-y-4 p-6">
-						<div>
-							<h3 className="heading-3 text-foreground">
-								Email us
-							</h3>
-							<p className="mt-1 text-muted-foreground text-sm">
-								Send us an email and we&apos;ll get back to
-								you as soon as possible.
-							</p>
-							<CopyEmailButton />
-						</div>
-						<div>
-							<h3 className="heading-3 text-foreground">
-								Follow us
-							</h3>
-							<p className="mt-1 text-muted-foreground text-sm">
-								Stay updated with news and announcements.
-							</p>
-							<div className="mt-3 flex gap-2">
-								<a
-									href="https://instagram.com/compsocgalway/"
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label="Instagram"
-									className={cn(
-										buttonVariants({
-											variant: "outline",
-											size: "icon",
-										}),
-									)}
-								>
-									<InstagramIcon className="size-4" />
-								</a>
-								<a
-									href="https://discord.compsoc.ie/"
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label="Discord"
-									className={cn(
-										buttonVariants({
-											variant: "outline",
-											size: "icon",
-										}),
-										"pl-0.25",
-									)}
-								>
-									<DiscordIcon className="size-4" />
-								</a>
-							</div>
-						</div>
-						<div>
-							<h3 className="heading-3 text-foreground">
-								Join us
-							</h3>
-							<p className="mt-1 text-muted-foreground text-sm">
-								Become a member through YourSpace to access
-								events, services, and our community.
-							</p>
-							<a
-								href="https://socs.universityofgalway.ie/societies/compsoc"
-								target="_blank"
-								rel="noopener noreferrer"
-								className={cn(
-									buttonVariants({
-										variant: "outline",
-										size: "sm",
-									}),
-									"mt-2 inline-flex items-center gap-2",
-								)}
-							>
-								Join on YourSpace
-								<ExternalLink className="size-4" />
-							</a>
-						</div>
-					</div>
+					{/* One row per way to reach us. Beside the tall Instagram
+					    window (lg) the rows share the window's height, so it fills
+					    with its own content; stacked, they keep their own. */}
+					<ul className="grid flex-1 list-none gap-3 p-6 lg:auto-rows-fr">
+						{CHANNELS.map((channel) => (
+							<li key={channel.name}>
+								<ChannelRow channel={channel} />
+							</li>
+						))}
+					</ul>
 				</Panel>
 
 				<Panel>
@@ -171,37 +159,25 @@ function ContactPage() {
 							<InstagramIcon className="size-5 text-accent" />
 							Latest on Instagram
 						</h2>
-						<p className="mt-1 text-muted-foreground text-sm">
-							Photos and updates from our community.
-						</p>
 					</div>
-					<div className="p-4 md:p-6">
-						<div className="overflow-hidden rounded-md border border-border bg-background">
+					{/* Edge to edge under the header. The embed is Instagram's
+					    fixed layout: a header, a 3-column grid of two rows, then a
+					    "View full profile" footer. The frame is sized to all of it
+					    (2/3 of its width plus ~196px, ~223px from 480px wide) so it
+					    never scrolls, and this box crops it where the grid ends
+					    (~147px / ~157px + 2/3 width, measured), so the window ends
+					    on the photos. The embed's header links to the profile. */}
+					<div className="@container">
+						<div className="@min-[480px]:h-[calc(157px+66.667cqw)] h-[calc(147px+66.667cqw)] overflow-hidden">
 							<iframe
 								title="CompSoc Galway on Instagram"
 								src="https://www.instagram.com/compsocgalway/embed/"
-								className="h-[min(540px,75vh)] w-full border-0"
+								className="block @min-[480px]:h-[calc(225px+66.667cqw)] h-[calc(198px+66.667cqw)] w-full border-0"
 								loading="lazy"
 								allow="clipboard-write; encrypted-media; picture-in-picture"
 								referrerPolicy="strict-origin-when-cross-origin"
 							/>
 						</div>
-						<a
-							href="https://www.instagram.com/compsocgalway/"
-							target="_blank"
-							rel="noopener noreferrer"
-							className={cn(
-								buttonVariants({
-									variant: "outline",
-									size: "sm",
-								}),
-								"mt-4 inline-flex w-full items-center justify-center gap-2 sm:w-auto",
-							)}
-						>
-							<InstagramIcon className="size-4" />
-							Open on Instagram
-							<ExternalLink className="size-4" />
-						</a>
 					</div>
 				</Panel>
 			</div>
@@ -209,34 +185,80 @@ function ContactPage() {
 	)
 }
 
-const EMAIL = "compsoc@socs.universityofgalway.ie"
+const rowClass =
+	"flex h-full w-full cursor-pointer items-center gap-2.5 rounded-md border-2 border-border p-3 text-left outline-none transition-colors hover:border-border-secondary focus-visible:border-border-secondary sm:gap-4 sm:p-4"
 
-function CopyEmailButton() {
+/**
+ * One way to reach us: icon, what it is, the account or address, and what a
+ * click does (open, or copy). A control inside a window, so on hover its
+ * border lightens like a button's; the accent is kept for focused windows.
+ */
+function ChannelRow({ channel }: { channel: Channel }) {
+	const { name, detail, Icon } = channel
 	const [copied, setCopied] = useState(false)
 	const timer = useRef<ReturnType<typeof setTimeout>>(null)
 
-	const copy = useCallback(() => {
-		navigator.clipboard.writeText(EMAIL)
+	const copy = useCallback((text: string) => {
+		navigator.clipboard.writeText(text)
 		setCopied(true)
 		if (timer.current) clearTimeout(timer.current)
 		timer.current = setTimeout(() => setCopied(false), 2000)
 	}, [])
 
+	const body = (action: ReactNode) => (
+		<>
+			<span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-muted text-accent sm:size-12">
+				<Icon className="size-5" />
+			</span>
+			<span className="min-w-0 flex-1">
+				<span className="heading-3 block text-foreground">
+					{name}
+				</span>
+				<span className="block text-muted-foreground text-sm [overflow-wrap:anywhere]">
+					{detail}
+				</span>
+			</span>
+			<span
+				className="shrink-0 text-muted-foreground"
+				aria-hidden
+			>
+				{action}
+			</span>
+		</>
+	)
+
+	const { copy: text } = channel
+	if (text !== undefined) {
+		return (
+			<button
+				type="button"
+				onClick={() => copy(text)}
+				className={rowClass}
+			>
+				{body(
+					copied ? (
+						<Check className="size-4 text-foreground" />
+					) : (
+						<Copy className="size-4" />
+					),
+				)}
+				<span className="sr-only" aria-live="polite">
+					{copied
+						? `${name} address copied`
+						: `Copy ${name} address`}
+				</span>
+			</button>
+		)
+	}
+
 	return (
-		<button
-			type="button"
-			onClick={copy}
-			className={cn(
-				buttonVariants({ variant: "outline", size: "sm" }),
-				"mt-2 inline-flex cursor-pointer items-center gap-2",
-			)}
+		<a
+			href={channel.href}
+			target="_blank"
+			rel="noopener noreferrer"
+			className={rowClass}
 		>
-			{EMAIL}
-			{copied ? (
-				<Check className="size-4 text-accent" />
-			) : (
-				<Copy className="size-4" />
-			)}
-		</button>
+			{body(<ExternalLink className="size-4" />)}
+		</a>
 	)
 }

@@ -66,7 +66,7 @@ function RouteComponent() {
 							<li>Preferred username</li>
 						</ul>
 					</div>
-					<div className="flex flex-col justify-center border-border border-t-2 p-6 md:border-t-0 md:border-t-0 md:border-l-0 md:border-l-2">
+					<div className="flex flex-col justify-center border-border border-t-2 p-6 md:border-t-0 md:border-l-2">
 						<p className="text-muted-foreground text-sm leading-7">
 							*To become a CompSoc member,{" "}
 							<a

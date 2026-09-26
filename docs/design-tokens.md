@@ -8,7 +8,7 @@ This doc is for developers and agents: where shared colors and motion values liv
 
 All UI transitions and animations use **300 ms** for consistency. Use this everywhere:
 
-- **Tailwind:** `duration-300` (e.g. `transition-all duration-300`)
+- **Tailwind:** nothing to add. `@theme` in `styles.css` sets `--default-transition-duration: 300ms` and `--default-transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1)` (CSS `ease`), so any `transition-colors`/`transition-all` already uses the home windows' timing. Don't add a different `ease-*` or duration to a window or button: every border on every page should change colour at the same pace.
 - **JS (`sectionVariants`, lazy `motion`):** `duration: 0.3` in `transition` objects
 - **Custom CSS:** `transition-duration: 300ms` or `0.3s`
 

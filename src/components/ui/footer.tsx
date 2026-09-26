@@ -3,6 +3,7 @@ import universityLogoUrl from "#/assets/img/university/universityofgalway.jpg?fo
 import { sectionStyle } from "#/constants/section-variants"
 import { useActiveSection } from "#/contexts/active-section"
 import { useWindowEnter } from "#/hooks/useWindowEnter"
+import { cn } from "#/lib/utils"
 
 export function Footer({
 	currentPath = "/",
@@ -29,7 +30,10 @@ export function Footer({
 		// biome-ignore lint/a11y/noStaticElementInteractions: hover only for active-section state, not a control
 		<footer
 			ref={footerRef}
-			className={`scroll-window w-full px-4 pb-4 ${!isHomePage ? "mx-auto max-w-6xl" : ""}`}
+			className={cn(
+				"scroll-window w-full px-4 pb-4",
+				!isHomePage && "mx-auto max-w-6xl",
+			)}
 			onMouseEnter={() => setFooterHovered(true)}
 			onMouseLeave={() => setFooterHovered(false)}
 			onTouchEnd={() => setTapOverride("footer")}

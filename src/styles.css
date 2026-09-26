@@ -125,6 +125,14 @@
 }
 
 @theme inline {
+	/*
+	 * Every Tailwind transition utility (transition-colors, transition-all, ...)
+	 * uses the home windows' timing: 300ms on CSS `ease`. The same values are in
+	 * section-variants.ts (the home sections' focus fade) and .tile below, so a
+	 * border changes colour at the same pace on every page, whatever drives it.
+	 */
+	--default-transition-duration: 300ms;
+	--default-transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
 	--animate-glow-border: glow-border 3s ease-in-out infinite;
 
 	@keyframes glow-border {

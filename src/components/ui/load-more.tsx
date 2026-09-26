@@ -50,7 +50,7 @@ export function LoadMore({
 			variant="outline"
 			size="sm"
 			onClick={() => onLoadRef.current()}
-			className="self-center px-3"
+			className="self-center px-4"
 		>
 			{label}
 		</Button>

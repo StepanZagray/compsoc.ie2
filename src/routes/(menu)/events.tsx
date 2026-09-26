@@ -155,11 +155,12 @@ function RouteComponent() {
 							}),
 						})
 					}
-					className={`flex-1 cursor-pointer rounded px-4 py-2 font-medium text-sm transition-colors ${
+					className={cn(
+						"flex-1 cursor-pointer rounded px-5 py-3 font-medium text-sm transition-colors",
 						activeTab === "upcoming"
 							? "bg-foreground text-background"
-							: "text-muted-foreground hover:text-foreground"
-					}`}
+							: "text-muted-foreground hover:text-foreground",
+					)}
 				>
 					Upcoming
 				</button>
@@ -175,11 +176,12 @@ function RouteComponent() {
 							}),
 						})
 					}
-					className={`flex-1 cursor-pointer rounded px-4 py-2 font-medium text-sm transition-colors ${
+					className={cn(
+						"flex-1 cursor-pointer rounded px-5 py-3 font-medium text-sm transition-colors",
 						activeTab === "past"
 							? "bg-foreground text-background"
-							: "text-muted-foreground hover:text-foreground"
-					}`}
+							: "text-muted-foreground hover:text-foreground",
+					)}
 				>
 					Past
 				</button>
@@ -306,7 +308,7 @@ function EventCard({ event }: { event: EventType }) {
 							variant: "secondary",
 							size: "sm",
 						}),
-						"inline-flex items-center gap-2",
+						"gap-2",
 					)}
 				>
 					View / Join event

@@ -171,7 +171,9 @@ function CommitteeCard({
 	)
 	const bio = person.bio?.trim() ? person.bio : defaultBio
 	return (
-		<Card className="mb-4 flex break-inside-avoid flex-col items-center text-center">
+		// One 24px rhythm: content padding alone sets the space above the photo
+		// and between the bio and the rule; the social row mirrors it below.
+		<Card className="mb-4 flex break-inside-avoid flex-col items-center gap-0 py-0 text-center">
 			<CardContent className="flex flex-col items-center p-6">
 				<img
 					src={photo}
@@ -194,7 +196,7 @@ function CommitteeCard({
 			</CardContent>
 			{person.social_links &&
 				person.social_links.length > 0 && (
-					<div className="flex flex-wrap justify-center gap-2 border-border border-t-2 p-4">
+					<div className="flex flex-wrap justify-center gap-2 mb-6">
 						{person.social_links.map((link) => {
 							const icon = Object.keys(link)[0]
 							const url = link[icon]

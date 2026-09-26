@@ -476,7 +476,7 @@ function JoinButton() {
 			target="_blank"
 			rel="noopener noreferrer"
 			className={cn(
-				"group/join relative inline-flex h-10 w-fit items-center overflow-hidden whitespace-nowrap rounded-md px-3 sm:px-4",
+				"group/join relative inline-flex h-12 w-fit items-center overflow-hidden whitespace-nowrap rounded-md px-4 sm:px-5",
 				"font-bold text-background outline-none",
 				"focus-visible:ring-3 focus-visible:ring-ring/50",
 			)}
@@ -521,7 +521,7 @@ function IconLink({
 			rel="noopener noreferrer"
 			aria-label={label}
 			className={cn(
-				"group/icon relative inline-flex size-10 items-center justify-center overflow-hidden rounded-md",
+				"group/icon relative inline-flex size-12 items-center justify-center overflow-hidden rounded-md",
 				"text-foreground outline-none transition-colors duration-350",
 				"hover:text-background focus-visible:text-background focus-visible:ring-3 focus-visible:ring-ring/50",
 			)}
