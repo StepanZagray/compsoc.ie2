@@ -1,11 +1,19 @@
 import { type RefObject, useEffect } from "react"
 import { prefersReducedMotion } from "#/lib/motion"
 
+/** Scroll, in px, the flight takes beyond the hero logo's distance to the bar. */
+const EXTRA_SCROLL = 64
+
+/** The share of the flight spent rising; the rest slides along the bar. */
+const RISE = 0.6
+
 /** Where the hexagon sits inside compsoc_logo.png (the bar's icon), as fractions. */
 const ICON_HEX = { left: 0.0675, right: 0.9325 }
 
 const easeOut = (t: number) => 1 - (1 - t) ** 3
 const easeIn = (t: number) => t ** 3
+const easeInOut = (t: number) =>
+	t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2
 const clamp01 = (t: number) => Math.min(1, Math.max(0, t))
 const lerp = (a: number, b: number, t: number) =>
 	a + (b - a) * t
@@ -20,9 +28,10 @@ const lerp = (a: number, b: number, t: number) =>
  * while scrolling.
  *
  * The path keeps the logo off every line of text: it rises (and shrinks)
- * first, straight up through the empty space above it, and only slides
- * sideways once it's up in the bar, where only the (dimmed) wordmark is. It rises
- * faster than the page scrolls, so what starts below it never catches up.
+ * first, through the empty space above it, to the wordmark's right edge, and
+ * only slides sideways once it's up in the bar, where only the (dimmed)
+ * wordmark is. It rises faster than the page scrolls, so what starts below it
+ * never catches up.
  *
  * Before hydration it's plain CSS: `.nav-logo[data-hero-top]` hides the bar's
  * icon and dims its wordmark at the hero in the prerendered page, and undoes
@@ -97,19 +106,36 @@ export function useLogoFlight(
 					slot.width * (ICON_HEX.right - ICON_HEX.left),
 				height: slot.height,
 			}
-			// Progress: 0 with the page at the top, 1 once the hero logo
-			// would have scrolled up to the bar.
+			// Progress: 0 with the page at the top, 1 once the page has
+			// scrolled as far as the hero logo is from the bar, plus
+			// EXTRA_SCROLL so the flight isn't rushed.
 			const distance =
-				from.top + window.scrollY - to.top || 1
+				Math.max(1, from.top + window.scrollY - to.top) +
+				EXTRA_SCROLL
 			const progress = clamp01(window.scrollY / distance)
-			// Up (and smaller) early, ease-out; across late, ease-in.
-			const up = easeOut(progress)
-			const across = easeIn(progress)
+			// Two legs, the same on every screen. Rising (and shrinking), the
+			// logo's centre makes for the wordmark's right edge, getting there
+			// as it reaches the bar with the whole wordmark still dimmed; then
+			// it slides left along the bar into the icon slot, clearing the
+			// shade as it passes. The path is planned for the centre, not the
+			// left edge: the logo shrinks around its top-left corner, so a
+			// left-edge path would drag the centre sideways and, where the
+			// hero logo starts near the wordmark (phones), land mid-word.
+			const mark = wordmark.getBoundingClientRect()
+			const rise = clamp01(progress / RISE)
+			const slide = clamp01((progress - RISE) / (1 - RISE))
+			const up = easeOut(rise)
+			const fromCentre = from.left + from.width / 2
+			const toCentre = to.left + to.width / 2
+			const centre =
+				progress < RISE
+					? lerp(fromCentre, mark.right, easeIn(rise))
+					: lerp(mark.right, toCentre, easeInOut(slide))
 
-			const x = lerp(from.left, to.left, across)
 			const y = lerp(from.top, to.top, up)
 			const sx = lerp(1, to.width / from.width, up)
 			const sy = lerp(1, to.height / from.height, up)
+			const x = centre - (from.width * sx) / 2
 
 			const flying = progress > 0 && progress < 1
 			heroLogo.style.visibility =
@@ -131,15 +157,13 @@ export function useLogoFlight(
 			// over it: the shade ends at the logo's centre line, so text the
 			// logo has crossed is at full brightness, text still ahead of it
 			// stays dim, and the join is always hidden behind the logo.
-			const mark = wordmark.getBoundingClientRect()
-			const centre =
+			const dimmed =
 				progress >= 1
-					? mark.left
-					: x + (from.width * sx) / 2
-			const dimmed = Math.min(
-				mark.width,
-				Math.max(0, centre - mark.left),
-			)
+					? 0
+					: Math.min(
+							mark.width,
+							Math.max(0, centre - mark.left),
+						)
 			shade.style.opacity = "1"
 			shade.style.width = `${dimmed}px`
 		}

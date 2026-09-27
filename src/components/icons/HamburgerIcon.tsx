@@ -16,7 +16,7 @@ export function HamburgerMenuIcon({
 			viewBox="0 0 32 32"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
-			className="h-8! w-8! transition-transform duration-300"
+			className="h-9! w-9! transition-transform duration-300"
 			aria-label={isOpen ? "Close menu" : "Open menu"}
 		>
 			<title>{isOpen ? "Close menu" : "Open menu"}</title>

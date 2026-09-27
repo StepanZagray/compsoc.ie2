@@ -196,7 +196,7 @@ function CommitteeCard({
 			</CardContent>
 			{person.social_links &&
 				person.social_links.length > 0 && (
-					<div className="flex flex-wrap justify-center gap-2 mb-6">
+					<div className="mb-6 flex flex-wrap justify-center gap-2">
 						{person.social_links.map((link) => {
 							const icon = Object.keys(link)[0]
 							const url = link[icon]
@@ -217,7 +217,7 @@ function CommitteeCard({
 										"rounded-full",
 									)}
 								>
-									<IconComponent className="size-4" />
+									<IconComponent className="size-5" />
 								</a>
 							)
 						})}

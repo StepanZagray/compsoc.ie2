@@ -285,14 +285,14 @@ const HeroSection = ({
 									label="Instagram"
 									sweepRow={9}
 								>
-									<InstagramIcon className="size-4" />
+									<InstagramIcon className="size-5" />
 								</IconLink>
 								<IconLink
 									href="https://discord.compsoc.ie/"
 									label="Discord"
 									sweepRow={11}
 								>
-									<DiscordIcon className="size-4" />
+									<DiscordIcon className="size-5" />
 								</IconLink>
 							</div>
 						</div>

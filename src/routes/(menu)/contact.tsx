@@ -128,7 +128,7 @@ function ContactPage() {
 						)}
 					>
 						View on Maps
-						<ExternalLink className="size-4" />
+						<ExternalLink className="size-5" />
 					</a>
 				</div>
 			</Panel>
@@ -207,8 +207,8 @@ function ChannelRow({ channel }: { channel: Channel }) {
 
 	const body = (action: ReactNode) => (
 		<>
-			<span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-muted text-accent sm:size-12">
-				<Icon className="size-5" />
+			<span className="flex size-11 shrink-0 items-center justify-center rounded-md bg-muted text-accent sm:size-12">
+				<Icon className="size-6" />
 			</span>
 			<span className="min-w-0 flex-1">
 				<span className="heading-3 block text-foreground">
@@ -237,9 +237,9 @@ function ChannelRow({ channel }: { channel: Channel }) {
 			>
 				{body(
 					copied ? (
-						<Check className="size-4 text-foreground" />
+						<Check className="size-5 text-foreground" />
 					) : (
-						<Copy className="size-4" />
+						<Copy className="size-5" />
 					),
 				)}
 				<span className="sr-only" aria-live="polite">
@@ -258,7 +258,7 @@ function ChannelRow({ channel }: { channel: Channel }) {
 			rel="noopener noreferrer"
 			className={rowClass}
 		>
-			{body(<ExternalLink className="size-4" />)}
+			{body(<ExternalLink className="size-5" />)}
 		</a>
 	)
 }

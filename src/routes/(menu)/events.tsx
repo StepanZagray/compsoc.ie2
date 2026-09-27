@@ -141,8 +141,10 @@ function RouteComponent() {
 				subtitle="Discover upcoming events and explore our past activities."
 			/>
 
-			{/* Tabs */}
-			<div className="flex gap-1 rounded-md border-2 border-border bg-background/80 p-1 transition-colors duration-300 hover:border-border-accent">
+			{/* Tabs: a control, not a window, so the frame never lights up;
+			    only the tab under the pointer responds, and the selected one
+			    (the solid slab) stays as it is. */}
+			<div className="flex gap-1 rounded-md border-2 border-border bg-background/80 p-1">
 				<button
 					type="button"
 					onClick={() =>
@@ -155,11 +157,12 @@ function RouteComponent() {
 							}),
 						})
 					}
+					aria-pressed={activeTab === "upcoming"}
 					className={cn(
-						"flex-1 cursor-pointer rounded px-5 py-3 font-medium text-sm transition-colors",
+						"flex-1 rounded px-5 py-3 font-medium text-sm outline-none transition-colors focus-visible:ring-3 focus-visible:ring-ring/50",
 						activeTab === "upcoming"
-							? "bg-foreground text-background"
-							: "text-muted-foreground hover:text-foreground",
+							? "cursor-default bg-foreground text-background"
+							: "cursor-pointer text-muted-foreground hover:bg-muted hover:text-foreground",
 					)}
 				>
 					Upcoming
@@ -176,11 +179,12 @@ function RouteComponent() {
 							}),
 						})
 					}
+					aria-pressed={activeTab === "past"}
 					className={cn(
-						"flex-1 cursor-pointer rounded px-5 py-3 font-medium text-sm transition-colors",
+						"flex-1 rounded px-5 py-3 font-medium text-sm outline-none transition-colors focus-visible:ring-3 focus-visible:ring-ring/50",
 						activeTab === "past"
-							? "bg-foreground text-background"
-							: "text-muted-foreground hover:text-foreground",
+							? "cursor-default bg-foreground text-background"
+							: "cursor-pointer text-muted-foreground hover:bg-muted hover:text-foreground",
 					)}
 				>
 					Past
@@ -312,7 +316,7 @@ function EventCard({ event }: { event: EventType }) {
 					)}
 				>
 					View / Join event
-					<ExternalLink className="size-4" />
+					<ExternalLink className="size-5" />
 				</a>
 			</div>
 		</Card>
