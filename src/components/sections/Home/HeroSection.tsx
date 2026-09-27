@@ -279,7 +279,7 @@ const HeroSection = ({
 							</h1>
 
 							<div className="mt-6 flex items-center gap-2 max-md:mt-8 max-md:justify-center">
-								<JoinButton />
+								<JoinButton active={active} />
 								<IconLink
 									href="https://instagram.com/compsocgalway/"
 									label="Instagram"
@@ -465,7 +465,12 @@ function EntrySweep() {
 	)
 }
 
-function JoinButton() {
+/**
+ * The call to action. Its glow breathes only while the hero is the focused
+ * window; when focus moves on it pauses where it is, and picks up from there
+ * when the hero is focused again.
+ */
+function JoinButton({ active }: { active: boolean }) {
 	const ref = useRef<HTMLAnchorElement>(null)
 	// Kept small: the buttons sit 8px apart and must never overlap.
 	useMagnetic(ref, 0.07)
@@ -488,7 +493,12 @@ function JoinButton() {
 				className="intro-covered absolute inset-0"
 			>
 				{/* Pulsing glow behind the accent fill */}
-				<span className="absolute inset-0.5 animate-glow-border rounded-md bg-border-accent motion-reduce:animate-none" />
+				<span
+					className={cn(
+						"absolute inset-0.5 animate-glow-border rounded-md bg-border-accent motion-reduce:animate-none",
+						!active && "[animation-play-state:paused]",
+					)}
+				/>
 				<span className="absolute inset-0.5 rounded-sm bg-accent" />
 			</span>
 			<HoverSlab group="join" />
