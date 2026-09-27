@@ -57,7 +57,7 @@ const InfographicSection = ({
 			onTouchEnd={() => setTapOverride("stats")}
 		>
 			<div
-				className="flex w-full flex-col overflow-hidden rounded-md border-2 bg-background/80 p-4 shadow-lg md:p-6"
+				className="flex w-full flex-col overflow-hidden rounded-md border-2 bg-background/80 p-5 shadow-lg md:p-6"
 				style={sectionStyle(
 					active,
 					activeVariant,
@@ -70,7 +70,9 @@ const InfographicSection = ({
 					--stats
 				</p>
 
-				<div className="mt-8 grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12">
+				{/* One rhythm when stacked: 24px between prompt, award and stats
+				    and between stat rows (32px from md), inside 20px padding. */}
+				<div className="mt-6 grid grid-cols-1 items-center gap-6 md:mt-8 md:gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12">
 					{/* The award leads: it's the society's most recent national recognition. */}
 					<div>
 						{/* The trophy tile is the height of the two title lines
@@ -101,7 +103,7 @@ const InfographicSection = ({
 
 					{/* Each figure hangs off a rule, like a column of `df` output:
 					    the number carries the weight, the label stays quiet. */}
-					<dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4 lg:gap-x-4">
+					<dl className="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4 lg:gap-x-4">
 						{metrics.map(({ value, label }) => (
 							<div
 								key={label}
